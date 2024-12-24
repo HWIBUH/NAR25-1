@@ -49,9 +49,9 @@ function popout() {
     tingnung.loop = false;
 }
 
-function death(){
-    tingnung.play();
-}
+// function death(){
+//     tingnung.play();
+// }
 
 setInterval(upTime, 1000);
 
