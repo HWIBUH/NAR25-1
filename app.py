@@ -6,7 +6,7 @@ app.debug = True
 
 @app.route('/')
 def index():
-    return render_template("index.html")
+    return render_template("test.html")
 @app.route('/test', methods=['GET', 'POST'])
 def query():
     results = None  
@@ -17,7 +17,7 @@ def query():
             return "Failed to connect to the database!"
         try:
             with connection.cursor() as cursor:
-                query = "SELECT * FROM trainee WHERE trainee_numb = %s"
+                query = "SELECT * FROM trainee WHERE trainee_numb' = %s"
                 cursor.execute(query, (trainee_numb,))
                 results = cursor.fetchall() 
         finally:
