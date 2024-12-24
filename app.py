@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
 from database import get_db_connection
-app = Flask(__name__)
+app = Flask(__name__,static_folder="CSS")
 
 app.debug = True
 
@@ -21,10 +21,13 @@ def query():
             with connection.cursor() as cursor:
                 query = "SELECT * FROM trainee WHERE trainee_number = %s AND trainee_pass = %s"
                 cursor.execute(query, (trainee_numb,trainee_pass))
-                results = cursor.fetchall() 
+                results=cursor.fetchall()
+                print(results)
+                if(results):
+                    return render_template("mainPage.html", results=results)
         finally:
             connection.close()
-    return render_template("login.html", results=results)
+        return render_template("loginPage.html", results=results)
 
 if __name__ == '__main__':
     app.run(debug=True)
