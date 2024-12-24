@@ -6,7 +6,7 @@ app.debug = True
 
 @app.route('/')
 def index():
-    return render_template("test.html")
+    return render_template("loginPage.html")
 
 @app.route('/login', methods=['GET', 'POST'])
 def query():
