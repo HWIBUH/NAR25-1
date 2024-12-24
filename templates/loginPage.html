@@ -21,7 +21,7 @@
             </div>
             <div class="time">
                 <p>server time</p>
-                <p id="time-clock">23:59</p>
+                <p id="time-clock"></p>
             </div>
         </nav>
         {% if flag==1 %}
@@ -45,4 +45,5 @@
         <form>
     </section>
 </body>
+<script src="{{url_for('static',filename='JS/time.js')}}"></script>
 </html>
