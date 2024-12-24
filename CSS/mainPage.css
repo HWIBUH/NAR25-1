@@ -1,0 +1,107 @@
+@import url("global.css");
+
+input:focus{
+    outline: none;
+}
+
+*{
+    font-family: "rubik";
+    font-weight: bold;
+}
+
+body{
+    margin: 0;
+    overflow: hidden;
+}
+
+.main-page{
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--eggshell);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* CSS Navbar */
+
+.nav-bar{
+    z-index: 999;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    height: 10%;
+    background-color: var(--bean);
+    color: var(--eggshell);
+}
+
+#forum{
+    margin-left: 40px;
+}
+
+.nav-inside{
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+}
+
+.nav-inside a{
+    text-decoration: none;
+    color: var(--eggshell);
+}
+
+.time p{
+    margin: 0px;
+    margin-right: 20px;
+}
+
+/* CSS Navbar */
+
+.info-container{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin-top: 10vh;
+    height: 80vh;
+    width: 100vw;
+}
+
+.forum-container, .bp-container, .case-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.forum-container p, .bp-container p, .case-container p{
+    font-size: 30px;
+    margin: 0;
+    margin-bottom: 5px;
+}
+
+.bp-container{
+    border-left: 1px solid var(--bean);
+    border-right: 1px solid var(--bean);
+}
+
+.forum-list, .bp-list, .case-list{
+    width: 80%;
+    height: 90%;
+    border: 2px solid var(--bean);
+    border-radius: 10px;
+}
+
+.forum-list{
+    background-color: var(--tea-rose-50);
+}
+
+.bp-list{
+    background-color: var(--hijau-sean-50);
+}
+
+.case-list{
+    background-color: var(--blood-red-50);
+}
