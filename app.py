@@ -7,6 +7,7 @@ app.debug = True
 @app.route('/')
 def index():
     return render_template("test.html")
+
 @app.route('/test', methods=['GET', 'POST'])
 def query():
     results = None  
@@ -23,5 +24,6 @@ def query():
         finally:
             connection.close()
     return render_template("test.html", results=results)
+
 if __name__ == '__main__':
     app.run(debug=True)
