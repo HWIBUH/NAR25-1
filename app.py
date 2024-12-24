@@ -11,13 +11,13 @@ def index():
 def query():
     results = None  
     if request.method == 'POST':
-        trainee_numb = request.form.get('trainee_numb')
+        trainee_numb = request.form.get('trainee_number')
         connection = get_db_connection()
         if connection is None:
             return "Failed to connect to the database!"
         try:
             with connection.cursor() as cursor:
-                query = "SELECT * FROM trainee WHERE trainee_numb' = %s"
+                query = "SELECT * FROM trainee WHERE trainee_number = %s"
                 cursor.execute(query, (trainee_numb,))
                 results = cursor.fetchall() 
         finally:
