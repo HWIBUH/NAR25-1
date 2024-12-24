@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Query Trainee</title>
+</head>
+<body>
+    <h1>Search for a Trainee</h1>
+    <form method="POST" action="/login">
+        <label for="trainee_number">Enter Trainee Number:</label>
+        <input type="text" id="trainee_number" name="trainee_number" required>
+        
+        <label for="trainee_pass">Enter Trainee Pass:</label>
+        <input type="text" id="trainee_pass" name="trainee_pass" required>
+        <button type="submit">Search</button>
+    </form>
+
+    {% if results %}
+    <h2>Results:</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Trainee Number</th>
+                <th>Name</th>
+                <th>Department</th>
+                <th>Batch</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for trainee in results %}
+            <tr>
+                <td>{{ trainee[0] }}</td> 
+                <td>{{ trainee[1] }}</td> 
+                <td>{{ trainee[2] }}</td> 
+                <td>{{ trainee[3] }}</td> 
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% elif results is not none %}
+    <p>No results found.</p>
+    {% endif %}
+</body>
+</html>

@@ -8,7 +8,7 @@ app.debug = True
 def index():
     return render_template("test.html")
 
-@app.route('/test', methods=['GET', 'POST'])
+@app.route('/login', methods=['GET', 'POST'])
 def query():
     results = None  
     if request.method == 'POST':
@@ -19,12 +19,12 @@ def query():
             return "Failed to connect to the database!"
         try:
             with connection.cursor() as cursor:
-                query = "SELECT * FROM trainee WHERE trainee_number = %s trainee_pass = %s"
+                query = "SELECT * FROM trainee WHERE trainee_number = %s AND trainee_pass = %s"
                 cursor.execute(query, (trainee_numb,trainee_pass))
                 results = cursor.fetchall() 
         finally:
             connection.close()
-    return render_template("test.html", results=results)
+    return render_template("login.html", results=results)
 
 if __name__ == '__main__':
     app.run(debug=True)
