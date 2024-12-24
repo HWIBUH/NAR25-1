@@ -1,0 +1,111 @@
+@import url("global.css");
+
+input:focus{
+    outline: none;
+}
+
+*{
+    font-family: "rubik";
+    font-weight: bold;
+}
+
+body{
+    margin: 0;
+    overflow: hidden;
+}
+
+.login-page{
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--eggshell);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-container{
+    width: 300px;
+    height: 350px;
+    background-color: var(--tea-rose);
+    border: 3px solid var(--bean);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    gap: 20px;
+}
+
+#time-clock{
+    font-size: 30px;
+}
+
+/* CSS Navbar */
+
+#nav-bar{
+    z-index: 999;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    height: 10%;
+    background-color: var(--bean);
+    color: var(--eggshell);
+}
+
+#forum{
+    margin-left: 40px;
+}
+
+.nav-inside{
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+}
+
+.nav-inside a{
+    text-decoration: none;
+    color: var(--eggshell);
+}
+
+.time p{
+    margin: 0px;
+    margin-right: 20px;
+}
+
+/* CSS Navbar */
+
+#login-text{
+    font-size: 40px;
+    margin: 0;
+}
+
+.usn, .pass{
+    display: flex;
+    flex-direction: column;
+}
+
+.usn p, .pass p{
+    margin-bottom: 5px;
+}
+
+.usn input, .pass input{
+    width: 95%;
+    height: 30px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--eggshell);
+}
+
+#submit-button{
+    width: 100px;
+    height: 25px;
+    border-radius: 5px;
+    border: none;
+    background-color: var(--bean);
+    color: var(--eggshell);
+}
