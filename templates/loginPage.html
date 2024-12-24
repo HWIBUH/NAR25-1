@@ -24,8 +24,8 @@
                 <p id="time-clock">23:59</p>
             </div>
         </nav>
-        {% if results is not none %}
-        <h1>Salah Login {{count}} kali wey</h1>
+        {% if flag==1 %}
+        <h1>Salah Login kali wey</h1>
         {% endif %}
         <form method="POST" action="/login">
             <div class="login-container">

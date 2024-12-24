@@ -27,7 +27,7 @@ def query():
                     return render_template("mainPage.html", results=results)
         finally:
             connection.close()
-        return render_template("loginPage.html", results=results)
+        return render_template("loginPage.html", results=results, flag=1)
 
 if __name__ == '__main__':
     app.run(debug=True)
