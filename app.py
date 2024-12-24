@@ -8,6 +8,10 @@ app.debug = True
 def index():
     return render_template("loginPage.html")
 
+@app.route('/alarm')
+def alarm():
+    return render_template("alarm.html")
+
 @app.route('/login', methods=['GET', 'POST'])
 def query():
     results = None  
