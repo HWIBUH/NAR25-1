@@ -6,7 +6,7 @@ Website yang dibuat untuk melatih kemampuan NAR 25-1(konsekuensi)
 3. Pake HTML CSS JS
 
 # Fitur
-1. Jam -> alarm setiap 30 menit (server time)
+1. Jam -> alarm setiap 30 menit (server time) [v]
 2. Homepage -> login dan register
 4. Kuis Trainer, Trainee, dan Flashcard Subco
 5. Leaderboard progress project angkatan
