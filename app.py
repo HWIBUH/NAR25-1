@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 from database import get_db_connection
+
 app = Flask(__name__,static_folder="static")
 
 app.debug = True
@@ -11,6 +12,10 @@ def index():
 @app.route('/alarm')
 def alarm():
     return render_template("alarm.html")
+
+@app.route('/subco')
+def subco():
+    return render_template("subco.html")
 
 @app.route('/login', methods=['GET', 'POST'])
 def query():
