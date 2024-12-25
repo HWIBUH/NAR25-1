@@ -109,3 +109,7 @@ body{
     background-color: var(--bean);
     color: var(--eggshell);
 }
+
+#submit-button:hover {
+    background-color: var(--blood-red-hover);
+}

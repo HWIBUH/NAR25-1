@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 from database import get_db_connection
+
 app = Flask(__name__,static_folder="static")
 
 app.debug = True
@@ -11,6 +12,10 @@ def index():
 @app.route('/alarm')
 def alarm():
     return render_template("alarm.html")
+
+@app.route('/subco')
+def subco():
+    return render_template("subco.html")
 
 @app.route('/login', methods=['GET', 'POST'])
 def query():
@@ -32,6 +37,22 @@ def query():
         finally:
             connection.close()
         return render_template("loginPage.html", results=results, flag=1)
+
+@app.route('/forum')
+def forum():
+    return render_template("forum.html")
+
+@app.route("/announcement")
+def announcement():
+    return render_template("announcement.html")
+
+@app.route("/subco")
+def subco():
+    return render_template("subco.html")
+
+@app.route("/leaderboard")
+def leaderboard():
+    return render_template("leaderboard.html")
 
 if __name__ == '__main__':
     app.run(debug=True)

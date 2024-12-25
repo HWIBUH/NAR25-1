@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='CSS/subco.css')}}">
+</head>
+<body>
+    <section class="subco-page">
+        <nav class="nav-bar">
+            <div class="nav-inside">
+                <a id="forum" href="">Forum</a>
+                <a href="">Leaderboard</a>
+                <a href="">Subco</a>
+                <a href="">Announcement</a>
+            </div>
+            <div class="time">
+                <p>server time</p>
+                <p id="time-clock">23:59</p>
+            </div>
+        </nav>
+        <div class="subco-flashcard">
+            <div class="question">
+                <div class="card">
+                    <h2>Subco Flashcard</h2>
+                    <div id="subco">
+                        Jelaskan bagaimana cara algoritma A* menemukan path terpendek
+                    </div>
+                    <button id="show">Show answer</button>
+                </div>
+            </div>
+            <div class="answer hidden">
+                <div class="card">
+                    <h2>Answer</h2>
+                    <div id="subco">Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore alias incidunt magni eaque culpa, asperiores iste maxime laudantium neque ratione ea aliquam cum repudiandae eos? Dicta laudantium voluptate non repellendus.</div>
+                    <div class="wrapper">
+                        <button id="prev">Show question</button>
+                        <button id="next">Next question</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="{{url_for('static',filename='JS/subco.js')}}"></script>
+</body>
+</html>
