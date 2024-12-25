@@ -10,12 +10,29 @@ body{
 }
 
 .title{
+    display: flex;
     text-align: center;
+    justify-content: center;
+    align-items: center;
+    gap: 5vw;
     font-size: 3rem;
     font-weight: 600;
-    color: var(--bean);
+    color: var(--eggshell);
     margin-top: 20vh;
     margin-bottom: 8vh;
+}
+
+.title div{
+    padding: 1vh 1vw;
+    border-radius: 1vh;
+}
+
+.trainee-btn{
+    background-color: var(--bean);
+}
+
+.trainer-btn{
+    background-color: var(--hijau-sean);
 }
 
 @media screen and (min-width: 0px) {
