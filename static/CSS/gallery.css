@@ -1,0 +1,116 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    font-family: 'Rubik';
+    max-width: 100vw;
+
+}
+
+.title{
+    text-align: center;
+    font-size: 3rem;
+    font-weight: 600;
+    color: var(--bean);
+    margin-top: 20vh;
+    margin-bottom: 8vh;
+}
+
+@media screen and (min-width: 0px) {
+    .gallery{
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2vh 1vh;
+        padding: 0 2vw;
+    }
+}
+
+@media screen and (min-width: 480px){
+    .gallery{
+        grid-template-columns: repeat(3, 1fr);
+        gap: 3vh 2vh;
+        padding: 0 7vw;
+    }
+}
+
+@media screen and (min-width: 720px){
+    .gallery{
+        grid-template-columns: repeat(5, 1fr);
+        gap: 4vh 3vh;
+        padding: 0 15vw;
+    }
+}
+
+.gallery{
+    max-width: 100vw;
+    display: grid;
+}
+
+.grid-item{
+    /* background-color: var(--hijau-sean); */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    max-width: 15vw;
+    padding: 1vh 0.5vw;
+    border-radius: 1vw;
+    gap: 1vh;
+}
+
+.grid-item img{
+    width: 100%;
+    border-radius: calc(1vw - 1vh);
+}
+
+.grid-item .details{
+    background-color: var(--eggshell);
+    border-radius: calc(1vw - 1vh);
+    font-weight: 500;
+
+}
+
+.green{
+    border: 3px solid var(--hijau-sean);
+    background-color: var(--hijau-sean);
+    color: var(--hijau-sean);
+}
+
+.red{
+    border: 3px solid var(--bean);
+    background-color: var(--bean);
+    color: var(--bean);
+}
+
+
+/* CSS Navbar */
+
+.nav-bar{
+    z-index: 999;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    height: 10%;
+    background-color: var(--bean);
+    color: var(--eggshell);
+}
+
+#forum{
+    margin-left: 40px;
+}
+
+.nav-inside{
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+}
+
+.nav-inside a{
+    text-decoration: none;
+    color: var(--eggshell);
+}
