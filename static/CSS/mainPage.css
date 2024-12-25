@@ -15,6 +15,7 @@ body{
 }
 
 .main-page{
+    position: relative;
     width: 100vw;
     height: 100vh;
     background-color: var(--eggshell);
@@ -104,4 +105,74 @@ body{
 
 .case-list{
     background-color: var(--blood-red-50);
+}
+
+/* CSS Modal */
+
+.modal-quiz{
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.501);
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-container{
+    width: 350px;
+    height: 450px;
+    background-color: var(--tea-rose);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border: 2px solid var(--bean);
+    border-radius: 10px;
+}
+
+#title-quiz{
+    margin: 0;
+    font-size: 30px;
+}
+
+#image-temp{
+    width: 100px;
+    height: 100px;
+    background-color: rgb(215, 236, 255);
+    border-radius: 5px;
+}
+
+#siapa{
+    margin: 0;
+    font-size: 20px;
+}
+
+.modal-container input{
+    width: 70%;
+    height: 30px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--eggshell);
+    color: var(--bean);
+}
+
+.modal-container input::placeholder{
+    color: var(--bean);
+}
+
+#submit-button{
+    width: 100px;
+    height: 25px;
+    border-radius: 5px;
+    border: none;
+    background-color: var(--bean);
+    color: var(--eggshell);
+}
+
+#hide{
+    display: none;
 }
