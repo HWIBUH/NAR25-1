@@ -48,16 +48,19 @@
         </div>
     </section>
     <div class="modal-quiz active inactive" id="bangunPop">
+        
         <div class="modal-container">
             <p id="title-quiz">Trainee Quiz</p> 
             <div id="image-temp"></div>
             
             <p id="siapa">Siapa Trainee ini?</p>
-            <input type="text" name="" id="" placeholder="Nomor Trainee">
-            <input type="text" name="" id="" placeholder="Nama Trainee">
-            <input type="text" name="" id="" placeholder="Jurusan">
-            <input type="text" name="" id="" placeholder="Binusian">
-            <button type="submit" id="submit-button">Submit</button>
+            <form method="POST" action="/checkForm">
+                <input type="text" name="trainee_number" id="trainee_number" placeholder="Nomor Trainee">
+                <input type="text" name="trainee_nama" id="trainee_nama" placeholder="Nama Trainee">
+                <input type="text" name="trainee_major" id="trainee_major" placeholder="Jurusan">
+                <input type="text" name="trainee_binusian" id="trainee_binusian" placeholder="Binusian">
+                <button type="submit" id="submit-button">Submit</button>
+            <form>
         </div>
     </div>
 </body>
