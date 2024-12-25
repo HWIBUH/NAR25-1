@@ -1,6 +1,4 @@
-const display = document.getElementById('time');
 const navdis = document.getElementById('time-clock');
-document.createElement
 let nexta = nextAlarm(); 
 const tingnung = new Audio("../static/assets/death.mp3"); 
 tingnung.loop = true;
@@ -12,14 +10,12 @@ function upTime() {
     const min = String(date.getMinutes()).padStart(2, '0'); 
     const sec = String(date.getSeconds()).padStart(2, '0');
 
-    // Ivy, gw komen soalnya ini bikin error tadi
-    // display.innerText = `${hour} : ${min} : ${sec}`;
     navdis.innerText = `${hour} : ${min} : ${sec}`;
 
     if (trimin(date)) {
         pop(); 
-        tingnung.play();
         nexta = nextAlarm(); 
+        tingnung.play();
     }
 
     // console.log("Current Time:", date);
@@ -51,9 +47,9 @@ function popout() {
     tingnung.loop = false;
 }
 
-// function death(){
-//     tingnung.play();
-// }
+function death(){
+    tingnung.play();
+}
 
 setInterval(upTime, 1000);
 
