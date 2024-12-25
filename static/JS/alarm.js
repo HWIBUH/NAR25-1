@@ -13,7 +13,7 @@ function upTime() {
     const sec = String(date.getSeconds()).padStart(2, '0');
 
     // Ivy, gw komen soalnya ini bikin error tadi
-    // display.innerText = `${hour} : ${min} : ${sec}`;
+    display.innerText = `${hour} : ${min} : ${sec}`;
 
     navdis.innerText = `${hour} : ${min} : ${sec}`;
     
@@ -53,7 +53,6 @@ function popout() {
     const popup = document.getElementById('bangunPop');
     popup.classList.remove('active');
     popup.classList.add('inactive');
-    tingnung.loop = false;
 }
 
 // function death(){
