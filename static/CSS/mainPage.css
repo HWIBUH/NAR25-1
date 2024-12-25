@@ -56,19 +56,39 @@ body{
     color: var(--eggshell);
 }
 
+
+/* CSS Navbar */
+
+
+.container {
+    display: flex;
+    
+}
+
+.time {
+    display: flex;
+    margin-top: 10vh;
+    height: 80vh;
+    width: 70vw;
+    align-items: center;
+    justify-content: center;
+}
+
 .time p{
     margin: 0px;
     margin-right: 20px;
 }
 
-/* CSS Navbar */
+#time-clock {
+    font-size: 12.5vw;
+}
 
 .info-container{
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
     margin-top: 10vh;
     height: 80vh;
-    width: 100vw;
+    width: 20vw;
 }
 
 .forum-container, .bp-container, .case-container{
@@ -81,11 +101,6 @@ body{
     font-size: 30px;
     margin: 0;
     margin-bottom: 5px;
-}
-
-.bp-container{
-    border-left: 1px solid var(--bean);
-    border-right: 1px solid var(--bean);
 }
 
 .forum-list, .bp-list, .case-list{

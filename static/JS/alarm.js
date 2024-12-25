@@ -11,7 +11,8 @@ function upTime() {
     const min = String(date.getMinutes()).padStart(2, '0'); 
     const sec = String(date.getSeconds()).padStart(2, '0');
 
-    display.innerText = `${hour} : ${min} : ${sec}`;
+    // Ivy, gw komen soalnya ini bikin error tadi
+    // display.innerText = `${hour} : ${min} : ${sec}`;
     navdis.innerText = `${hour} : ${min} : ${sec}`;
 
     if (trimin(date)) {
