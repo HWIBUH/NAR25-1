@@ -49,10 +49,10 @@ def query():
 
 @app.route('/checkForm', methods=['POST'])
 def checkForm():
-    trainee_numb = request.form.get('trainee_number')
-    trainee_nama = request.form.get('trainee_nama')
+    trainee_numb = request.form.get('trainee_id')
+    trainee_nama = request.form.get('trainee_name')
     trainee_major = request.form.get('trainee_major')
-    trainee_binusian = request.form.get('trainee_binusian')
+    trainee_binusian = request.form.get('trainee_batch')
     connection = get_db_connection()
     if connection is None:
         return "Failed to connect to the database!"
