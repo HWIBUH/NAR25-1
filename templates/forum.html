@@ -3,9 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    
+    <link rel="stylesheet" href="{{url_for('static',filename='CSS/forum.css')}}">
+    <title>Forum</title>
 </head>
 <body>
-    
+    <section class="forum-page">
+        
+        <nav class="nav-bar">
+            <div class="nav-inside">
+                <a id="forum" href="forum.html">Forum</a>
+                <a href="">Leaderboard</a>
+                <a href="">Subco</a>
+                <a href="">Announcement</a>
+            </div>
+            <div class="time">
+                <p>Server time</p>
+                <p id="time-clock"></p>
+            </div>
+        </nav>
+        <form method="POST">
+            <div class="forum-container">
+                <div>
+                    <p id="inputforum-text">Input Forum Links Here</p>
+                </div>
+                <div class="linkbox">
+                    <textarea id="linkbox-text" rows="12" cols="35" style="resize: none;"></textarea>
+                </div>
+                <button id="submit-button" type="submit">Submit</button>
+            </div>
+        <form>
+    </section>
 </body>
 </html>
