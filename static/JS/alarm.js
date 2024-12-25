@@ -14,14 +14,17 @@ function upTime() {
 
     // Ivy, gw komen soalnya ini bikin error tadi
     // display.innerText = `${hour} : ${min} : ${sec}`;
-    navdis.innerText = `${hour} : ${min} : ${sec}`;
 
-    if (trimin(date)) {
+    navdis.innerText = `${hour} : ${min} : ${sec}`;
+    
+    console.log(nexta);
+    if (trimin(date) || 1===1) {
+        
         pop(); 
         tingnung.play();
         nexta = nextAlarm(); 
     }
-
+    
     // console.log("Current Time:", date);
     // console.log("Next Alarm:", nexta);
 }
@@ -43,11 +46,13 @@ function trimin(curr) {
 function pop() {
     const popup = document.getElementById('bangunPop');
     popup.classList.add('active');
+    popup.classList.remove('inactive');
 }
 
 function popout() {
     const popup = document.getElementById('bangunPop');
     popup.classList.remove('active');
+    popup.classList.add('inactive');
     tingnung.loop = false;
 }
 
