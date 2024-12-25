@@ -1,5 +1,6 @@
 const display = document.getElementById('time');
 const navdis = document.getElementById('time-clock');
+document.createElement
 let nexta = nextAlarm(); 
 const tingnung = new Audio('../static/assets/death.mp3'); 
 tingnung.loop = true;
