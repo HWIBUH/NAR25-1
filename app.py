@@ -74,7 +74,7 @@ def leaderboard():
 
 @app.route("/gallery")
 def gallery():
-    return render_template("gallery.html", base_url = url_for('static', filename='/'))
+    return render_template("gallery.html", base_url=url_for('static', filename='assets/'))
 
 if __name__ == '__main__':
     app.run(debug=True)
