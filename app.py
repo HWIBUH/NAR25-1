@@ -13,10 +13,6 @@ def index():
 def alarm():
     return render_template("alarm.html")
 
-@app.route('/subco')
-def subco():
-    return render_template("subco.html")
-
 @app.route('/login', methods=['GET', 'POST'])
 def query():
     results = None  
