@@ -26,41 +26,6 @@ body{
     justify-content: center;
 }
 
-/* CSS Navbar */
-
-.nav-bar{
-    z-index: 999;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    position: fixed;
-    top: 0;
-    width: 100vw;
-    height: 10%;
-    background-color: var(--bean);
-    color: var(--eggshell);
-}
-
-#forum{
-    margin-left: 40px;
-}
-
-.nav-inside{
-    display: flex;
-    flex-direction: row;
-    gap: 30px;
-}
-
-.nav-inside a{
-    text-decoration: none;
-    color: var(--eggshell);
-}
-
-
-/* CSS Navbar */
-
-
 .container {
     display: flex;
     
@@ -73,11 +38,13 @@ body{
     width: 70vw;
     align-items: center;
     justify-content: center;
+    color: var(--bean);
 }
 
 .time p{
     margin: 0px;
     margin-right: 20px;
+    font-size: 60px
 }
 
 #time-clock {

@@ -13,9 +13,58 @@
     --blood-red-50:#69140e94;
 
     /* hover */
-    --bean-hover:#852d33;
+    --bean-hover:#ac3941;
     --hijau-sean-hover:#26301c;
     --eggshell-hover:#858070fd;
     --tea-rose-hover:#705d59;
     --blood-red-hover:#490e0a;
 }
+
+/* CSS Navbar */
+
+.nav-bar{
+    z-index: 999;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    height: 10%;
+    background-color: var(--bean);
+    color: var(--eggshell);
+}
+
+#forum{
+    margin-left: 40px;
+}
+
+.nav-inside{
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+}
+
+.nav-inside a{
+    text-decoration: none;
+    color: var(--eggshell);
+    transition-duration: 500ms;
+}
+
+.nav-inside a:hover{
+    text-decoration: none;
+    color: var(--eggshell-hover);
+}
+
+.time{
+    display: flex;
+    flex-direction: column;
+}
+
+.time p{
+    margin: 0px;
+    margin-right: 25px;
+}
+
+/* CSS Navbar */
