@@ -25,13 +25,28 @@ def query():
         try:
             with connection.cursor() as cursor:
                 query = "SELECT * FROM trainee WHERE trainee_number = %s AND trainee_pass = %s"
-                cursor.execute(query, (trainee_numb,trainee_pass))
-                results=cursor.fetchall()
-                if(results):
-                    return render_template("mainPage.html", results=results)
+                cursor.execute(query, (trainee_numb, trainee_pass))
+                results = cursor.fetchone()
+                print(results)
+                
+                if results:
+                    cursor.execute("SELECT trainee_number, trainee_photo FROM quiz ORDER BY RAND() LIMIT 1")
+                    random_quiz = cursor.fetchone()
+    
+                    if random_quiz:
+    
+                        return render_template(
+                            "mainPage.html",
+                            results=results,
+                            quiz_trainee_number=random_quiz['trainee_number'],
+                            quiz_trainee_photo=random_quiz['trainee_photo']
+                        )
+                    else:
+                        return "No quiz data found."
         finally:
             connection.close()
-        return render_template("loginPage.html", results=results, flag=1)
+    return render_template("loginPage.html", results=results, flag=1)
+
 
 @app.route('/checkForm', methods=['POST'])
 def checkForm():
