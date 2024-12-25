@@ -38,5 +38,21 @@ def query():
             connection.close()
         return render_template("loginPage.html", results=results, flag=1)
 
+@app.route('/forum')
+def forum():
+    return render_template("forum.html")
+
+@app.route("/announcement")
+def announcement():
+    return render_template("announcement.html")
+
+@app.route("/subco")
+def subco():
+    return render_template("subco.html")
+
+@app.route("/leaderboard")
+def leaderboard():
+    return render_template("leaderboard.html")
+
 if __name__ == '__main__':
     app.run(debug=True)
