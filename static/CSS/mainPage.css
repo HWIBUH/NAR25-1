@@ -6,22 +6,8 @@
     font-weight: bold;
 }
 
-<<<<<<< HEAD
-body{
-    margin: 0;
-    overflow: hidden;
-    background-color: var(--eggshell);
-}
-
-.main-page{
-    position: relative;
-    width: 100vw;
-    height: 100vh;
-    background-color: var(--eggshell);
-=======
 body {
     background-color: antiquewhite;
->>>>>>> 3ac65bb7ed82c3ec7309f16464d1881caded4df0
     display: flex;
     justify-content: center;
     align-items: center;
