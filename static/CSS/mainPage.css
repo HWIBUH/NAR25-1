@@ -192,3 +192,10 @@ body{
 #hide{
     display: none;
 }
+
+.active{
+    display:block;
+}
+.inactive{
+    display:none;
+}
