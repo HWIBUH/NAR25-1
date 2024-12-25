@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alarm Clock</title>
     <link rel="stylesheet" href="{{url_for('static',filename='CSS/mainPage.css')}}">
+    <script>
+        sessionStorage.setItem("userInitials", "{{ results['trainee_number']}}")
+        sessionStorage.setItem("userName", "{{ results['trainee_nama']}}")
+        sessionStorage.setItem("userMajor", "{{ results['trainee_major'] }}")
+        sessionStorage.setItem("userBinusian", "{{ results['trainee_binusian']}}")
+    </script>
 </head>
 <body>
     <section class="container">
@@ -20,25 +26,27 @@
                 <p id="time-clock"></p>
             </div>
         </nav>
-        
         <div class="clock">
             <h2>Server Time</h2>
             <div id="time"></div>
         </div>
         
-        <div class="bangun" id="bangunPop"> 
+        <div class="bangun inactive" id="bangunPop"> 
             <h1>!!!BANGUN BANGUN!!!</h1>
             <button class="bbut" onclick="popout()">Turn Off</button>
         </div>
         <!-- <button onclick="death()">tinung</button> -->
-        <div class="quiz-modal">
-            <div class="quiz-container">
+        <div id="data-container" data-flag="{{flag}}"></div>
+        <div class="quiz-modal inactive" id="quiz1">
+            <div class="quiz-container inactive" id="quiz2">
                 <p id="title-quiz">Trainee Quiz</p>
+                
                 <div id="image-temp">
                     <img src="{{ quiz_trainee_photo }}" alt="Trainee Image">
                 </div>
+                <div id="data-container" data-flag="{{flag}}"></div>
                 <p id="siapa">Siapa Trainee ini?</p>
-                <form method="POST" action="#" class="jawab">
+                <form method="POST" action="/checkForm" class="jawab">
                     <input type="text" name="trainee_id" placeholder="Nomor Trainee">
                     <input type="text" name="trainee_name" placeholder="Nama Trainee">
                     <input type="text" name="trainee_major" placeholder="Jurusan">
@@ -51,3 +59,4 @@
 </body>
 <script src="{{url_for('static',filename='JS/alarm.js')}}"></script>
 </html>
+
