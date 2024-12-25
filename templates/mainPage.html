@@ -3,63 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NAR 25-1</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{url_for('static',filename='CSS/mainPage.css')}}">
+    <title>Main Page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/mainPage.css') }}">
 </head>
 <body>
     <section class="main-page">
         <nav class="nav-bar">
             <div class="nav-inside">
-                <a id="forum" href="{{url_for('forum')}}">Forum</a>
-                <a href="{{url_for('leaderboard')}}">Leaderboard</a>
-                <a href="{{url_for('subco')}}">Subco</a>
-                <a href="{{url_for('announcement')}}">Announcement</a>
+                <a href="{{ url_for('forum') }}">Forum</a>
+                <a href="{{ url_for('leaderboard') }}">Leaderboard</a>
+                <a href="{{ url_for('subco') }}">Subco</a>
+                <a href="{{ url_for('announcement') }}">Announcement</a>
             </div>
-
         </nav>
         <div class="container">
             <div class="time">
-                <!-- <p>server time</p> -->
                 <p id="time-clock"></p>
-            </div>           
+            </div>
             <div class="info-container">
-                <div class="forum-container">
-                    <p>Forum</p>
-                    <div class="forum-list">
-                        <!-- isi -->
+                <h2>Welcome, {{ results['trainee_name'] }}</h2>
+
+                <!-- Quiz Section -->
+                <div class="quiz-container">
+                    <p id="title-quiz">Trainee Quiz</p>
+                    <div id="image-temp">
+                        <img src="{{ quiz_trainee_photo }}" alt="Trainee Image">
                     </div>
+                    <p id="siapa">Siapa Trainee ini?</p>
+                    <form method="POST" action="#">
+                        <input type="text" name="trainee_id" placeholder="Nomor Trainee">
+                        <input type="text" name="trainee_name" placeholder="Nama Trainee">
+                        <input type="text" name="trainee_major" placeholder="Jurusan">
+                        <input type="text" name="trainee_batch" placeholder="Binusian">
+                        <button type="submit" id="submit-button">Submit</button>
+                    </form>
                 </div>
-                <div class="bp-container">
-                    <p>BP</p>
-                    <div class="bp-list">
-                        <!-- isi -->
-                    </div>
-                </div>
-                <div class="case-container">
-                    <p>Case</p>
-                    <div class="case-list">
-                        <!-- isi -->
-                    </div>
-                </div>   
             </div>
         </div>
     </section>
-    <div class="modal-quiz active inactive" id="bangunPop">
-        <div class="modal-container">
-            <p id="title-quiz">Trainee Quiz</p> 
-            <div id="image-temp"></div>
-            
-            <p id="siapa">Siapa Trainee ini?</p>
-            <input type="text" name="" id="" placeholder="Nomor Trainee">
-            <input type="text" name="" id="" placeholder="Nama Trainee">
-            <input type="text" name="" id="" placeholder="Jurusan">
-            <input type="text" name="" id="" placeholder="Binusian">
-            <button type="submit" id="submit-button">Submit</button>
-        </div>
-    </div>
+    <script src="{{ url_for('static', filename='JS/time.js') }}"></script>
 </body>
-<script src="{{url_for('static',filename='JS/time.js')}}"></script>
 </html>

@@ -25,28 +25,14 @@ def query():
         try:
             with connection.cursor() as cursor:
                 query = "SELECT * FROM trainee WHERE trainee_number = %s AND trainee_pass = %s"
-                cursor.execute(query, (trainee_numb, trainee_pass))
-                results = cursor.fetchone()
+                cursor.execute(query, (trainee_numb,trainee_pass))
+                results=cursor.fetchall()
                 print(results)
-                
-                if results:
-                    cursor.execute("SELECT trainee_number, trainee_photo FROM quiz ORDER BY RAND() LIMIT 1")
-                    random_quiz = cursor.fetchone()
-    
-                    if random_quiz:
-    
-                        return render_template(
-                            "mainPage.html",
-                            results=results,
-                            quiz_trainee_number=random_quiz['trainee_number'],
-                            quiz_trainee_photo=random_quiz['trainee_photo']
-                        )
-                    else:
-                        return "No quiz data found."
+                if(results):
+                    return render_template("mainPage.html", results=results)
         finally:
             connection.close()
-    return render_template("loginPage.html", results=results, flag=1)
-
+        return render_template("loginPage.html", results=results, flag=1)
 
 @app.route('/forum')
 def forum():
