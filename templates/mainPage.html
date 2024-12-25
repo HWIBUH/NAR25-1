@@ -16,10 +16,10 @@
     <section class="container">
         <nav id="nav-bar">
             <div class="nav-inside">
-                <a id="forum" href="#">Forum</a>
-                <a href="#">Leaderboard</a>
-                <a href="#">Subco</a>
-                <a href="#">Announcement</a>
+                <a id="forum" href="{{url_for('static', filename='forum.html')}}">Forum</a>
+                <a href="{{url_for('static', filename='leaderboard.html')}}">Leaderboard</a>
+                <a href="{{url_for('static', filename='subco.html')}}">Subco</a>
+                <a href="{{url_for('static', filename='announcement.html')}}">Announcement</a>
             </div>
             <div class="time">
                 <p>Server Time</p>
@@ -44,7 +44,6 @@
                 <div id="image-temp">
                     <img src="{{ quiz_trainee_photo }}" alt="Trainee Image">
                 </div>
-                <div id="data-container" data-flag="{{flag}}"></div>
                 <p id="siapa">Siapa Trainee ini?</p>
                 <form method="POST" action="/checkForm" class="jawab">
                     <input type="text" name="trainee_id" placeholder="Nomor Trainee">

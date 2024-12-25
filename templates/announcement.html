@@ -10,10 +10,10 @@
     <!-- Dari database -->
     <nav class="nav-bar">
         <div class="nav-inside">
-            <a id="forum" href="">Forum</a>
-            <a href="">Leaderboard</a>
-            <a href="">Subco</a>
-            <a href="">Announcement</a>
+            <a id="forum" href="{{url_for('static', filename='forum.html')}}">Forum</a>
+            <a href="{{url_for('static', filename='leaderboard.html')}}">Leaderboard</a>
+            <a href="{{url_for('static', filename='subco.html')}}">Subco</a>
+            <a href="{{url_for('static', filename='announcement.html')}}">Announcement</a>
         </div>
         <div class="time">
             <p>server time</p>
