@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alarm Clock</title>
     <link rel="stylesheet" href="{{url_for('static',filename='CSS/mainPage.css')}}">
+    <script>
+        sessionStorage.setItem("userInitials", "{{ results['trainee_number']}}")
+        sessionStorage.setItem("userName", "{{ results['trainee_nama']}}")
+        sessionStorage.setItem("userMajor", "{{ results['trainee_major'] }}")
+        sessionStorage.setItem("userBinusian", "{{ results['trainee_binusian']}}")
+    </script>
 </head>
 <body>
     <section class="container">
@@ -20,7 +26,6 @@
                 <p id="time-clock"></p>
             </div>
         </nav>
-        
         <div class="clock">
             <h2>Server Time</h2>
             <div id="time"></div>
@@ -33,7 +38,7 @@
         <!-- <button onclick="death()">tinung</button> -->
         <div class="quiz-modal">
             <div class="quiz-container">
-                <p id="title-quiz">Trainee Quiz</p>
+                <p id="title-quiz"></p>
                 <div id="image-temp">
                     <img src="{{ quiz_trainee_photo }}" alt="Trainee Image">
                 </div>
