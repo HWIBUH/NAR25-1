@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, url_for
 from database import get_db_connection
 
 app = Flask(__name__,static_folder="static")
@@ -25,36 +25,27 @@ def query():
         try:
             with connection.cursor() as cursor:
                 query = "SELECT * FROM trainee WHERE trainee_number = %s AND trainee_pass = %s"
-                cursor.execute(query, (trainee_numb,trainee_pass))
-                results=cursor.fetchall()
-                if(results):
-                    return render_template("mainPage.html", results=results)
+                cursor.execute(query, (trainee_numb, trainee_pass))
+                results = cursor.fetchone()
+                print(results)
+                
+                if results:
+                    cursor.execute("SELECT trainee_number, trainee_photo FROM quiz ORDER BY RAND() LIMIT 1")
+                    random_quiz = cursor.fetchone()
+    
+                    if random_quiz:
+    
+                        return render_template(
+                            "mainPage.html",
+                            results=results,
+                            quiz_trainee_number=random_quiz['trainee_number'],
+                            quiz_trainee_photo=random_quiz['trainee_photo']
+                        )
+                    else:
+                        return "No quiz data found."
         finally:
             connection.close()
-        return render_template("loginPage.html", results=results, flag=1)
-
-@app.route('/checkForm', methods=['POST'])
-def checkForm():
-    trainee_numb = request.form.get('trainee_number')
-    trainee_nama = request.form.get('trainee_nama')
-    trainee_major = request.form.get('trainee_major')
-    trainee_binusian = request.form.get('trainee_binusian')
-    connection = get_db_connection()
-    if connection is None:
-        return "Failed to connect to the database!"
-    try:
-        with connection.cursor() as cursor:
-            query = "SELECT * FROM trainee WHERE trainee_number = %s AND trainee_nama = %s AND trainee_major = %s AND trainee_binusian = %s"
-            cursor.execute(query, (trainee_numb.upper(),trainee_nama.title(),trainee_major,trainee_binusian))
-            results=cursor.fetchall()
-            print(results)
-            if(len(results)>0):
-                print(trainee_numb,trainee_nama,trainee_major,trainee_binusian)
-                return render_template("mainPage.html", results=results, flag=1)
-    finally:
-        connection.close()
-    return render_template("mainPage.html", results=results, flag=0)
-
+    return render_template("loginPage.html", results=results, flag=1)
 
 @app.route('/forum')
 def forum():
@@ -74,7 +65,18 @@ def leaderboard():
 
 @app.route("/gallery")
 def gallery():
-    return render_template("gallery.html", base_url=url_for('static', filename='assets/'))
+    connection = get_db_connection()
+    if connection is None:
+        return "Failed to connect to the database!"
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT trainee_number, trainee_photo FROM quiz")
+            rows = cursor.fetchall()
+            trainee_data = [dict(row) for row in rows]
+    finally:
+        connection.close()
+
+    return render_template("gallery.html", trainee_data=trainee_data)
 
 if __name__ == '__main__':
     app.run(debug=True)
