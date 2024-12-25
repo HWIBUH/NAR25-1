@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,500;1,500&display=swap');
+
+body {
+    padding: 0;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    font-family: Rubik;
+}
+
+.card {
+    width: 400px;
+    height: fit-content;
+    border: 5px solid #e8d6cb;
+    border-radius: 20px;
+    background-color: #3b4a2c;
+    color: #e8d6cb;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 20px;
+    padding: 50px;
+    font-weight: bold;
+}
+
+
+#show {
+    color: #e8d6cb;
+    font-weight: bold;
+    border-radius: 5px;
+    border: none;
+    background-color: #20251b;
+    padding: 7px 30px;
+}
+
+#show:hover {
+    transition: 750ms;
+    background-color: #e8d6cb;
+    color: #20251b;
+}
+
+#subco {
+    border-radius: 10px;
+    border: 2px solid #e8d6cb ;
+    padding: 30px;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 30px;
+}
+
+#next {
+    color: #e8d6cb;
+    font-weight: bold;
+    border-radius: 5px;
+    border: none;
+    background-color: #20251b;
+    padding: 7px 30px;
+}
+
+#next:hover {
+    transition: 750ms;
+    background-color: #e8d6cb;
+    color: #20251b;
+}
+
+#prev {
+    color: #e8d6cb;
+    font-weight: bold;
+    border-radius: 5px;
+    border: none;
+    background-color: #20251b;
+    padding: 7px 30px;
+}
+
+#prev:hover {
+    transition: 750ms;
+    background-color: #e8d6cb;
+    color: #20251b;
+}
+
+.hidden {
+    display: none;
+}
