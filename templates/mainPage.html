@@ -31,14 +31,15 @@
             <button class="bbut" onclick="popout()">Turn Off</button>
         </div>
         <!-- <button onclick="death()">tinung</button> -->
-        <div class="quiz-modal">
+        <div id="data-container" data-flag="{{flag}}"></div>
+        <div class="quiz-modal inactive active" id="bangunPop">
             <div class="quiz-container">
                 <p id="title-quiz">Trainee Quiz</p>
                 
                 <div id="image-temp">
                     <img src="{{ quiz_trainee_photo }}" alt="Trainee Image">
                 </div>
-
+                <div id="data-container" data-flag="{{flag}}"></div>
                 <p id="siapa">Siapa Trainee ini?</p>
                 <form method="POST" action="#" class="jawab">
                     <input type="text" name="trainee_id" placeholder="Nomor Trainee">
