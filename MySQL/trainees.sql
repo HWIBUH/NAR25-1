@@ -4,7 +4,7 @@ CREATE TABLE trainee(
     trainee_binusian CHAR(3),
     trainee_major VARCHAR(251),
     trainee_pass VARCHAR(251)    
-)
+)   
 
 INSERT INTO trainee(trainee_number,trainee_nama,trainee_major,trainee_binusian,trainee_pass) VALUES
 ('T186', 'Marcell Sutiono', 'GAT', 'B27', 'T186Marcell SutionoGATB27'),
