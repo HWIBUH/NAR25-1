@@ -20,7 +20,7 @@ function upTime() {
     console.log(i)
     if (trimin(date) || i%10==0) {
         
-        pop(); 
+        pop();
         tingnung.play();
         nexta = nextAlarm(); 
     }
@@ -43,23 +43,28 @@ function trimin(curr) {
     return curr.getHours() === nexta.getHours() && curr.getMinutes() === nexta.getMinutes() && curr.getSeconds() === 0;
 }
 
-
-
 function popout() {
     const popup = document.getElementById('bangunPop');
     popup.classList.remove('active');
     popup.classList.add('inactive');
-    tingnung.loop = false;
+    const q1= document.getElementById('quiz1');
+    const q2 = document.getElementById('quiz2');
+    q1.classList.add('active');
+    q1.classList.remove('inactive'); 
+    q2.classList.add('active');
+    q2.classList.remove('inactive'); 
 }
 
 function pop() {
     const popup = document.getElementById('bangunPop');
-    popup.classList.add('active');
     popup.classList.remove('inactive');
+    popup.classList.add('active');
 }
 // function death(){
 //     tingnung.play();
 // }
+
+
 
 setInterval(upTime, 1000);
 
