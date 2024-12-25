@@ -1,7 +1,6 @@
-const display = document.getElementById('time');
 const navdis = document.getElementById('time-clock');
 let nexta = nextAlarm(); 
-const tingnung = new Audio('../death.mp3'); 
+const tingnung = new Audio("../static/assets/death.mp3"); 
 tingnung.loop = true;
 
 function upTime() {
@@ -11,7 +10,6 @@ function upTime() {
     const min = String(date.getMinutes()).padStart(2, '0'); 
     const sec = String(date.getSeconds()).padStart(2, '0');
 
-    display.innerText = `${hour} : ${min} : ${sec}`;
     navdis.innerText = `${hour} : ${min} : ${sec}`;
 
     if (trimin(date)) {
@@ -49,6 +47,9 @@ function popout() {
     tingnung.loop = false;
 }
 
+function death(){
+    tingnung.play();
+}
 
 setInterval(upTime, 1000);
 

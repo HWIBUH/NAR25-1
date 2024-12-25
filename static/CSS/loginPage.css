@@ -1,4 +1,4 @@
-@import url("global.css");
+@import url("./global.css");
 
 input:focus{
     outline: none;
@@ -108,4 +108,8 @@ body{
     border: none;
     background-color: var(--bean);
     color: var(--eggshell);
+}
+
+#submit-button:hover {
+    background-color: var(--blood-red-hover);
 }

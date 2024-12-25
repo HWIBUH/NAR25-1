@@ -1,0 +1,21 @@
+:root{
+    --bean:#3C1518;
+    --hijau-sean:#3B4A2C;
+    --eggshell:#F5EFDC;
+    --tea-rose:#D0ADA7;
+    --blood-red:#69140E;
+
+    /* transparancy 50 */
+    --bean-50:#3c151889;
+    --hijau-sean-50:#3b4a2c89;
+    --eggshell-50:#f5efdc8c;
+    --tea-rose-50:#d0ada796;
+    --blood-red-50:#69140e94;
+
+    /* hover */
+    --bean-hover:#852d33;
+    --hijau-sean-hover:#26301c;
+    --eggshell-hover:#858070fd;
+    --tea-rose-hover:#705d59;
+    --blood-red-hover:#490e0a;
+}

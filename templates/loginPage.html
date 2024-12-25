@@ -7,10 +7,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../CSS/loginPage.css">
+    <link rel="stylesheet" href="{{url_for('static',filename='CSS/loginPage.css')}}">
 </head>
 <body>
     <section class="login-page">
+        
         <nav id="nav-bar">
             <div class="nav-inside">
                 <a id="forum" href="">Forum</a>
@@ -20,23 +21,29 @@
             </div>
             <div class="time">
                 <p>server time</p>
-                <p id="time-clock">23:59</p>
+                <p id="time-clock"></p>
             </div>
         </nav>
-        <div class="login-container">
-            <div>
-                <p id="login-text">Log-in</p>
+        {% if flag==1 %}
+        <h1>Salah Login kali wey</h1>
+        {% endif %}
+        <form method="POST" action="/login">
+            <div class="login-container">
+                <div>
+                    <p id="login-text">Login</p>
+                </div>
+                <div class="usn">
+                    <p>Username</p>
+                    <input type="text" id="trainee_number" name="trainee_number" required>
+                </div>
+                <div class="pass">
+                    <p>Password</p>
+                    <input type="text" id="trainee_pass" name="trainee_pass" required>
+                </div>
+                <button id="submit-button" type="submit">Submit</button>
             </div>
-            <div class="usn">
-                <p>Username</p>
-                <input type="email" name="" id="">
-            </div>
-            <div class="pass">
-                <p>Password</p>
-                <input type="password" name="" id="">
-            </div>
-            <button id="submit-button" type="submit">Submit</button>
-        </div>
+        <form>
     </section>
 </body>
+<script src="{{url_for('static',filename='JS/time.js')}}"></script>
 </html>
