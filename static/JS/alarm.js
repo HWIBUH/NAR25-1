@@ -17,8 +17,8 @@ function upTime() {
 
     if (trimin(date)) {
         pop(); 
-        nexta = nextAlarm(); 
         tingnung.play();
+        nexta = nextAlarm(); 
     }
 
     // console.log("Current Time:", date);
