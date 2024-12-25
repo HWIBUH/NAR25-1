@@ -12,6 +12,18 @@ $('.trainer-btn').on('click', (e)=>{
 
 //ceritanya smua namanya by T number
 
-trainee_list = [
-    'T186', 'T191', 'T195',
+let trainee_list = [
+    'T186', 'T191', 'T192' ,'T195',
+    'T207', 'T212', 'T213', 'T217',
+    'T228', 'T230', 'T237', 'T241',
+    'T252', 'T297', 'T312', 'T330',
+    'T355'
 ]
+
+let i = 0;
+
+trainee_list.forEach((e)=>{
+    filename = e + ".png";
+    let imgElement = $('<img>').attr('src', baseUrl + 'assets/' + filename).attr('alt', e)
+    $('.trainee').add
+});
