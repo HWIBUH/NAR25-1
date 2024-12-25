@@ -126,7 +126,7 @@ body{
 /* CSS Modal */
 
 .modal-quiz{
-    position: absolute;
+    position: fixed;
     width: 100vw;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.501);
@@ -138,6 +138,7 @@ body{
 }
 
 .modal-container{
+    position: absolute;
     width: 350px;
     height: 450px;
     background-color: var(--tea-rose);
