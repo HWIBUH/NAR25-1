@@ -1,0 +1,139 @@
+
+input:focus{
+    outline: none;
+}
+
+*{
+    font-family: "rubik";
+    font-weight: bold;
+}
+
+body{
+    margin: 0;
+    background: #F5EFDC;
+    overflow: hidden;
+}
+
+#nav-bar{
+    z-index: 999;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    height: 10%;
+    background-color: #3C1518;
+    color: #F5EFDC;
+}
+
+#forum{
+    margin-left: 40px;
+}
+
+.nav-inside{
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+}
+
+.nav-inside a{
+    text-decoration: none;
+    color: #F5EFDC;
+}
+
+.time p{
+    margin: 0px;
+    margin-right: 20px;
+}
+
+/* navbar */
+
+
+/* .forum {
+    display: flex;
+    justify-content: center;
+    
+} */
+
+.wrapper {
+    /* margin-top: 70px;
+    padding: 20px; */
+    margin-top: 70px;
+    height: 80vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* .leaderboardborder {
+    border-radius: 10;
+} */
+
+.judul {
+    border: 0px;
+    border-radius: 10px;
+    height: 40px;
+    width: 80vw;
+    background: #3b4a2c;
+}
+
+.heading {
+    color: #F5EFDC;
+    padding-top: 10px;
+}
+
+.isinya {
+    color: #3C1518;
+    margin: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.baris1 {
+    margin: 0;
+    height: 40px;
+    border-radius: 10px;
+    background: #F5EFDC;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+}
+
+.baris2 {
+    margin: 0;
+    height: 40px;
+    border-radius: 10px;
+    background: #D0ADA7;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+}
+
+ul{
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    /* align-items: center; */
+    justify-content: space-between;
+    /* margin: 10px; */
+    padding-right: 30px;
+}
+
+.butt_on {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    position: relative;
+    top: 20px;
+}
+
+/* .isinya {
+
+} */

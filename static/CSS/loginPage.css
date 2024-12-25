@@ -41,44 +41,6 @@ body{
     font-size: 30px;
 }
 
-/* CSS Navbar */
-
-#nav-bar{
-    z-index: 999;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    position: fixed;
-    top: 0;
-    width: 100vw;
-    height: 10%;
-    background-color: var(--bean);
-    color: var(--eggshell);
-}
-
-#forum{
-    margin-left: 40px;
-}
-
-.nav-inside{
-    display: flex;
-    flex-direction: row;
-    gap: 30px;
-}
-
-.nav-inside a{
-    text-decoration: none;
-    color: var(--eggshell);
-}
-
-.time p{
-    margin: 0px;
-    margin-right: 20px;
-}
-
-/* CSS Navbar */
-
 #login-text{
     font-size: 40px;
     margin: 0;
@@ -108,8 +70,9 @@ body{
     border: none;
     background-color: var(--bean);
     color: var(--eggshell);
+    transition-duration: 500ms;
 }
 
 #submit-button:hover {
-    background-color: var(--blood-red-hover);
+    background-color: var(--bean-hover);
 }

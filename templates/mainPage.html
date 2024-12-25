@@ -18,11 +18,10 @@
                 <a href="{{url_for('subco')}}">Subco</a>
                 <a href="{{url_for('announcement')}}">Announcement</a>
             </div>
-
         </nav>
         <div class="container">
             <div class="time">
-                <!-- <p>server time</p> -->
+                <p>Server time</p>
                 <p id="time-clock"></p>
             </div>           
             <div class="info-container">
@@ -53,11 +52,13 @@
             <div id="image-temp"></div>
             
             <p id="siapa">Siapa Trainee ini?</p>
-            <input type="text" name="" id="" placeholder="Nomor Trainee">
-            <input type="text" name="" id="" placeholder="Nama Trainee">
-            <input type="text" name="" id="" placeholder="Jurusan">
-            <input type="text" name="" id="" placeholder="Binusian">
-            <button type="submit" id="submit-button">Submit</button>
+            <form method="POST" action="/checkForm">
+                <input type="text" name="trainee_number" id="trainee_number" placeholder="Nomor Trainee">
+                <input type="text" name="trainee_nama" id="trainee_nama" placeholder="Nama Trainee">
+                <input type="text" name="trainee_major" id="trainee_major" placeholder="Jurusan">
+                <input type="text" name="trainee_binusian" id="trainee_binusian" placeholder="Binusian">
+                <button type="submit" id="submit-button">Submit</button>
+            <form>
         </div>
     </div>
 </body>
