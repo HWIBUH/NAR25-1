@@ -3,9 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='CSS/announcement.css')}}">
+    <title>Annoucement</title>
 </head>
 <body>
-    
+    <!-- Dari database -->
+    <nav class="nav-bar">
+        <div class="nav-inside">
+            <a id="forum" href="">Forum</a>
+            <a href="">Leaderboard</a>
+            <a href="">Subco</a>
+            <a href="">Announcement</a>
+        </div>
+        <div class="time">
+            <p>server time</p>
+            <p id="time-clock">23:59</p>
+        </div>
+    </nav>
 </body>
 </html>
