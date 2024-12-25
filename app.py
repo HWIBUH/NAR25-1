@@ -27,7 +27,6 @@ def query():
                 query = "SELECT * FROM trainee WHERE trainee_number = %s AND trainee_pass = %s"
                 cursor.execute(query, (trainee_numb,trainee_pass))
                 results=cursor.fetchall()
-                print(results)
                 if(results):
                     return render_template("mainPage.html", results=results)
         finally:
@@ -46,16 +45,15 @@ def checkForm():
     try:
         with connection.cursor() as cursor:
             query = "SELECT * FROM trainee WHERE trainee_number = %s AND trainee_nama = %s AND trainee_major = %s AND trainee_binusian = %s"
-            cursor.execute(query, (trainee_numb,trainee_nama,trainee_major,trainee_binusian))
+            cursor.execute(query, (trainee_numb.upper(),trainee_nama.title(),trainee_major,trainee_binusian))
             results=cursor.fetchall()
             print(results)
-            flag=0
-            if(results):
-                flag=1
-                return render_template("mainPage.html", results=results, flag=flag)
+            if(len(results)>0):
+                print(trainee_numb,trainee_nama,trainee_major,trainee_binusian)
+                return render_template("mainPage.html", results=results, flag=1)
     finally:
         connection.close()
-    return render_template("mainPage.html", results=results, flag=flag)
+    return render_template("mainPage.html", results=results, flag=0)
 
 
 @app.route('/forum')
