@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, url_for
 from database import get_db_connection
 
 app = Flask(__name__,static_folder="static")
@@ -84,6 +84,21 @@ def subco():
 @app.route("/leaderboard")
 def leaderboard():
     return render_template("leaderboard.html")
+
+@app.route("/gallery")
+def gallery():
+    connection = get_db_connection()
+    if connection is None:
+        return "Failed to connect to the database!"
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT trainee_number, trainee_photo FROM quiz")
+            rows = cursor.fetchall()
+            trainee_data = [dict(row) for row in rows]
+    finally:
+        connection.close()
+
+    return render_template("gallery.html", trainee_data=trainee_data)
 
 if __name__ == '__main__':
     app.run(debug=True)
