@@ -4,7 +4,7 @@ document.createElement
 let nexta = nextAlarm(); 
 const tingnung = new Audio("../static/assets/death.mp3"); 
 tingnung.loop = true;
-
+i=0
 function upTime() {
     const date = new Date();
 
@@ -13,12 +13,12 @@ function upTime() {
     const sec = String(date.getSeconds()).padStart(2, '0');
 
     // Ivy, gw komen soalnya ini bikin error tadi
-    // display.innerText = `${hour} : ${min} : ${sec}`;
+    // display.xinnerText = `${hour} : ${min} : ${sec}`;
 
     navdis.innerText = `${hour} : ${min} : ${sec}`;
-    
-    console.log(nexta);
-    if (trimin(date) || 1===1) {
+    i++
+    console.log(i)
+    if (trimin(date) || i%10==0) {
         
         pop(); 
         tingnung.play();
@@ -43,11 +43,7 @@ function trimin(curr) {
     return curr.getHours() === nexta.getHours() && curr.getMinutes() === nexta.getMinutes() && curr.getSeconds() === 0;
 }
 
-function pop() {
-    const popup = document.getElementById('bangunPop');
-    popup.classList.add('active');
-    popup.classList.remove('inactive');
-}
+
 
 function popout() {
     const popup = document.getElementById('bangunPop');
@@ -56,6 +52,11 @@ function popout() {
     tingnung.loop = false;
 }
 
+function pop() {
+    const popup = document.getElementById('bangunPop');
+    popup.classList.add('active');
+    popup.classList.remove('inactive');
+}
 // function death(){
 //     tingnung.play();
 // }
