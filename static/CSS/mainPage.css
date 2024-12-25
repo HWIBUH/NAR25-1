@@ -125,7 +125,7 @@ body{
 /* CSS Modal */
 
 .modal-quiz{
-    position: absolute;
+    position: fixed;
     width: 100vw;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.501);
@@ -137,6 +137,7 @@ body{
 }
 
 .modal-container{
+    position: absolute;
     width: 350px;
     height: 450px;
     background-color: var(--tea-rose);
@@ -191,29 +192,3 @@ body{
 #hide{
     display: none;
 }
-
-.active {
-    display:block;
-}
-
-.inactive{
-    display:none;
-}
-
-/* .modal-quiz {
-    font-family: 'Rubik', sans-serif;
-    font-weight: bold;
-    border: solid 3px black;
-    background-color: var(--blood-red);
-    color: var(--eggshell);
-    width: 600px;
-    text-align: center;
-    border-radius: 20px;
-    padding: 30px 50px;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 10; 
-    display: none;  
-} */
