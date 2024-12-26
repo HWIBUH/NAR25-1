@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" href="{{url_for('static',filename='CSS/forum.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='CSS/mainPage.css')}}">
     <title>NAR 25-1</title>
 </head>
 <body>
@@ -19,7 +20,7 @@
                 <a href="{{url_for('announcement')}}">Announcement</a>
                 <a href="{{url_for('gallery')}}">Gallery</a>
             </div>
-            <div class="time">
+            <div class="time" id = "time">
                 <p>Server time</p>
                 <p id="time-clock"></p>
             </div>
@@ -44,6 +45,23 @@
             <p> T number: {{tnumber}}</p>
         {% endif %}
     </section>
+    <div class="quiz-modal inactive" id="quiz1">
+        <div class="quiz-container inactive" id="quiz2">
+            <p id="title-quiz">Trainee Quiz</p>
+            <div id="image-temp">
+                <img src="{{quiz_trainee_photo}}" alt="Trainee Image" id="trainee-img">
+            </div>
+            <p id="siapa">Siapa Trainee ini? </p>
+            <div id="data-container" data-flag="{{flag}}"></div>
+            <form method="POST" action="/checkForm" class="jawab" id="trainee-form">
+                <input type="text" name="trainee_id" placeholder="Nomor Trainee">
+                <input type="text" name="trainee_name" placeholder="Nama Trainee">
+                <input type="text" name="trainee_major" placeholder="Jurusan">
+                <input type="text" name="trainee_batch" placeholder="Binusian">
+                <button type="submit" id="submit-button">Submit</button>
+            </form>
+        </div>
+    </div>
     <script src="{{url_for('static',filename='JS/time.js')}}"></script>
 </body>
 </html>
