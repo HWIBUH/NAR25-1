@@ -46,8 +46,15 @@ setInterval(() => {
 function snowFall()
 {
     ctx.clearRect(0, 0, width, height);
+    
     for(let i=snow.length-1; i>=0; i--)
-    {
+    {   
+        if(snow[i].r < 3.5){
+            ctx.filter = 'blur(2px)';
+        }else{
+            ctx.filter = 'none';
+        }
+
         snow[i].draw();
         snow[i].fall();
 
@@ -55,6 +62,7 @@ function snowFall()
         {
             snow.splice(i, 1);
         }
+
     }
     requestAnimationFrame(snowFall);
 }
