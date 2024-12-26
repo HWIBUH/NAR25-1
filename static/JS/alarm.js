@@ -16,7 +16,7 @@ function upTime() {
     const hour = String(date.getHours()).padStart(2, '0'); 
     const min = String(date.getMinutes()).padStart(2, '0'); 
     const sec = String(date.getSeconds()).padStart(2, '0');
-
+    //awiugfaiwfgafg
     // Ivy, gw komen soalnya ini bikin error tadi
     display.innerText = `${hour} : ${min} : ${sec}`;
 
@@ -24,7 +24,7 @@ function upTime() {
     
     i++
     console.log(i);
-    if (trimin(date) || i%20===0) {
+    if (trimin(date) || i%60===0) {
         (async()=>{
             const response = await fetch('/randomize');
             const result = await response.json();

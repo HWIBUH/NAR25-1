@@ -121,10 +121,11 @@ def forum():
         try:
             with connection.cursor() as cursor:
                 if input_tnumber:
-                    query = "INSERT INTO forum (url, answered, respondent) VALUES (%s, True, %s)"
+                    # T217 GANTI JADI SESUAI DATABASE NYA WENE
+                    query = "INSERT INTO forum (forum_link, trainee_number) VALUES (%s,%s)"
                     cursor.execute(query, (forum_url, input_tnumber.upper()))
                 else:
-                    query = "INSERT INTO forum (url) VALUES (%s)"
+                    query = "INSERT INTO forum (forum_link) VALUES (%s)"
                     cursor.execute(query, (forum_url))
         finally:
             connection.commit()
@@ -134,10 +135,26 @@ def forum():
     
     return render_template("forum.html")
 
-@app.route('/forum_assignment', methods = ['GET', 'POST'])
+
+#================================ FORUM API ====================================
+@app.route('/api/forum_runquery', methods = ['GET', 'POST'])
+def forum_api():
+    connection = get_db_connection()
+    with connection.cursor() as cursor:
+        # T217 GANTI JADI SESUAI DATABASE NYA WENE
+        query = "SELECT trainee_number,COUNT(trainee_number) FROM `forum` GROUP BY trainee_number;"
+        cursor.execute(query)
+        result=cursor.fetchall()
+        print(result)
+        return jsonify({
+                        'status': 'success',
+                        'message': 'data fetched succesfully',
+                        'data': result
+                    })
+
+@app.route('/forum_assign')
 def forum_assignment():
     return render_template("forum_assign.html")
-
 #================================ ANNOUNCEMENT ====================================
 
 @app.route("/announcement")
@@ -150,6 +167,7 @@ def subco():
 
 @app.route("/leaderboard")
 def leaderboard():
+    print("ke leader board")
     return render_template("leaderboard.html")
 
 #================================ GALERY ====================================
