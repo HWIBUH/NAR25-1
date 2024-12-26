@@ -69,7 +69,7 @@ body {
     scrollbar-width: 10px;
 
     overflow-x: hidden;
-    border: 1px solid red;
+    /* border: 1px solid red; */
 
     padding: 20px;
     height: 90%;
@@ -101,8 +101,8 @@ body {
     border: 1px solid var(--bean);
     
     position: absolute;
-    left: 30%;
-    top: 15px;
+    right: 10%;
+    bottom: 15px;
 }
 
 .check-btn:hover {

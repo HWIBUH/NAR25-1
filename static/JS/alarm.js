@@ -7,7 +7,9 @@ const tingnung = new Audio("../static/assets/death.mp3");
 tingnung.loop = true;
 i=0
 const q1= document.getElementById('quiz1');
-    const q2 = document.getElementById('quiz2');
+const q2 = document.getElementById('quiz2');
+
+
 function upTime() {
     const date = new Date();
 
