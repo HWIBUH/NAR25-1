@@ -210,7 +210,7 @@ def delete_announcement(announcement_id):
         return jsonify({"success": False, "message": "Failed to connect to the database!"}), 500
     try:
         with connection.cursor() as cursor:
-            query = "DELETE FROM announcement WHERE announcement_id = %d"
+            query = "DELETE FROM announcement WHERE announcement_id = %s"
             cursor.execute(query, (announcement_id,))
             connection.commit()
     finally:
