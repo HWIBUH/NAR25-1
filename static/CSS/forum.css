@@ -22,7 +22,7 @@ body{
 
 .forum-container{
     width: 300px;
-    height: 350px;
+    max-height: 70vh;
     background-color: var( --hijau-sean);
     border: 3px solid var(--bean);
     display: flex;
@@ -31,6 +31,13 @@ body{
     justify-content: center;
     border-radius: 10px;
     gap: 20px;
+    padding: 1vw;
+}
+
+.forum-container input{
+    width: 100%;
+    border-radius: 0.5vw;
+    background-color: var(--eggshell);
 }
 
 #submit-button{
@@ -51,6 +58,11 @@ body{
     /* font-weight: bold; */
 }
 
+.forum-container label{
+    color: var(--eggshell);
+}
+
 #linkbox-text{
     background-color: var(--eggshell);
+    border-radius: 0.5vw;
 }
