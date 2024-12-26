@@ -131,22 +131,10 @@ def leaderboard():
     return render_template("leaderboard.html")
 
 @app.route("/gallery")
-<<<<<<< HEAD
 def gallery():  
     cursor.execute("SELECT trainee_number, trainee_photo FROM quiz")
         rows = cursor.fetchall()
         trainee_data = [dict(row) for row in rows]
-=======
-def gallery():
-    connection = get_db_connection()
-    if connection is None:
-        return "Failed to connect to the database!"
-    try:
-        with connection.cursor() as cursor:
-            cursor.execute("SELECT q.trainee_number, trainee_nama, trainee_binusian, trainee_major, trainee_photo FROM quiz q JOIN trainee tr ON tr.trainee_number = q.trainee_number")
-            rows = cursor.fetchall()
-            trainee_data = [dict(row) for row in rows]
->>>>>>> accc6f37ded09e89c646b32b2ebebdcd32360720
     finally:
         connection.close()
 

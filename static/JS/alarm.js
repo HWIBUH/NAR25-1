@@ -22,11 +22,7 @@ function upTime() {
     
     i++
     console.log(i);
-<<<<<<< HEAD
     if (trimin(date)) {
-=======
-    if (trimin(date) || i%20===0) {
->>>>>>> e66f8072b78ea0d3a38c09b48c19f3bbc41f3444
         
         pop(); 
         tingnung.play();
