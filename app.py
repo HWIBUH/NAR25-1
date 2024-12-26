@@ -95,6 +95,10 @@ def forum():
     
     return render_template("forum.html")
 
+@app.route('/forum_assignment', methods = ['GET', 'POST'])
+def forum_assignment():
+    return render_template("forum_assign.html")
+
 #================================ ANNOUNCEMENT ====================================
 
 @app.route("/announcement")
@@ -116,7 +120,7 @@ def gallery():
         return "Failed to connect to the database!"
     try:
         with connection.cursor() as cursor:
-            cursor.execute("SELECT trainee_number, trainee_photo FROM quiz")
+            cursor.execute("SELECT q.trainee_number, trainee_nama, trainee_binusian, trainee_major, trainee_photo FROM quiz q JOIN trainee tr ON tr.trainee_number = q.trainee_number")
             rows = cursor.fetchall()
             trainee_data = [dict(row) for row in rows]
     finally:
