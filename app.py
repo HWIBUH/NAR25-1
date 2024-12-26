@@ -63,6 +63,56 @@ def subco():
 def leaderboard():
     return render_template("leaderboard.html")
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
 @app.route("/input_announcement")
 def input_announcement():
     return render_template("inputAnnouncement.html")
