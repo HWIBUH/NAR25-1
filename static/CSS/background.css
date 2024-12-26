@@ -1,0 +1,19 @@
+.hiasan{
+    position: absolute;
+}
+
+.christmas-tree{
+    height: 90vh;
+    bottom: -10vh;
+    right: 4vw;
+}
+
+.gifts{
+    height: 45vh;
+    bottom: -8vh;
+    left: 3vw;
+}
+
+#snow-canvas{
+    z-index: 5;
+}
