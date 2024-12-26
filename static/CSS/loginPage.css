@@ -4,6 +4,7 @@ input:focus{
     outline: none;
 }
 
+
 *{
     font-family: "rubik";
     font-weight: bold;
@@ -13,6 +14,21 @@ body{
     margin: 0;
     overflow: hidden;
 }
+.hiasan{
+    position: absolute;
+}
+
+.christmas-tree{
+    height: 100vh;
+    bottom: -10vh;
+    right: 3vw;
+}
+
+.gifts{
+    height: 40vh;
+    bottom: -5vh;
+    left: 3vw;
+}
 
 .login-form{
     z-index: 1000;
@@ -21,7 +37,7 @@ body{
 .login-page{
     width: 100vw;
     height: 100vh;
-    background-color: var(--hijau-sean);
+    background: linear-gradient(var(--hijau-sean), #0f201a);
     display: flex;
     flex-direction: column;
     align-items: center;
