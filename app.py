@@ -34,6 +34,11 @@ def query():
             connection.close()
     return render_template("loginPage.html", results=results, flag=1)
 
+@app.route('/main')
+def main():
+    results = None  
+    return render_template("mainPage.html", results=results)
+
 #================================ BACKEND RANDOMIZE FOR QUIZ ====================================
 trainee_id=""
 
@@ -56,9 +61,9 @@ def randomize():
                 })
         else:
             return "No quiz data found."
+        
+#================================ BACKEND QUIZ ====================================        
 @app.route('/checkForm', methods=['POST', 'GET'])
-
-#================================ BACKEND QUIZ ====================================
 def checkForm():
     print("checked")
     trainee_numb = request.form.get('trainee_id')
@@ -186,6 +191,7 @@ def send_input_announcement():
             connection.commit() 
     finally:
         connection.close()
+    return redirect("/announcement")
 
 @app.route('/api/announcement', methods=['GET'])
 def get_announcement():
@@ -201,20 +207,20 @@ def get_announcement():
     finally:
         connection.close()
 
-@app.route("/delete_announcement")
-def delete_announcement():
-    announcement_id = request.form.get('announcement_id')
+@app.route("/api/delete_announcement/<int:announcement_id>", methods=["DELETE"])
+def delete_announcement(announcement_id):
+    print(announcement_id)
     connection = get_db_connection()
     if connection is None:
-        return "Failed to connect to the database!"
+        return jsonify({"success": False, "message": "Failed to connect to the database!"}), 500
     try:
         with connection.cursor() as cursor:
-            query = "DELETE FROM announcements WHERE id = %d"
+            query = "DELETE FROM announcement WHERE announcement_id = %d"
             cursor.execute(query, (announcement_id,))
             connection.commit()
     finally:
         connection.close()
-    return redirect("/announcement")
+    return jsonify({"success": True, "message": "Announcement deleted successfully!"})
 
 if __name__ == '__main__':
     app.run(debug=True)

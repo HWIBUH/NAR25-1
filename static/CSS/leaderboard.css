@@ -1,3 +1,5 @@
+@import url("global.css");
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
 
 input:focus{
     outline: none;
@@ -14,42 +16,14 @@ body{
     overflow: hidden;
 }
 
-#nav-bar{
-    z-index: 999;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    position: fixed;
-    top: 0;
-    width: 100vw;
-    height: 10%;
-    background-color: #3C1518;
-    color: #F5EFDC;
-}
-
 #forum{
     margin-left: 40px;
-}
-
-.nav-inside{
-    display: flex;
-    flex-direction: row;
-    gap: 30px;
-}
-
-.nav-inside a{
-    text-decoration: none;
-    color: #F5EFDC;
 }
 
 .time p{
     margin: 0px;
     margin-right: 20px;
 }
-
-/* navbar */
-
 
 /* .forum {
     display: flex;
@@ -133,7 +107,3 @@ ul{
     position: relative;
     top: 20px;
 }
-
-/* .isinya {
-
-} */

@@ -8,16 +8,22 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{url_for('static',filename='CSS/loginPage.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='CSS/reindeer.css')}}">
+
 </head>
 <body>
     <section class="login-page">
-        
+        <img src="{{url_for('static', filename='assets/christmas-tree.png')}}" alt="" class="hiasan christmas-tree">
+        <img src="{{url_for('static', filename='assets/gifts.png')}}" alt="" class="hiasan gifts">
+        <canvas id="snow-canvas"></canvas>
         <nav class="nav-bar">
             <div class="nav-inside">
-                <a id="forum" href="">Forum</a>
+                <p>25 - 1</p>
+                <a href="">Forum</a>
                 <a href="">Leaderboard</a>
                 <a href="">Subco</a>
                 <a href="">Announcement</a>
+                <a href="">Gallery</a>
             </div>
             <div class="time">
                 <p>Server time</p>
@@ -27,7 +33,7 @@
         {% if flag==1 %}
         <h1>Salah Login wey</h1>
         {% endif %}
-        <form method="POST" action="/login">
+        <form class="login-form" method="POST" action="/login">
             <div class="login-container">
                 <div>
                     <p id="login-text">Login</p>
@@ -42,8 +48,26 @@
                 </div>
                 <button id="submit-button" type="submit">Submit</button>
             </div>
-        <form>
+        </form>
+        <div class="scene">
+            <div class="reindeer-wrapper">
+                <div class="reindeer">
+                  <div class="body"></div>
+                  <div class="leg front"></div>
+                  <div class="leg back"></div>
+                  <div class="name-tag">kentang</div>
+                  <div class="head">
+                    <div class="antler left"></div>
+                    <div class="antler right"></div>
+                    <div class="eye left"></div>
+                    <div class="eye right"></div>
+                    <div class="nose"></div>
+                  </div>
+                </div>
+            </div>
+          </div>
     </section>
 </body>
 <script src="{{url_for('static',filename='JS/time.js')}}"></script>
+<script src="{{url_for('static',filename='JS/snow.js')}}"></script>
 </html>

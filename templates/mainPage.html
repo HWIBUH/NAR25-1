@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alarm Clock</title>
+    <title>NAR 25-1</title>
     <link rel="stylesheet" href="{{url_for('static',filename='CSS/mainPage.css')}}">
     <script>
         sessionStorage.setItem("userInitials", "{{ results['trainee_number']}}")
@@ -14,13 +14,14 @@
 </head>
 <body>
     <section class="container">
-        <nav id="nav-bar">
+        <nav class="nav-bar">
             <div class="nav-inside">
-                <a id="forum" href="{{url_for('forum')}}">Forum</a>
+                <a href="{{url_for('main')}}">25-1</a>
+                <a href="{{url_for('forum')}}">Forum</a>
                 <a href="{{url_for('leaderboard')}}">Leaderboard</a>
                 <a href="{{url_for('subco')}}">Subco</a>
                 <a href="{{url_for('announcement')}}">Announcement</a>
-                <p></p>
+                <a href="{{url_for('gallery')}}">Gallery</a>
             </div>
             <div class="time">
                 <p>Server Time</p>
@@ -31,7 +32,7 @@
             <h2>Server Time</h2>
             <div id="time"></div>
         </div>
-        
+
         <div class="bangun inactive" id="bangunPop"> 
             <h1>!!!BANGUN BANGUN!!!</h1>
             <button class="bbut" onclick="popout()">Turn Off</button>
@@ -41,7 +42,6 @@
         <div class="quiz-modal inactive" id="quiz1">
             <div class="quiz-container inactive" id="quiz2">
                 <p id="title-quiz">Trainee Quiz</p>
-                
                 <div id="image-temp">
                     <img src="{{quiz_trainee_photo}}" alt="Trainee Image" id="trainee-img">
                 </div>
