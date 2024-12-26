@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, url_for, jsonify
+from flask import Flask, render_template, request, redirect, jsonify, url_for
 from database import get_db_connection
 app = Flask(__name__,static_folder="static")
 
@@ -137,13 +137,62 @@ def gallery():
         return "Failed to connect to the database!"
     try:
         with connection.cursor() as cursor:
-            cursor.execute("SELECT trainee_number, trainee_photo FROM quiz")
+            cursor.execute("SELECT q.trainee_number, trainee_nama, trainee_binusian, trainee_major, trainee_photo FROM quiz q JOIN trainee tr ON tr.trainee_number = q.trainee_number")
             rows = cursor.fetchall()
             trainee_data = [dict(row) for row in rows]
     finally:
         connection.close()
 
     return render_template("gallery.html", trainee_data=trainee_data)
+
+@app.route("/input_announcement")
+def input_announcement():
+    return render_template("inputAnnouncement.html")
+
+@app.route("/send_input_announcement", methods=["POST"])
+def send_input_announcement():
+    title = request.form.get('announcement_title')
+    content = request.form.get('announcement_content')
+    deadline = request.form.get('announcement_deadline')
+    connection = get_db_connection()
+    if connection is None:
+        return "Failed to connect to the database!"
+    try:
+        with connection.cursor() as cursor:
+            query = "INSERT INTO announcement (announcement_title, announcement_content, announcement_deadline) VALUES (%s, %s, %s)"
+            cursor.execute(query, (title, content, deadline))
+            connection.commit() 
+    finally:
+        connection.close()
+
+@app.route('/api/announcement', methods=['GET'])
+def get_announcement():
+    connection = get_db_connection()
+    if connection is None:
+         return jsonify({"success": False, "message": "Failed to connect to the database!"}), 500
+    try:
+        with connection.cursor() as cursor:
+            query = "SELECT * FROM announcement"
+            cursor.execute(query)
+            announcement = cursor.fetchall()
+            return jsonify(announcement)
+    finally:
+        connection.close()
+
+@app.route("/delete_announcement")
+def delete_announcement():
+    announcement_id = request.form.get('announcement_id')
+    connection = get_db_connection()
+    if connection is None:
+        return "Failed to connect to the database!"
+    try:
+        with connection.cursor() as cursor:
+            query = "DELETE FROM announcements WHERE id = %d"
+            cursor.execute(query, (announcement_id,))
+            connection.commit()
+    finally:
+        connection.close()
+    return redirect("/announcement")
 
 if __name__ == '__main__':
     app.run(debug=True)
