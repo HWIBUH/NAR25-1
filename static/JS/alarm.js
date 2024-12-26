@@ -7,7 +7,9 @@ const tingnung = new Audio("../static/assets/death.mp3");
 tingnung.loop = true;
 i=0
 const q1= document.getElementById('quiz1');
-    const q2 = document.getElementById('quiz2');
+const q2 = document.getElementById('quiz2');
+
+
 function upTime() {
     const date = new Date();
 
@@ -23,10 +25,19 @@ function upTime() {
     i++
     console.log(i);
     if (trimin(date) || i%20===0) {
-        
-        pop(); 
-        tingnung.play();
-        nexta = nextAlarm(); 
+        (async()=>{
+            const response = await fetch('/randomize');
+            const result = await response.json();
+            console.log(result)
+            const image=document.getElementById("trainee-img")
+            console.log(result.data.trainee_photo)
+            image.src=result.data.trainee_photo
+            pop();
+            tingnung.play();
+            tingnung.loop = true;
+            nexta = nextAlarm(); 
+        })()
+
     }
     
     // console.log("Current Time:", date);

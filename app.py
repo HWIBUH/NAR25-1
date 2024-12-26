@@ -3,7 +3,6 @@ from database import get_db_connection
 app = Flask(__name__,static_folder="static")
 
 app.debug = True
-
 @app.route('/')
 def index():
     return render_template("loginPage.html")
@@ -26,25 +25,33 @@ def query():
                 query = "SELECT * FROM trainee WHERE trainee_number = %s AND trainee_pass = %s"
                 cursor.execute(query, (trainee_numb, trainee_pass))
                 results = cursor.fetchone()
-                print(results)
-                
-                if results:
-                    cursor.execute("SELECT trainee_number, trainee_photo FROM quiz ORDER BY RAND() LIMIT 1")
-                    random_quiz = cursor.fetchone()
-                    if random_quiz:
-    
-                        return render_template(
-                            "mainPage.html",
-                            results=results,
-                            quiz_trainee_number=random_quiz['trainee_number'],
-                            quiz_trainee_photo=random_quiz['trainee_photo']
-                        )
-                    else:
-                        return "No quiz data found."
+                if(results):
+                    return render_template(
+                    "mainPage.html",
+                    results=results)            
         finally:
             connection.close()
     return render_template("loginPage.html", results=results, flag=1)
-
+trainee_id=""
+@app.route('/randomize',methods=['GET', 'POST'] )
+def randomize():
+    connection = get_db_connection()
+    with connection.cursor() as cursor:
+        cursor.execute("SELECT trainee_number, trainee_photo FROM quiz ORDER BY RAND() LIMIT 1")
+        random_quiz = cursor.fetchone()
+        print(random_quiz["trainee_number"])
+        global trainee_id
+        trainee_id=random_quiz["trainee_number"]
+        if random_quiz:
+            return jsonify({
+                    'status': 'success',
+                    'data': {
+                        'trainee_id': random_quiz["trainee_number"],
+                        'trainee_photo': random_quiz["trainee_photo"],
+                    },
+                })
+        else:
+            return "No quiz data found."
 @app.route('/checkForm', methods=['POST', 'GET'])
 def checkForm():
     print("checked")
@@ -58,8 +65,8 @@ def checkForm():
         return "Failed to connect to the database!"
     try:
         with connection.cursor() as cursor:
-            query = "SELECT * FROM trainee WHERE trainee_number = %s AND trainee_nama = %s AND trainee_major = %s AND trainee_binusian = %s"
-            cursor.execute(query, (trainee_numb.upper(),trainee_nama.title(),trainee_major,trainee_binusian))
+            query = "SELECT * FROM trainee WHERE trainee_number = %s AND trainee_number = %s AND trainee_nama = %s AND trainee_major = %s AND trainee_binusian = %s"
+            cursor.execute(query, (trainee_id,trainee_numb.upper(),trainee_nama.title(),trainee_major,trainee_binusian))
             results=cursor.fetchall()
             print(results)
             if(len(results)>0):

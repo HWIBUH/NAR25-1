@@ -20,6 +20,7 @@
                 <a href="{{url_for('leaderboard')}}">Leaderboard</a>
                 <a href="{{url_for('subco')}}">Subco</a>
                 <a href="{{url_for('announcement')}}">Announcement</a>
+                <p></p>
             </div>
             <div class="time">
                 <p>Server Time</p>
@@ -42,9 +43,9 @@
                 <p id="title-quiz">Trainee Quiz</p>
                 
                 <div id="image-temp">
-                    <img src="{{ quiz_trainee_photo }}" alt="Trainee Image">
+                    <img src="{{quiz_trainee_photo}}" alt="Trainee Image" id="trainee-img">
                 </div>
-                <p id="siapa">Siapa Trainee ini {{flag}}? </p>
+                <p id="siapa">Siapa Trainee ini? </p>
                 <div id="data-container" data-flag="{{flag}}"></div>
                 <form method="POST" action="/checkForm" class="jawab" id="trainee-form">
                     <input type="text" name="trainee_id" placeholder="Nomor Trainee">
