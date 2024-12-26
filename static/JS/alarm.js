@@ -77,7 +77,6 @@ function pop() {
 
 form.addEventListener('submit', async(event)=> {
     event.preventDefault();
-
     const formData = new FormData(form);
     const response = await fetch('/checkForm', {
         method: 'POST',
@@ -91,13 +90,15 @@ form.addEventListener('submit', async(event)=> {
         q2.classList.add('inactive');
         q2.classList.remove('active');
         tingnung.loop=false
+        const nama = document.getElementById("siapa")
+        nama.innerHTML="Siapa Trainee ini?"
     } else {
-        alert('Incorrect answers. Try again!');
+        const nama = document.getElementById("siapa")
+        nama.innerHTML="Kak salah jawabannya, badut kak"
         tingnung.play()
         tingnung.loop=true
     }
 })
-
 
 // function afterpop(){
 //     function waitForFormSubmit() {
