@@ -109,10 +109,21 @@ def checkForm():
                     })
 
 #====================================== FORUM ======================================================
+
+def get_lowest():
+    connection = get_db_connection()
+    with connection.cursor() as cursor:
+        # T217 GANTI JADI SESUAI DATABASE NYA WENE
+        query = " SELECT trainee_number,COUNT(trainee_number) FROM `forum` GROUP BY trainee_number ORDER BY COUNT(trainee_number) ASC LIMIT 1;"
+        cursor.execute(query)
+        result=cursor.fetchall()
+        print(result[0]["trainee_number"])
+        return result[0]["trainee_number"]
 @app.route('/forum', methods = ['GET', 'POST'])
 def forum():
     if request.method == 'POST':
         forum_url = request.form.get('forum_url')
+        forum_url = forum_url.split("\r\n")
         input_tnumber = request.form.get('answerer')
 
         connection = get_db_connection()
@@ -120,15 +131,12 @@ def forum():
             return "Failed to connect to database"
         try:
             with connection.cursor() as cursor:
-                if input_tnumber:
-                    # T217 GANTI JADI SESUAI DATABASE NYA WENE
+                for i in forum_url:
+                    Tlow=get_lowest()
                     query = "INSERT INTO forum (forum_link, trainee_number) VALUES (%s,%s)"
-                    cursor.execute(query, (forum_url, input_tnumber.upper()))
-                else:
-                    query = "INSERT INTO forum (forum_link) VALUES (%s)"
-                    cursor.execute(query, (forum_url))
+                    cursor.execute(query, (i,Tlow))
+                    connection.commit()
         finally:
-            connection.commit()
             connection.close()
         print(f"User input: {forum_url}")
         return render_template("forum.html", forum_url = forum_url, tnumber = input_tnumber)
@@ -136,7 +144,7 @@ def forum():
     return render_template("forum.html")
 
 
-#================================ FORUM API ====================================
+#================================ ANNOUNCEMENT API ====================================
 @app.route('/api/forum_runquery', methods = ['GET', 'POST'])
 def forum_api():
     connection = get_db_connection()
