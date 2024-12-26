@@ -61,9 +61,9 @@ def randomize():
                 })
         else:
             return "No quiz data found."
+        
+#================================ BACKEND QUIZ ====================================        
 @app.route('/checkForm', methods=['POST', 'GET'])
-
-#================================ BACKEND QUIZ ====================================
 def checkForm():
     print("checked")
     trainee_numb = request.form.get('trainee_id')
