@@ -9,10 +9,10 @@
     <div>
         <nav id="nav-bar">
             <div class="nav-inside">
-                <a id="forum" href="">Forum</a>
-                <a href="">Leaderboard</a>
-                <a href="">Subco</a>
-                <a href="">Announcement</a>
+                <a id="forum" href="{{url_for('forum')}}">Forum</a>
+                <a href="{{url_for('leaderboard')}}">Leaderboard</a>
+                <a href="{{url_for('subco')}}">Subco</a>
+                <a href="{{url_for('announcement')}}">Announcement</a>
             </div>
             <div class="time">
                 <p>server time</p>
@@ -128,7 +128,7 @@
                         <ul class="isinya">
                             <li>1. </li>
                             <li>T999 - Budiono Siregar - CS - B29</li>
-                            <li>99</li>
+                            <li>99</li>     
                         </ul>
                     </div>
                     <div class="baris1 page2">
@@ -160,7 +160,7 @@
                 </div>
         </div>
     </div>
-    <script src="./jquery-3.6.0.min.js"></script>
-    <script src="./javascript.js"></script>
+    <script src="{{url_for('static',filename='JS/jquery-3.6.0.min.js')}}"></script>
+    <script src="{{url_for('static',filename='JS/javascript.js')}}"></script>
 </body>
 </html>

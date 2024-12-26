@@ -1,0 +1,68 @@
+@import url("./global.css");
+
+*{
+    font-family: "rubik";
+    font-weight: bold;
+}
+
+body{
+    margin: 0;
+    overflow: hidden;
+}
+
+.forum-page{
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--eggshell);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.forum-container{
+    width: 300px;
+    max-height: 70vh;
+    background-color: var( --hijau-sean);
+    border: 3px solid var(--bean);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    gap: 20px;
+    padding: 1vw;
+}
+
+.forum-container input{
+    width: 100%;
+    border-radius: 0.5vw;
+    background-color: var(--eggshell);
+}
+
+#submit-button{
+    width: 100px;
+    height: 25px;
+    border-radius: 5px;
+    border: none;
+    /* font-weight: bold; */
+    background-color: var(--hijau-sean-hover);
+    color: var(--eggshell);
+    transition-duration: 500ms;
+}
+
+#inputforum-text{
+    font-size: 20px;
+    margin: 0;
+    color: var(--eggshell);
+    /* font-weight: bold; */
+}
+
+.forum-container label{
+    color: var(--eggshell);
+}
+
+#linkbox-text{
+    background-color: var(--eggshell);
+    border-radius: 0.5vw;
+}

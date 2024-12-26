@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{url_for('static',filename='CSS/global.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='CSS/gallery.css')}}">
+    <script>
+        var baseUrl = "{{ base_url }}";
+        var traineeData = {{ trainee_data|tojson }};
+    </script>
+</head>
+<body>
+    <nav class="nav-bar">
+        <div class="nav-inside">
+            <a id="forum" href="{{url_for('forum')}}">Forum</a>
+            <a href="{{url_for('leaderboard')}}">Leaderboard</a>
+            <a href="{{url_for('subco')}}">Subco</a>
+            <a href="{{url_for('announcement')}}">Announcement</a>
+        </div>
+        <div class="time">
+            <p>Server Time</p>
+            <p id="time-clock"></p>
+        </div>
+    </nav>
+    <div class="title">
+        <div class="trainee-btn">
+            Trainee Gallery
+        </div>
+        <div class="trainer-btn">
+            Trainer Gallery
+        </div>
+    </div>
+    <div class="gallery trainee">
+        
+    </div>
+
+    <div class="gallery trainer">
+        <div class="grid-item green">
+            <img src="{{url_for('static', filename='assets/T297.png')}}" alt="foto-muka">
+            <div class="details">
+                <p>T186</p>
+                <p>Marcell Sutiono</p>
+                <p>Game Application and Technology</p>
+                <p>B27</p>
+            </div>
+        </div>
+
+        <div class="grid-item red">
+            <img src="{{url_for('static', filename='assets/T297.png')}}" alt="foto-muka">
+            <div class="details">
+                <p>T186</p>
+                <p>Marcell Sutiono</p>
+                <p>Game Application and Technology</p>
+                <p>B27</p>
+            </div>
+        </div>
+        <div class="grid-item green">
+            <img src="{{url_for('static', filename='assets/T297.png')}}" alt="foto-muka">
+            <div class="details">
+                <p>T186</p>
+                <p>Marcell Sutiono</p>
+                <p>Game Application and Technology</p>
+                <p>B27</p>
+            </div>
+        </div>
+
+        <div class="grid-item red">
+            <img src="{{url_for('static', filename='assets/T297.png')}}" alt="foto-muka">
+            <div class="details">
+                <p>T186</p>
+                <p>Marcell Sutiono</p>
+                <p>Game Application and Technology</p>
+                <p>B27</p>
+            </div>
+        </div>
+        <div class="grid-item green">
+            <img src="{{url_for('static', filename='assets/T297.png')}}" alt="foto-muka">
+            <div class="details">
+                <p>T186</p>
+                <p>Marcell Sutiono</p>
+                <p>Game Application and Technology</p>
+                <p>B27</p>
+            </div>
+        </div>
+
+        <div class="grid-item red">
+            <img src="{{url_for('static', filename='assets/T297.png')}}" alt="foto-muka">
+            <div class="details">
+                <p>T186</p>
+                <p>Marcell Sutiono</p>
+                <p>Game Application and Technology</p>
+                <p>B27</p>
+            </div>
+        </div>
+
+        <div class="grid-item green">
+            <img src="{{url_for('static', filename='assets/T297.png')}}" alt="foto-muka">
+            <div class="details">
+                <p>T186</p>
+                <p>Marcell Sutiono</p>
+                <p>Game Application and Technology</p>
+                <p>B27</p>
+            </div>
+        </div>
+
+        <div class="grid-item red">
+            <img src="{{url_for('static', filename='assets/T297.png')}}" alt="foto-muka">
+            <div class="details">
+                <p>T186</p>
+                <p>Marcell Sutiono</p>
+                <p>Game Application and Technology</p>
+                <p>B27</p>
+            </div>
+        </div>
+
+        <div class="grid-item green">
+            <img src="{{url_for('static', filename='assets/T297.png')}}" alt="foto-muka">
+            <div class="details">
+                <p>T186</p>
+                <p>Marcell Sutiono</p>
+                <p>Game Application and Technology</p>
+                <p>B27</p>
+            </div>
+        </div>
+
+        <div class="grid-item red">
+            <img src="{{url_for('static', filename='assets/T297.png')}}" alt="foto-muka">
+            <div class="details">
+                <p>T186</p>
+                <p>Marcell Sutiono</p>
+                <p>Game Application and Technology</p>
+                <p>B27</p>
+            </div>
+        </div>
+
+        <div class="grid-item green">
+            <img src="{{url_for('static', filename='assets/T297.png')}}" alt="foto-muka">
+            <div class="details">
+                <p>T186</p>
+                <p>Marcell Sutiono</p>
+                <p>Game Application and Technology</p>
+                <p>B27</p>
+            </div>
+        </div>
+
+        <div class="grid-item red">
+            <img src="{{url_for('static', filename='assets/T297.png')}}" alt="foto-muka">
+            <div class="details">
+                <p>T186</p>
+                <p>Marcell Sutiono</p>
+                <p>Game Application and Technology</p>
+                <p>B27</p>
+            </div>
+        </div>
+
+        <div class="grid-item green">
+            <img src="{{url_for('static', filename='assets/T297.png')}}" alt="foto-muka">
+            <div class="details">
+                <p>T186</p>
+                <p>Marcell Sutiono</p>
+                <p>Game Application and Technology</p>
+                <p>B27</p>
+            </div>
+        </div>
+
+        <div class="grid-item red">
+            <img src="{{url_for('static', filename='assets/T297.png')}}" alt="foto-muka">
+            <div class="details">
+                <p>T186</p>
+                <p>Marcell Sutiono</p>
+                <p>Game Application and Technology</p>
+                <p>B27</p>
+            </div>
+        </div>
+
+        <div class="grid-item green">
+            <img src="{{url_for('static', filename='assets/T297.png')}}" alt="foto-muka">
+            <div class="details">
+                <p>T186</p>
+                <p>Marcell Sutiono</p>
+                <p>Game Application and Technology</p>
+                <p>B27</p>
+            </div>
+        </div>
+
+        <div class="grid-item red">
+            <img src="{{url_for('static', filename='assets/T297.png')}}" alt="foto-muka">
+            <div class="details">
+                <p>T186</p>
+                <p>Marcell Sutiono</p>
+                <p>Game Application and Technology</p>
+                <p>B27</p>
+            </div>
+        </div>
+
+        <div class="grid-item green">
+            <img src="{{url_for('static', filename='assets/T297.png')}}" alt="foto-muka">
+            <div class="details">
+                <p>T186</p>
+                <p>Marcell Sutiono</p>
+                <p>Game Application and Technology</p>
+                <p>B27</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{url_for('static', filename='JS/jquery-3.6.0.min.js')}}"></script>
+    <script src="{{url_for('static', filename='JS/gallery.js')}}"></script>
+    <!-- <script src="{{ url_for('static', filename='js/gallery.js') }}"></script> -->
+</body>
+</html>

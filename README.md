@@ -6,6 +6,7 @@ Website yang dibuat untuk melatih kemampuan NAR 25-1(konsekuensi)
 3. Pake HTML CSS JS
 
 # Fitur
+<<<<<<<<< Temporary merge branch 1
 1. Jam -> alarm setiap 30 menit (server time) [60%]
 2. Homepage -> login dan register [90%]
 4. Kuis Trainer, Trainee, dan Flashcard Subco

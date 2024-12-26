@@ -1,168 +1,214 @@
-@import url("./global.css");
-
-input:focus{
-    outline: none;
-}
+@import url("global.css");
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
 
 *{
-    font-family: "rubik";
+    font-family: 'Rubik';
     font-weight: bold;
 }
 
-body{
-    margin: 0;
-    overflow: hidden;
-}
-
-.main-page{
-    position: relative;
-    width: 100vw;
-    height: 100vh;
-    background-color: var(--eggshell);
+body {
+    background-color: antiquewhite;
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    position: relative;
 }
 
 .container {
+    position: relative;
+    width: 700px;
     display: flex;
-    
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-.time {
+.clock {
+    font-family: 'Rubik', sans-serif;
+    font-weight: bold;
+    border: solid 3px black;
+    background-color: var(--hijau-sean);
+    color: antiquewhite;
+    width: 700px;
+    text-align: center;
+    font-size: 80px;
+    border-radius: 20px;
+    padding: 30px 50px;
+    z-index: 1;
+    position: relative;
+}
+
+h2 {
+    font-size: 20px;
+    margin: 0;
+    padding: 5px;
+    border: solid 1px black;
+    background-color: var(--eggshell);
+    color: black;
+    width: 25%;
+    margin: auto;
+    border-radius: 15px;
+    margin-bottom: 10px;
+}
+
+.bangun {
+    font-family: 'Rubik', sans-serif;
+    font-weight: bold;
+    border: solid 3px black;
+    background-color: var(--blood-red);
+    color: var(--eggshell);
+    width: 600px;
+    text-align: center;
+    border-radius: 20px;
+    padding: 30px 50px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10; 
+    display: none;  
+}
+
+.bangun .active {
+    display: block; 
+}
+
+h1 {
+    font-size: 100px;
+    margin: 20px 0;
+}
+
+.bbut {
+    margin: auto;
+    border-style: none;
+    width: 200px;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-family: 'Rubik', sans-serif;
+    font-size: 20px;
+    cursor: pointer;
+    background-color: var(--tea-rose);
+    color: var(--eggshell);
+    border: solid 1px black;
+}
+
+/* navbar */
+#nav-bar{
+    z-index: 999;
     display: flex;
-    margin-top: 10vh;
-    height: 80vh;
-    width: 70vw;
+    flex-direction: row;
     align-items: center;
-    justify-content: center;
-    color: var(--bean);
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    height: 10%;
+    background-color: var(--bean);
+    color: var(--eggshell);
+    /* font-family: 'Rubik';
+    font-size: 2vw;
+    font-weight: bold; */
+}
+
+#forum{
+    margin-left: 40px;
+}
+
+.nav-inside{
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+}
+
+.nav-inside a{
+    text-decoration: none;
+    color: var(--eggshell);
 }
 
 .time p{
     margin: 0px;
     margin-right: 20px;
-    font-size: 60px
 }
 
-#time-clock {
-    font-size: 12.5vw;
-}
-
-.info-container{
-    display: grid;
-    grid-template-rows: repeat(3, 1fr);
-    margin-top: 10vh;
-    height: 80vh;
-    width: 20vw;
-}
-
-.forum-container, .bp-container, .case-container{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.forum-container p, .bp-container p, .case-container p{
-    font-size: 30px;
-    margin: 0;
-    margin-bottom: 5px;
-}
-
-.forum-list, .bp-list, .case-list{
-    width: 80%;
-    height: 90%;
-    border: 2px solid var(--bean);
-    border-radius: 10px;
-}
-
-.forum-list{
-    background-color: var(--tea-rose-50);
-}
-
-.bp-list{
-    background-color: var(--hijau-sean-50);
-}
-
-.case-list{
-    background-color: var(--blood-red-50);
-}
-
-/* CSS Modal */
-
-.modal-quiz{
-    position: fixed;
+/* quiz */
+/* .quiz-modal{
     width: 100vw;
     height: 100vh;
-    background-color: rgba(0, 0, 0, 0.501);
-    top: 0;
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.modal-container{
     position: absolute;
-    width: 350px;
-    height: 450px;
+    background-color: rgba(0, 0, 0, 0.719);
+    z-index: 1000;
+} */
+
+.quiz-container{
     background-color: var(--tea-rose);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    border: 2px solid var(--bean);
+    color: var(--bean);
+    text-align: center;
+    border-style: solid;
+    border-width: 2px;
     border-radius: 10px;
+    padding: 10px;
+    width: 350px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 20; 
 }
 
 #title-quiz{
-    margin: 0;
     font-size: 30px;
 }
 
-#image-temp{
-    width: 100px;
-    height: 100px;
-    background-color: rgb(215, 236, 255);
-    border-radius: 5px;
+.jawab{
+    border-radius: 10px;
+    border-style: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    gap: 15px;
+    width: 100%;
 }
 
-#siapa{
-    margin: 0;
-    font-size: 20px;
-}
-
-.modal-container input{
-    width: 70%;
-    height: 30px;
-    border: none;
-    border-radius: 5px;
+.jawab input{
     background-color: var(--eggshell);
-    color: var(--bean);
+    border-style: none;
+    border-radius: 5px;
+    padding: 10px;
+    width: 70%;
 }
 
-.modal-container input::placeholder{
+.jawab input::placeholder{
     color: var(--bean);
 }
 
 #submit-button{
-    width: 100px;
-    height: 25px;
-    border-radius: 5px;
-    border: none;
     background-color: var(--bean);
+    padding: 5px;
     color: var(--eggshell);
+    width: 150px;
+    border-radius: 5px;
+    border-style: none;
 }
 
-#hide{
-    display: none;
+#image-temp{
+    background-color: var(--eggshell);
+    width: 100px;
+    height: 100px;
+    margin: auto;
+}
+
+.quiz-container .active {
+    display: block; 
+}
+
+.inactive{
+    display : none;
 }
 
 .active{
-    display:block;
-}
-.inactive{
-    display:none;
+    display : block;
 }
