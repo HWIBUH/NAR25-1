@@ -5,17 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" href="{{url_for('static',filename='CSS/forum.css')}}">
-    <title>Forum</title>
+    <title>NAR 25-1</title>
 </head>
 <body>
     <section class="forum-page">
         
         <nav class="nav-bar">
             <div class="nav-inside">
-                <a id="forum" href="{{url_for('forum')}}">Forum</a>
+                <a href="{{url_for('main')}}">25-1</a>
+                <a href="{{url_for('forum')}}">Forum</a>
                 <a href="{{url_for('leaderboard')}}">Leaderboard</a>
                 <a href="{{url_for('subco')}}">Subco</a>
                 <a href="{{url_for('announcement')}}">Announcement</a>
+                <a href="{{url_for('gallery')}}">Gallery</a>
             </div>
             <div class="time">
                 <p>Server time</p>
