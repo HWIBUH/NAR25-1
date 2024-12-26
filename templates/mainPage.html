@@ -37,15 +37,16 @@
             <button class="bbut" onclick="popout()">Turn Off</button>
         </div>
         <!-- <button onclick="death()">tinung</button> -->
-        <div id="data-container" data-flag="{{flag}}"></div>
+        
         <div class="quiz-modal inactive" id="quiz1">
             <div class="quiz-container inactive" id="quiz2">
                 <p id="title-quiz">Trainee Quiz</p>
                 <div id="image-temp">
                     <img src="{{ quiz_trainee_photo }}" alt="Trainee Image">
                 </div>
-                <p id="siapa">Siapa Trainee ini?</p>
-                <form method="POST" action="/checkForm" class="jawab">
+                <p id="siapa">Siapa Trainee ini {{flag}}? </p>
+                <div id="data-container" data-flag="{{flag}}"></div>
+                <form method="POST" action="/checkForm" class="jawab" id="trainee-form">
                     <input type="text" name="trainee_id" placeholder="Nomor Trainee">
                     <input type="text" name="trainee_name" placeholder="Nama Trainee">
                     <input type="text" name="trainee_major" placeholder="Jurusan">

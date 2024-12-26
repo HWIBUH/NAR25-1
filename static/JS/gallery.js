@@ -12,15 +12,21 @@ $(document).ready(function() {
     });
 
     traineeData.forEach((e, i) => {
-        let imgElement = $('<img>').attr('src', e.trainee_photo).attr('alt', e.trainee_number);
+        let img = $('<img>').attr('src', e.trainee_photo).attr('alt', e.trainee_number);
+        let imgElement = $('<div>').attr('class', 'img-container')
+        imgElement.append(img)
+
         let details = $('<div>').attr('class', 'details');
 
         let tNumber = $('<p>').text(e.trainee_number);
-        // let traineeName = $('<p>').text(e.trainee_name);
-        // let traineeMajor = $('<p>').text(e.trainee_major);
-        // let binusian = $('<p>').text(e.trainee_binusian);
+        let traineeName = $('<p>').text(e.trainee_nama);
+        let traineeMajor = $('<p>').text(e.trainee_major);
+        let binusian = $('<p>').text(e.trainee_binusian);
 
         details.append(tNumber);
+        details.append(traineeName);
+        details.append(traineeMajor);
+        details.append(binusian);
 
         let container = $('<div>').attr('class', 'grid-item');
 
