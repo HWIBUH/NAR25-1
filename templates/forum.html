@@ -12,10 +12,10 @@
         
         <nav class="nav-bar">
             <div class="nav-inside">
-                <a id="forum" href="forum.html">Forum</a>
-                <a href="">Leaderboard</a>
-                <a href="">Subco</a>
-                <a href="">Announcement</a>
+                <a id="forum" href="{{url_for('forum')}}">Forum</a>
+                <a href="{{url_for('leaderboard')}}">Leaderboard</a>
+                <a href="{{url_for('subco')}}">Subco</a>
+                <a href="{{url_for('announcement')}}">Announcement</a>
             </div>
             <div class="time">
                 <p>Server time</p>
