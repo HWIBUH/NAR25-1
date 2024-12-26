@@ -116,6 +116,10 @@ def forum():
     
     return render_template("forum.html")
 
+@app.route('/forum_assignment', methods = ['GET', 'POST'])
+def forum_assignment():
+    return render_template("forum_assign.html")
+
 #================================ ANNOUNCEMENT ====================================
 
 @app.route("/announcement")

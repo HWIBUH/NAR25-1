@@ -68,6 +68,7 @@ body{
     /* background-color: var(--hijau-sean); */
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     align-items: center;
     text-align: center;
     max-width: 15vw;
@@ -76,16 +77,21 @@ body{
     gap: 1vh;
 }
 
+.img-container{
+    width: 100%;
+    overflow: hidden;
+    border-radius: calc(1vw - 1vh);
+}
+
 .grid-item img{
     width: 100%;
-    border-radius: calc(1vw - 1vh);
 }
 
 .grid-item .details{
     background-color: var(--eggshell);
     border-radius: calc(1vw - 1vh);
     font-weight: 500;
-
+    width: 100%;
 }
 
 .green{
