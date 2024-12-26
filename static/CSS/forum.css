@@ -16,6 +16,11 @@ body{
     position: relative;
 }
 
+.time p{
+    margin: 0px;
+    margin-right: 20px;
+}
+
 .forum-page{
     position: relative;
     width: 700px;
@@ -35,7 +40,7 @@ body{
     align-items: center;
     justify-content: center;
     border-radius: 10px;
-    gap: 20px;
+    gap: 10px;
     padding: 1vw;
 }
 
