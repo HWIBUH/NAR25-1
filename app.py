@@ -1,6 +1,5 @@
-from flask import Flask, render_template, request, url_for
+from flask import Flask, render_template, request, url_for, jsonify
 from database import get_db_connection
-
 app = Flask(__name__,static_folder="static")
 
 app.debug = True
@@ -32,7 +31,6 @@ def query():
                 if results:
                     cursor.execute("SELECT trainee_number, trainee_photo FROM quiz ORDER BY RAND() LIMIT 1")
                     random_quiz = cursor.fetchone()
-    
                     if random_quiz:
     
                         return render_template(
@@ -47,13 +45,15 @@ def query():
             connection.close()
     return render_template("loginPage.html", results=results, flag=1)
 
-@app.route('/checkForm', methods=['POST'])
+@app.route('/checkForm', methods=['POST', 'GET'])
 def checkForm():
+    print("checked")
     trainee_numb = request.form.get('trainee_id')
     trainee_nama = request.form.get('trainee_name')
     trainee_major = request.form.get('trainee_major')
     trainee_binusian = request.form.get('trainee_batch')
     connection = get_db_connection()
+    flag=0
     if connection is None:
         return "Failed to connect to the database!"
     try:
@@ -64,10 +64,31 @@ def checkForm():
             print(results)
             if(len(results)>0):
                 print(trainee_numb,trainee_nama,trainee_major,trainee_binusian)
-                return render_template("mainPage.html", results=results, flag=1)
+                flag=1
+                return jsonify({
+                    'status': 'success',
+                    'message': 'Form processed successfully!',
+                    'data': {
+                        'trainee_id': trainee_numb,
+                        'trainee_name': trainee_nama,
+                        'trainee_major': trainee_major,
+                        'trainee_batch': trainee_binusian
+                    },
+                    'flag': flag
+                })
     finally:
         connection.close()
-    return render_template("mainPage.html", results=results, flag=0)
+    return jsonify({
+                        'status': 'success',
+                        'message': 'Form processed successfully!',
+                        'data': {
+                            'trainee_id': trainee_numb,
+                            'trainee_name': trainee_nama,
+                            'trainee_major': trainee_major,
+                            'trainee_batch': trainee_binusian
+                        },
+                        'flag': flag
+                    })
 
 @app.route('/forum')
 def forum():
