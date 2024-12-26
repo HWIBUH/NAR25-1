@@ -3,50 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NAR 25-1</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
-    
+    <title>Alarm Clock</title>
     <link rel="stylesheet" href="{{url_for('static',filename='CSS/mainPage.css')}}">
-    <script src="{{url_for('static',filename='JS/time.js')}}" defer></script>
+    <script>
+        sessionStorage.setItem("userInitials", "{{ results['trainee_number']}}")
+        sessionStorage.setItem("userName", "{{ results['trainee_nama']}}")
+        sessionStorage.setItem("userMajor", "{{ results['trainee_major'] }}")
+        sessionStorage.setItem("userBinusian", "{{ results['trainee_binusian']}}")
+    </script>
 </head>
 <body>
-    <section class="main-page">
-        <nav class="nav-bar">
+    <section class="container">
+        <nav id="nav-bar">
             <div class="nav-inside">
-                <a href="{{ url_for('forum') }}">Forum</a>
-                <a href="{{ url_for('leaderboard') }}">Leaderboard</a>
-                <a href="{{ url_for('subco') }}">Subco</a>
-                <a href="{{ url_for('announcement') }}">Announcement</a>
+                <a id="forum" href="{{url_for('forum')}}">Forum</a>
+                <a href="{{url_for('leaderboard')}}">Leaderboard</a>
+                <a href="{{url_for('subco')}}">Subco</a>
+                <a href="{{url_for('announcement')}}">Announcement</a>
             </div>
-        </nav>
-        <div class="container">
             <div class="time">
-                <p>Server time</p>
+                <p>Server Time</p>
                 <p id="time-clock"></p>
             </div>
-            <div class="info-container">
-                <h2>Welcome, {{ results['trainee_name'] }}</h2>
-
-                <!-- Quiz Section -->
-                <div class="quiz-container">
-                    <p id="title-quiz">Trainee Quiz</p>
-                    <div id="image-temp">
-                        <img src="{{ quiz_trainee_photo }}" alt="Trainee Image">
-                    </div>
-                    <p id="siapa">Siapa Trainee ini?</p>
-                    <form method="POST" action="#">
-                        <input type="text" name="trainee_id" placeholder="Nomor Trainee">
-                        <input type="text" name="trainee_name" placeholder="Nama Trainee">
-                        <input type="text" name="trainee_major" placeholder="Jurusan">
-                        <input type="text" name="trainee_batch" placeholder="Binusian">
-                        <button type="submit" id="submit-button">Submit</button>
-                    </form>
+        </nav>
+        <div class="clock">
+            <h2>Server Time</h2>
+            <div id="time"></div>
+        </div>
+        
+        <div class="bangun inactive" id="bangunPop"> 
+            <h1>!!!BANGUN BANGUN!!!</h1>
+            <button class="bbut" onclick="popout()">Turn Off</button>
+        </div>
+        <!-- <button onclick="death()">tinung</button> -->
+        <div id="data-container" data-flag="{{flag}}"></div>
+        <div class="quiz-modal inactive" id="quiz1">
+            <div class="quiz-container inactive" id="quiz2">
+                <p id="title-quiz">Trainee Quiz</p>
+                
+                <div id="image-temp">
+                    <img src="{{ quiz_trainee_photo }}" alt="Trainee Image">
                 </div>
+                <p id="siapa">Siapa Trainee ini?</p>
+                <form method="POST" action="/checkForm" class="jawab">
+                    <input type="text" name="trainee_id" placeholder="Nomor Trainee">
+                    <input type="text" name="trainee_name" placeholder="Nama Trainee">
+                    <input type="text" name="trainee_major" placeholder="Jurusan">
+                    <input type="text" name="trainee_batch" placeholder="Binusian">
+                    <button type="submit" id="submit-button">Submit</button>
+                </form>
             </div>
         </div>
     </section>
-    <script src="{{ url_for('static', filename='JS/time.js') }}"></script>
 </body>
+<script src="{{url_for('static',filename='JS/alarm.js')}}"></script>
 </html>
+
