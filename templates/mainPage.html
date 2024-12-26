@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alarm Clock</title>
+    <title>NAR 25-1</title>
     <link rel="stylesheet" href="{{url_for('static',filename='CSS/mainPage.css')}}">
     <script>
         sessionStorage.setItem("userInitials", "{{ results['trainee_number']}}")
@@ -16,11 +16,12 @@
     <section class="container">
         <nav class="nav-bar">
             <div class="nav-inside">
-                <p>25 - 1</p>
+                <a href="{{url_for('main')}}">25-1</a>
                 <a href="{{url_for('forum')}}">Forum</a>
                 <a href="{{url_for('leaderboard')}}">Leaderboard</a>
                 <a href="{{url_for('subco')}}">Subco</a>
                 <a href="{{url_for('announcement')}}">Announcement</a>
+                <a href="{{url_for('gallery')}}">Gallery</a>
             </div>
             <div class="time">
                 <p>Server Time</p>

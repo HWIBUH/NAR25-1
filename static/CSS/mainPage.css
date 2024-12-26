@@ -187,3 +187,47 @@ h1 {
     background-color: rgba(0, 0, 0, 0.719);
     z-index: 1000;
 } */
+
+@media screen and (max-width: 810px) {
+    .clock {
+        width: 500px;
+        font-size: 70px;
+    }
+}
+
+@media screen and (max-width: 765px) {
+    .nav-inside{
+        gap: 20px;
+        margin-left: 3vw;
+    }
+
+    .nav-inside a{
+        font-size: 15px;
+    }
+
+    #time-clock {
+        font-size: 25px;
+    }
+}
+
+@media screen and (max-width: 690px) {
+    .nav-inside{
+        gap: 15px;
+        margin-left: 3vw;
+    }
+
+    .nav-inside a{
+        font-size: 15px;
+    }
+
+    #time-clock {
+        font-size: 25px;
+    }
+}
+
+@media screen and (max-width: 610px) {
+    .clock {
+        width: 400px;
+        font-size: 60px;
+    }
+}

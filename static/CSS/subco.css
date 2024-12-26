@@ -1,5 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,500;1,500&display=swap');
-@import url("./global.css");
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+@import url("global.css");
+
+*{
+    font-family: 'Rubik';
+    font-weight: bold;
+}
 
 body {
     margin: 0;
@@ -7,7 +12,15 @@ body {
     display: flex;
     align-items: center;
     flex-direction: column;
-    font-family: Rubik;
+}
+
+.container {
+    position: relative;
+    width: 700px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .card {
@@ -88,7 +101,11 @@ body {
     display: none;
 }
 
-.subco-page{
+.subco-flashcard {
+    margin-top: 20vh;
+}
+
+/* .subco-page{
     position: relative;
     width: 100vw;
     height: 100vh;
@@ -97,43 +114,9 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-}
-
-/* CSS Navbar */
-
-.nav-bar{
-    z-index: 999;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    position: fixed;
-    top: 0;
-    width: 100vw;
-    height: 10%;
-    background-color: var(--bean);
-    color: var(--eggshell);
-}
-
-#forum{
-    margin-left: 40px;
-}
-
-.nav-inside{
-    display: flex;
-    flex-direction: row;
-    gap: 30px;
-}
-
-.nav-inside a{
-    text-decoration: none;
-    color: var(--eggshell);
-}
+} */
 
 .time p{
     margin: 0px;
     margin-right: 20px;
 }
-
-
-/* CSS Navbar */
