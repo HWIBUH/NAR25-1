@@ -13,7 +13,7 @@
     --blood-red-50:#69140e94;
 
     /* hover */
-    --bean-hover:#ac3941;
+    --bean-hover:#963138;
     --hijau-sean-hover:#26301c;
     --eggshell-hover:#858070fd;
     --tea-rose-hover:#705d59;
@@ -73,3 +73,10 @@
 }
 
 /* CSS Navbar */
+
+#snow-canvas{
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    z-index: 3;
+}
