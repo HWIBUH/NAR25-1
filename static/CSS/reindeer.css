@@ -1,0 +1,138 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,500;1,500&display=swap");
+@import url("./global.css");
+
+
+  .scene {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: flex-end;
+    justify-content: end;
+    transform: translateX(-30vw) scaleX(-1); 
+
+    
+  }
+@keyframes marquee{
+    0%{
+        transform: translateX(0vw);
+    }
+
+    100%{
+        transform: translateX(-150vw);
+    }
+}
+  .reindeer {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    animation: marquee 8s infinite;
+  }
+
+  .body {
+    position: absolute;
+    width: 100px;
+    height: 50px;
+    background: #8B4513;
+    border-radius: 25px;
+    top: 30px;
+  }
+
+  .leg {
+    position: absolute;
+    width: 10px;
+    height: 30px;
+    background: #654321;
+    bottom: 0;
+  }
+  .leg.front {
+    left: 20px;
+    animation: move-leg 0.1s infinite alternate;
+  }
+  .leg.back {
+    right: 20px;
+    animation: move-leg 0.1s infinite alternate-reverse;
+  }
+
+  @keyframes move-leg {
+    0% { transform: rotate(50deg); }
+    100% { transform: rotate(-50deg); }
+  }
+  @keyframes move-head {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(15deg); }
+  }
+  .name-tag{
+    font-family: "rubik";
+    position:absolute;
+    transform: scaleX(-1);
+    text-align: center;
+    width:80px;
+    height:fit-content;
+    top: -65px;
+    left: 6px;
+    border-radius: 5px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.65);
+
+  }
+  .head {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background: #8B4513;
+    border-radius: 50%;
+    top: -20px;
+    left: -10px;
+    animation: move-head 0.1s infinite alternate;
+  }
+
+  .antler {
+    position: absolute;
+    width: 10px;
+    height: 30px;
+    background: #D2B48C;
+    top: -20px;
+    border-radius: 0 0 10px 10px;
+  }
+  .antler.left {
+    left: 0;
+    transform: rotate(-30deg);
+  }
+  .antler.right {
+    right: 0;
+    transform: rotate(30deg);
+  }
+
+  .eye.right {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background: black;
+    border-radius: 50%;
+    top: 15px;
+    left: 30px;
+  }
+
+  .eye.left {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background: black;
+    border-radius: 50%;
+    top: 15px;
+    left: 15px;
+  }
+
+
+
+  .nose {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: red;
+    border-radius: 50%;
+    bottom: 5px;
+    left: 20px;
+  }
+

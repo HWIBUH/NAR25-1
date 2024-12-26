@@ -8,6 +8,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{url_for('static',filename='CSS/loginPage.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='CSS/reindeer.css')}}">
+
 </head>
 <body>
     <section class="login-page">
@@ -43,7 +45,24 @@
                 </div>
                 <button id="submit-button" type="submit">Submit</button>
             </div>
-        <form>
+        </form>
+        <div class="scene">
+            <div class="reindeer-wrapper">
+                <div class="reindeer">
+                  <div class="body"></div>
+                  <div class="leg front"></div>
+                  <div class="leg back"></div>
+                  <div class="name-tag">kentang</div>
+                  <div class="head">
+                    <div class="antler left"></div>
+                    <div class="antler right"></div>
+                    <div class="eye left"></div>
+                    <div class="eye right"></div>
+                    <div class="nose"></div>
+                  </div>
+                </div>
+            </div>
+          </div>
     </section>
 </body>
 <script src="{{url_for('static',filename='JS/time.js')}}"></script>
