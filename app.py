@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, url_for
+from flask import Flask, render_template, request, redirect, url_for
 from database import get_db_connection
 
 app = Flask(__name__,static_folder="static")
@@ -85,20 +85,51 @@ def subco():
 def leaderboard():
     return render_template("leaderboard.html")
 
+@app.route("/input_announcement")
+def input_announcement():
+    return render_template("inputAnnouncement.html")
+
 @app.route("/gallery")
-def gallery():
-    connection = get_db_connection()
-    if connection is None:
-        return "Failed to connect to the database!"
-    try:
-        with connection.cursor() as cursor:
-            cursor.execute("SELECT trainee_number, trainee_photo FROM quiz")
+def gallery():  
+    cursor.execute("SELECT trainee_number, trainee_photo FROM quiz")
             rows = cursor.fetchall()
             trainee_data = [dict(row) for row in rows]
     finally:
         connection.close()
 
     return render_template("gallery.html", trainee_data=trainee_data)
+  
+@app.route("/send_input_announcement", methods=["POST"])
+def send_input_announcement():
+    announcement_title = request.form.get('announcement_title')
+    announcement_content = request.form.get('announcement_content')
+    announcement_deadline = request.form.get('announcement_deadline')
+    connection = get_db_connection()
+    if connection is None:
+        return "Failed to connect to the database!"
+    try:
+        with connection.cursor() as cursor:
+            query = "INSERT INTO announcement (announcement_title, announcement_content, announcement_deadline) VALUES (%s, %s, %s)"
+            cursor.execute(query, (announcement_title, announcement_content, announcement_deadline))
+            connection.commit() 
+    finally:
+        connection.close()
+    return redirect('/announcement')
+
+app.route("/delete_announcement")
+def delete_announcement():
+    announcement_id = request.form.get('announcement_id')
+    connection = get_db_connection()
+    if connection is None:
+        return "Failed to connect to the database!"
+    try:
+        with connection.cursor() as cursor:
+            query = "DELETE FROM announcements WHERE id = %s"
+            cursor.execute(query, (announcement_id,))
+            connection.commit()
+    finally:
+        connection.close()
+    return render_template("announcement.html")
 
 if __name__ == '__main__':
     app.run(debug=True)
