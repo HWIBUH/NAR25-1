@@ -36,10 +36,6 @@
     color: var(--eggshell);
 }
 
-#forum{
-    margin-left: 40px;
-}
-
 .nav-inside{
     display: flex;
     flex-direction: row;
@@ -50,6 +46,11 @@
     text-decoration: none;
     color: var(--eggshell);
     transition-duration: 500ms;
+}
+
+.nav-inside p{
+    margin: 0;
+    margin-left: 40px;
 }
 
 .nav-inside a:hover{
@@ -65,6 +66,10 @@
 .time p{
     margin: 0px;
     margin-right: 25px;
+}
+
+#time-clock{
+    font-size: 30px;
 }
 
 /* CSS Navbar */
