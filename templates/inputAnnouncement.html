@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NAR 25-1</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="{{url_for('static',filename='CSS/announcement.css')}}"
+    />
+  </head>
+  <body>
+    <section class="flex-col">
+      <nav class="nav-bar">
+        <div class="nav-inside">
+          <a href="{{ url_for('forum') }}">Forum</a>
+          <a href="{{ url_for('leaderboard') }}">Leaderboard</a>
+          <a href="{{ url_for('subco') }}">Subco</a>
+          <a href="{{ url_for('announcement') }}">Announcement</a>
+        </div>
+      </nav>
+
+      <form action="/send_input_announcement" class="input-box flex-col" method="POST">
+        <label for="title">Announcement Title</label>
+        <input type="text" name="announcement_title" id="title"/>
+        <label for="desc">Announcement Description</label>
+        <textarea name="announcement_content" id="desc"></textarea>
+        <label for="deadline">Deadline</label>
+        <input type="date" name="announcement_deadline" id="deadline" />
+        <div class="button-box">
+          <button type="submit">Add</button>
+        </div>
+      </form>
+    </section>
+    <script src="{{url_for('static',filename='JS/input_announcement.js')}}"></script>
+  </body>
+</html>
