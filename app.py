@@ -69,9 +69,33 @@ def checkForm():
         connection.close()
     return render_template("mainPage.html", results=results, flag=0)
 
-@app.route('/forum')
+#====================================== FORUM ======================================================
+@app.route('/forum', methods = ['GET', 'POST'])
 def forum():
+    if request.method == 'POST':
+        forum_url = request.form.get('forum_url')
+        input_tnumber = request.form.get('answerer')
+
+        connection = get_db_connection()
+        if connection is None:
+            return "Failed to connect to database"
+        try:
+            with connection.cursor() as cursor:
+                if input_tnumber:
+                    query = "INSERT INTO forum (url, answered, respondent) VALUES (%s, True, %s)"
+                    cursor.execute(query, (forum_url, input_tnumber.upper()))
+                else:
+                    query = "INSERT INTO forum (url) VALUES (%s)"
+                    cursor.execute(query, (forum_url))
+        finally:
+            connection.commit()
+            connection.close()
+        print(f"User input: {forum_url}")
+        return render_template("forum.html", forum_url = forum_url, tnumber = input_tnumber)
+    
     return render_template("forum.html")
+
+#================================ ANNOUNCEMENT ====================================
 
 @app.route("/announcement")
 def announcement():
