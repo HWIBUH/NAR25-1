@@ -3,22 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NAR 25-1</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    
+    
     <link rel="stylesheet" href="{{url_for('static',filename='CSS/announcement.css')}}">
-    <title>Annoucement</title>
 </head>
-<body>
-    <!-- Dari database -->
-    <nav class="nav-bar">
-        <div class="nav-inside">
-            <a id="forum" href="{{url_for('forum')}}">Forum</a>
-            <a href="{{url_for('leaderboard')}}">Leaderboard</a>
-            <a href="{{url_for('subco')}}">Subco</a>
-            <a href="{{url_for('announcement')}}">Announcement</a>
-        </div>
-        <div class="time">
-            <p>server time</p>
+<body onload="generate()">
+    <section class="flex-col">
+        <nav class="nav-bar">
+            <div class="nav-inside">
+                <a href="{{ url_for('forum') }}">Forum</a>
+                <a href="{{ url_for('leaderboard') }}">Leaderboard</a>
+                <a href="{{ url_for('subco') }}">Subco</a>
+                <div class="dropdown">
+                    <a class="announcement" href="{{ url_for('announcement') }}">Announcement</a>
+                    <a class="input_announcement" href="{{ url_for('input_announcement')}}">Input Announcement</a>
+                </div>
+            </div>
+            <div class="time">
+                <p>server time</p>
             <p id="time-clock">23:59</p>
         </div>
-    </nav>
+        </nav>
+        
+        <div class="announcement-outer-box">
+            <div class="announcement-box" id="list-card">
+                <div class="announcement-card">
+                    <h2>Testing</h2>
+                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Enim velit optio necessitatibus quisquam corporis sint illo temporibus provident obcaecati suscipit dignissimos possimus dolorum, a veritatis dolorem aliquid nulla expedita laborum.</p>
+                    <p>04:02:30 </p>
+                    <button type="button" class="check-btn" onclick="pop()"></button>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <script src="{{url_for('static',filename='JS/announcement.js')}}"></script>
 </body>
 </html>
