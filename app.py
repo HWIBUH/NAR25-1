@@ -34,6 +34,11 @@ def query():
             connection.close()
     return render_template("loginPage.html", results=results, flag=1)
 
+@app.route('/main')
+def main():
+    results = None  
+    return render_template("mainPage.html", results=results)
+
 #================================ BACKEND RANDOMIZE FOR QUIZ ====================================
 trainee_id=""
 

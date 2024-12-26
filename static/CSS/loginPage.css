@@ -1,8 +1,9 @@
-@import url("./global.css");
+@import url("global.css");
 
 input:focus{
     outline: none;
 }
+
 
 *{
     font-family: "rubik";
@@ -12,6 +13,21 @@ input:focus{
 body{
     margin: 0;
     overflow: hidden;
+}
+.hiasan{
+    position: absolute;
+}
+
+.christmas-tree{
+    height: 90vh;
+    bottom: -10vh;
+    right: 4vw;
+}
+
+.gifts{
+    height: 45vh;
+    bottom: -8vh;
+    left: 3vw;
 }
 
 .login-form{
@@ -23,7 +39,7 @@ body{
 .login-page{
     width: 100vw;
     height: 100vh;
-    background-color: var(--hijau-sean);
+    background: linear-gradient(var(--hijau-sean), #0f201a);
     display: flex;
     flex-direction: column;
     align-items: center;

@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,500;1,500&display=swap");
-@import url("./global.css");
+@import url("global.css");
 
 input:focus {
   outline: none;
@@ -159,38 +159,12 @@ body {
 
 /* Input Announcement */
 
-/* CSS Navbar */
 
-.nav-bar {
-  z-index: 999;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  position: fixed;
-  top: 0;
-  width: 100vw;
-  height: 10%;
-  background-color: var(--bean);
-  color: var(--eggshell);
-}
 
 #forum {
   margin-left: 40px;
 }
 
-.nav-inside {
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  gap: 30px;
-  margin-left: 50px;
-}
-
-.nav-inside a {
-  text-decoration: none;
-  color: var(--eggshell);
-}
 
 .dropdown {
   position: relative;
@@ -215,5 +189,3 @@ body {
   margin: 0px;
   margin-right: 20px;
 }
-
-/* CSS Navbar */

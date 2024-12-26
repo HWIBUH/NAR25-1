@@ -3,20 +3,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{url_for('static',filename='CSS/leaderboard.css')}}">
-    <title>Leaderboard</title>
+    <title>NAR 25-1</title>
 </head>
 <body>
-    <div>
-        <nav id="nav-bar">
+    <div class="container">
+        <nav class="nav-bar">
             <div class="nav-inside">
-                <a id="forum" href="{{url_for('forum')}}">Forum</a>
+                <a href="{{url_for('main')}}">25-1</a>
+                <a href="{{url_for('forum')}}">Forum</a>
                 <a href="{{url_for('leaderboard')}}">Leaderboard</a>
                 <a href="{{url_for('subco')}}">Subco</a>
                 <a href="{{url_for('announcement')}}">Announcement</a>
+                <a href="{{url_for('gallery')}}">Gallery</a>
             </div>
             <div class="time">
-                <p>server time</p>
-                <p id="time-clock">23:59</p>
+                <p>Server Time</p>
+                <p id="time-clock"></p>
             </div>
         </nav>
         <div class="wrapper">
@@ -162,5 +164,6 @@
     </div>
     <script src="{{url_for('static',filename='JS/jquery-3.6.0.min.js')}}"></script>
     <script src="{{url_for('static',filename='JS/javascript.js')}}"></script>
+    <script src="{{url_for('static',filename='JS/time.js')}}"></script>
 </body>
 </html>

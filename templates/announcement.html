@@ -15,17 +15,20 @@
     <section class="flex-col">
         <nav class="nav-bar">
             <div class="nav-inside">
-                <a href="{{ url_for('forum') }}">Forum</a>
-                <a href="{{ url_for('leaderboard') }}">Leaderboard</a>
-                <a href="{{ url_for('subco') }}">Subco</a>
+                <a href="{{url_for('main')}}">25-1</a>
+                <a href="{{url_for('forum')}}">Forum</a>
+                <a href="{{url_for('leaderboard')}}">Leaderboard</a>
+                <a href="{{url_for('subco')}}">Subco</a>
+                <a href="{{url_for('announcement')}}">Announcement</a>
+                <a href="{{url_for('gallery')}}">Gallery</a>
                 <div class="dropdown">
                     <a class="announcement" href="{{ url_for('announcement') }}">Announcement</a>
                     <a class="input_announcement" href="{{ url_for('input_announcement')}}">Input Announcement</a>
                 </div>
             </div>
             <div class="time">
-                <p>server time</p>
-            <p id="time-clock">23:59</p>
+                <p>Server Time</p>
+            <p id="time-clock"></p>
         </div>
         </nav>
         
@@ -42,5 +45,6 @@
 
     </section>
     <script src="{{url_for('static',filename='JS/announcement.js')}}"></script>
+    <script src="{{url_for('static',filename='JS/time.js')}}"></script>
 </body>
 </html>
