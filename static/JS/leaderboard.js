@@ -15,13 +15,26 @@ $('.butt_on1').on('click', function(e) {
 async function fetchData(){
     const response=await fetch("/api/forum_runquery")
     const result = await response.json()
-    
+    let c=1
     for(object of result.data){
-        let element = '<ul class="isinya"><li>1.</li><li>'+object["COUNT(trainee_number)"]+'</li><li>'+object["trainee_number"]+'</li></ul>'  
+        c++
+        let element = '<ul class="isinya"><li>'+(c-2)+'.</li><li>'+object["COUNT(trainee_number)"]+'</li><li>'+object["trainee_number"]+'</li></ul>'  
+        
+        
+        if(object["trainee_number"]==""){
+            continue
+            // element = '<ul class="isinya"><li>'+(c-1)+'.</li><li>'+object["COUNT(trainee_number)"]+'</li><li>UNANSWERED</li></ul>'  
+        }
+        
         let wrapper = document.createElement('div')
-        wrapper.innerHTML=element
         wrapper.classList.add("page1")
-        wrapper.classList.add("baris1")
+        if(c%2==0){
+            wrapper.classList.add("baris1")
+        }else{
+            wrapper.classList.add("baris2")
+        }
+        
+        wrapper.innerHTML=element
         document.getElementById('parent').appendChild(wrapper);
         console.log(element)
     }
