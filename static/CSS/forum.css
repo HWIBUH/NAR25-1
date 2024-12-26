@@ -1,28 +1,38 @@
-@import url("./global.css");
+@import url("global.css");
+@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
 
 *{
-    font-family: "rubik";
+    font-family: "Rubik";
     font-weight: bold;
 }
 
 body{
+    background-color: var(--eggshell);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
     margin: 0;
-    overflow: hidden;
+    position: relative;
+}
+
+.time p{
+    margin: 0px;
+    margin-right: 20px;
 }
 
 .forum-page{
-    width: 100vw;
-    height: 100vh;
-    background-color: var(--eggshell);
+    position: relative;
+    width: 700px;
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
+    align-items: center;
 }
 
 .forum-container{
     width: 300px;
-    height: 350px;
+    max-height: 70vh;
     background-color: var( --hijau-sean);
     border: 3px solid var(--bean);
     display: flex;
@@ -30,7 +40,14 @@ body{
     align-items: center;
     justify-content: center;
     border-radius: 10px;
-    gap: 20px;
+    gap: 10px;
+    padding: 1vw;
+}
+
+.forum-container input{
+    width: 100%;
+    border-radius: 0.5vw;
+    background-color: var(--eggshell);
 }
 
 #submit-button{
@@ -51,6 +68,11 @@ body{
     /* font-weight: bold; */
 }
 
+.forum-container label{
+    color: var(--eggshell);
+}
+
 #linkbox-text{
     background-color: var(--eggshell);
+    border-radius: 0.5vw;
 }

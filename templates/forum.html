@@ -5,34 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="stylesheet" href="{{url_for('static',filename='CSS/forum.css')}}">
-    <title>Forum</title>
+    <title>NAR 25-1</title>
 </head>
 <body>
     <section class="forum-page">
         
         <nav class="nav-bar">
             <div class="nav-inside">
-                <a id="forum" href="{{url_for('static', filename='forum.html')}}">Forum</a>
-                <a href="{{url_for('static', filename='leaderboard.html')}}">Leaderboard</a>
-                <a href="{{url_for('static', filename='subco.html')}}">Subco</a>
-                <a href="{{url_for('static', filename='announcement.html')}}">Announcement</a>
+                <a href="{{url_for('main')}}">25-1</a>
+                <a href="{{url_for('forum')}}">Forum</a>
+                <a href="{{url_for('leaderboard')}}">Leaderboard</a>
+                <a href="{{url_for('subco')}}">Subco</a>
+                <a href="{{url_for('announcement')}}">Announcement</a>
+                <a href="{{url_for('gallery')}}">Gallery</a>
             </div>
             <div class="time">
                 <p>Server time</p>
                 <p id="time-clock"></p>
             </div>
         </nav>
-        <form method="POST">
+        <form method="POST" action="/forum">
             <div class="forum-container">
                 <div>
                     <p id="inputforum-text">Input Forum Links Here</p>
                 </div>
+                <label for="answerer">T number</label>
+                <input type="text" name="answerer" id="" placeholder="TXXX">
+                <label for="">Forum Url</label>
                 <div class="linkbox">
-                    <textarea id="linkbox-text" rows="12" cols="35" style="resize: none;"></textarea>
+                    <textarea id="linkbox-text" placeholder="Url forum" required name="forum_url" rows="10" cols="35" style="resize: none;"></textarea>
                 </div>
                 <button id="submit-button" type="submit">Submit</button>
             </div>
-        <form>
+        </form>
+
+        {% if forum_url %}
+            <p> You entered: {{ forum_url }}</p>
+            <p> T number: {{tnumber}}</p>
+        {% endif %}
     </section>
 </body>
+<script src="{{url_for('static',filename='JS/alarm.js')}}"></script>
 </html>

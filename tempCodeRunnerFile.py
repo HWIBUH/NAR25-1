@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-GET
-=======
 from flask import Flask, render_template, request
 from database import get_db_connection
 
@@ -55,4 +52,3 @@ def leaderboard():
 
 if __name__ == '__main__':
     app.run(debug=True)
->>>>>>> 21b45e9b5751e96370738ddceef456295d151343

@@ -1,8 +1,9 @@
-@import url("./global.css");
+@import url("global.css");
 
 input:focus{
     outline: none;
 }
+
 
 *{
     font-family: "rubik";
@@ -13,11 +14,32 @@ body{
     margin: 0;
     overflow: hidden;
 }
+.hiasan{
+    position: absolute;
+}
+
+.christmas-tree{
+    height: 90vh;
+    bottom: -10vh;
+    right: 4vw;
+}
+
+.gifts{
+    height: 45vh;
+    bottom: -8vh;
+    left: 3vw;
+}
+
+.login-form{
+    position: relative;
+    z-index: 1000;
+    top: 20vh;
+}
 
 .login-page{
     width: 100vw;
     height: 100vh;
-    background-color: var(--eggshell);
+    background: linear-gradient(var(--hijau-sean), #0f201a);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -27,23 +49,22 @@ body{
 .login-container{
     width: 300px;
     height: 350px;
-    background-color: var(--tea-rose);
+    background-color: var(--eggshell);
     border: 3px solid var(--bean);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     border-radius: 10px;
-    gap: 20px;
-}
-
-#time-clock{
-    font-size: 30px;
+    gap: 15px;
 }
 
 #login-text{
     font-size: 40px;
     margin: 0;
+    color: var(--bean);
+    padding: 10px;
+    border-bottom: 2px solid var(--bean);
 }
 
 .usn, .pass{
@@ -53,19 +74,25 @@ body{
 
 .usn p, .pass p{
     margin-bottom: 5px;
+    color: var(--bean);
 }
 
 .usn input, .pass input{
-    width: 95%;
+    width: 98%;
     height: 30px;
     border: none;
     border-radius: 5px;
-    background-color: var(--eggshell);
+    background-color: var(--bean);
+    color: var(--eggshell);
+}
+
+.pass input{
+    margin-bottom: 15px;
 }
 
 #submit-button{
-    width: 100px;
-    height: 25px;
+    width: 120px;
+    height: 30px;
     border-radius: 5px;
     border: none;
     background-color: var(--bean);
@@ -75,4 +102,8 @@ body{
 
 #submit-button:hover {
     background-color: var(--bean-hover);
+}
+
+#snow-canvas{
+    z-index: 5;
 }

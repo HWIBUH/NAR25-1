@@ -3,21 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>NAR 25-1</title>
     <link rel="stylesheet" href="{{url_for('static',filename='CSS/subco.css')}}">
 </head>
 <body>
-    <section class="subco-page">
+    <section class="container">
         <nav class="nav-bar">
             <div class="nav-inside">
-                <a id="forum" href="">Forum</a>
-                <a href="">Leaderboard</a>
-                <a href="">Subco</a>
-                <a href="">Announcement</a>
+                <a href="{{url_for('main')}}">25-1</a>
+                <a id="forum" href="{{url_for('forum')}}">Forum</a>
+                <a href="{{url_for('leaderboard')}}">Leaderboard</a>
+                <a href="{{url_for('subco')}}">Subco</a>
+                <a href="{{url_for('announcement')}}">Announcement</a>
             </div>
             <div class="time">
-                <p>server time</p>
-                <p id="time-clock">23:59</p>
+                <p>Server Time</p>
+                <p id="time-clock"></p>
             </div>
         </nav>
         <div class="subco-flashcard">
@@ -43,5 +44,6 @@
         </div>
     </section>
     <script src="{{url_for('static',filename='JS/subco.js')}}"></script>
+    <script src="{{url_for('static',filename='JS/time.js')}}"></script>
 </body>
 </html>
