@@ -92,8 +92,8 @@ def input_announcement():
 @app.route("/gallery")
 def gallery():  
     cursor.execute("SELECT trainee_number, trainee_photo FROM quiz")
-            rows = cursor.fetchall()
-            trainee_data = [dict(row) for row in rows]
+        rows = cursor.fetchall()
+        trainee_data = [dict(row) for row in rows]
     finally:
         connection.close()
 
