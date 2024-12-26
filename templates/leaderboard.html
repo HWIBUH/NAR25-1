@@ -22,25 +22,26 @@
                 <p id="time-clock"> </p>
             </div>
         </nav>
-        <div class="wrapper">
+        <div class="wrapper" >
             <div class="forum">
                 <h1>FORUM</h1>
             </div>
-                <div class="leaderhead">
+                <div class="leaderhead" id="parent">
                     <div class="judul">
                         <ul class="heading">
                             <li>No</li>
                             <li>Name</li>
                             <li>Jumlah</li>
                         </ul>
-                    </div>  
-                    <div class="baris1 page1">
+                    </div> 
+                    <!--<div class="baris1 page1" >
                         <ul class="isinya">
                             <li>1. </li>
                             <li>T999 - Budiono Siregar - CS - B29</li>
                             <li>99</li>
                         </ul>
                     </div>
+                     
                     <div class="baris2 page1">
                         <ul class="isinya">
                             <li>1. </li>
@@ -154,8 +155,7 @@
                             <li>T999 - Budiono Siregar - CS - B29</li>
                             <li>99</li>
                         </ul>
-                    </div>
-
+                    </div>-->
                     <div class="butt_on">
                         <button type="button" class="butt_on1"> 1 </button>
                         <button type="button" class="butt_on2"> 2 </button>
@@ -185,7 +185,7 @@
         </div>
     </div>
     <script src="{{url_for('static',filename='JS/jquery-3.6.0.min.js')}}"></script>
-    <script src="{{url_for('static',filename='JS/javascript.js')}}"></script>
+    <script src="{{url_for('static',filename='JS/leaderboard.js')}}"></script>
     <script src="{{url_for('static',filename='JS/alarm.js')}}"></script>
 </body>
 </html>
