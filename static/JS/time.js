@@ -59,6 +59,8 @@ function pop() {
     const popup = document.getElementById('bangunPop');
     popup.classList.remove('inactive');
     popup.classList.add('active');
+
+    
 }
 // function death(){
 //     tingnung.play();
