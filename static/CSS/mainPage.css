@@ -1,12 +1,18 @@
 @import url("global.css");
 @import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
 
+/* input:focus{
+    outline: none;
+} */
+
 *{
     font-family: 'Rubik';
     font-weight: bold;
 }
 
 body {
+    /* /* margin: 0;  */
+    overflow: hidden;
     background-color: var(--eggshell);
     display: flex;
     justify-content: center;
@@ -231,3 +237,4 @@ h1 {
         font-size: 60px;
     }
 }
+
