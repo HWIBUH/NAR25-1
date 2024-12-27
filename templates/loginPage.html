@@ -12,6 +12,7 @@
 
 </head>
 <body>
+    
     <section class="login-page">
         <img src="{{url_for('static', filename='assets/christmas-tree.png')}}" alt="" class="hiasan christmas-tree">
         <img src="{{url_for('static', filename='assets/gifts.png')}}" alt="" class="hiasan gifts">
@@ -35,6 +36,7 @@
         {% endif %}
         <form class="login-form" method="POST" action="/login">
             <div class="login-container">
+                <audio src="{{url_for('static', filename='assets/padoru_padoru.mp3')}}" autoplay loop></audio>
                 <div>
                     <p id="login-text">Login</p>
                 </div>
