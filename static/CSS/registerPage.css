@@ -6,23 +6,103 @@
 }
 
 body{
+    background: linear-gradient(var(--hijau-sean), #0f201a);
     margin: 0;
     overflow: hidden;
+}
+
+.login-page{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Regis-container{
+    width: 400px;
+    height: 460px;
+    background-color: var(--eggshell);
+    border: 3px solid var(--bean);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    gap: 15px;
+    z-index: 1000;
 }
 
 .usn, .pass, .confirmpass{
     display: flex;
     flex-direction: column;
+    width: 65%;
 }
 
 .usn p, .pass p, .confirmpass p{
     margin-bottom: 5px;
+    color: var(--bean);
 }
 
 .usn input, .pass input, .confirmpass input{
-    width: 95%;
+    width: 45%;
     height: 30px;
     border: none;
     border-radius: 5px;
     background-color: var(--eggshell);
+}
+
+#regis-text{
+    font-size: 40px;
+    margin: 0;
+    color: var(--bean);
+    padding: 10px;
+    border-bottom: 2px solid var(--bean);
+}
+
+.usn input, .pass input, .confirmpass input{
+    width: 98%;
+    height: 30px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--bean);
+    color: var(--eggshell);
+}
+
+.confirmpass input{
+    margin-bottom: 10px;
+}
+
+#submit-button{
+    width: 120px;
+    height: 30px;
+    border-radius: 5px;
+    border: none;
+    background-color: var(--bean);
+    color: var(--eggshell);
+    transition-duration: 500ms;
+}
+
+#submit-button:hover {
+    background-color: var(--bean-hover);
+}
+
+#snow-canvas{
+    z-index: 5;
+}
+
+.hiasan{
+    position: absolute;
+}
+
+.christmas-tree{
+    height: 90vh;
+    bottom: -10vh;
+    right: 4vw;
+}
+
+.gifts{
+    height: 45vh;
+    bottom: -8vh;
+    left: 3vw;
 }
