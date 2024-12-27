@@ -215,7 +215,7 @@ def forum_list():
 @app.route('/checkTheBoxAPI', methods=['GET'])
 def checkTheBox():
     forum_id = request.args.get('forum_id')
-    
+    print("box is checked")
     connection = get_db_connection()
     with connection.cursor() as cursor:
         query="UPDATE forum SET isAnswered=NOT isAnswered WHERE forum_id=%s"

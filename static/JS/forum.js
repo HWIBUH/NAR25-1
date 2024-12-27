@@ -1,7 +1,7 @@
 async function generate_data() {
     const response = await fetch("/forum_todo_api")
     const data = await response.json()
-
+    console.log(data)
     let newGrid = document.createElement("div");
     newGrid.id = "grid-forum";
     document.getElementById("forum-list").appendChild(newGrid)
