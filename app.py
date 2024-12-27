@@ -227,6 +227,8 @@ def gallery():
 
     return render_template("gallery.html", trainee_data=trainee_data, trainer_data=trainer_data)
 
+
+#=============================== input announcement
 @app.route("/input_announcement")
 def input_announcement():
     return render_template("inputAnnouncement.html")
