@@ -13,16 +13,13 @@ def index():
 def alarm():
     return render_template("alarm.html")
 
-trainee_number_for_forum_api=""
 #================================ BACKEND LOGIN ====================================
 @app.route('/login', methods=['GET', 'POST'])
 def query():
     results = None  
     if request.method == 'POST':
-        global trainee_number_for_forum_api
-        print(request.headers)
+        print("HALOOOOOO")
         trainee_numb = request.form.get('trainee_number')
-        trainee_number_for_forum_api=trainee_numb
         trainee_pass = request.form.get('trainee_pass')
         connection = get_db_connection()
         if connection is None:
@@ -33,8 +30,10 @@ def query():
                 cursor.execute(query, (trainee_numb, trainee_pass))
                 results = cursor.fetchone()
                 print(results)
-                nama=results["trainee_nama"]
-                if(results):
+                
+                if((results)):
+                    nama=results["trainee_nama"]
+                    print(nama)
                     return render_template(
                     "mainPage.html",
                     results=results, trainee_numb=trainee_numb, trainee_nama=nama)            
