@@ -25,19 +25,10 @@ function upTime() {
     i++
     console.log(i);
     if (trimin(date)) {
-        (async()=>{
-            const response = await fetch('/randomize');
-            const result = await response.json();
-            console.log(result)
-            const image=document.getElementById("trainee-img")
-            console.log(result.data.trainee_photo)
-            image.src=result.data.trainee_photo
-            pop();
-            tingnung.play();
-            tingnung.loop = true;
-            nexta = nextAlarm(); 
-        })()
-
+        
+        pop(); 
+        tingnung.play();
+        nexta = nextAlarm(); 
     }
     
     // console.log("Current Time:", date);
