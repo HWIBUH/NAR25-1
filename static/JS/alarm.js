@@ -1,5 +1,6 @@
 const display = document.getElementById('time');
 const navdis = document.getElementById('time-clock');
+const bigTime = document.getElementById('big-time');
 const form = document.getElementById('trainee-form');
 
 let nexta = nextAlarm(); 
@@ -13,14 +14,20 @@ const q2 = document.getElementById('quiz2');
 function upTime() {
     const date = new Date();
 
-    const hour = String(date.getHours()).padStart(2, '0'); 
+    const hour = String(date.getHours()).padStart(2, '0');
     const min = String(date.getMinutes()).padStart(2, '0'); 
     const sec = String(date.getSeconds()).padStart(2, '0');
     //awiugfaiwfgafg
     // Ivy, gw komen soalnya ini bikin error tadi
-    display.innerText = `${hour} : ${min} : ${sec}`;
-
-    navdis.innerText = `${hour} : ${min} : ${sec}`;
+    // display.innerText = `${hour} : ${min} : ${sec}`; ini kalo gadicommand bakal ngubah divnya langsung
+    if(navdis != null)
+    {
+        navdis.innerText = `${hour} : ${min} : ${sec}`;
+    }
+    if(bigTime != null)
+    {
+        bigTime.innerText = `${hour} : ${min} : ${sec}`;//tambahin ini buat main page
+    }
     
     i++
     console.log(i);
@@ -66,30 +73,34 @@ function pop() {
     popup.classList.add('active');
 }
 
-form.addEventListener('submit', async(event)=> {
-    event.preventDefault();
-    const formData = new FormData(form);
-    const response = await fetch('/checkForm', {
-        method: 'POST',
-        body: formData
-    });
-    const result = await response.json();
-    console.log(result);
-    if (result.flag === 1) {
-        q1.classList.add('inactive');
-        q1.classList.remove('active'); 
-        q2.classList.add('inactive');
-        q2.classList.remove('active');
-        tingnung.loop=false
-        const nama = document.getElementById("siapa")
-        nama.innerHTML="Siapa Trainee ini?"
-    } else {
-        const nama = document.getElementById("siapa")
-        nama.innerHTML="Kak salah jawabannya, badut kak"
-        tingnung.play()
-        tingnung.loop=true
-    }
-})
+if(form != null)
+{
+    form.addEventListener('submit', async(event)=> {
+        event.preventDefault();
+        const formData = new FormData(form);
+        const response = await fetch('/checkForm', {
+            method: 'POST',
+            body: formData
+        });
+        const result = await response.json();
+        console.log(result);
+        if (result.flag === 1) {
+            q1.classList.add('inactive');
+            q1.classList.remove('active'); 
+            q2.classList.add('inactive');
+            q2.classList.remove('active');
+            tingnung.loop=false
+            const nama = document.getElementById("siapa")
+            nama.innerHTML="Siapa Trainee ini?"
+        } else {
+            const nama = document.getElementById("siapa")
+            nama.innerHTML="Kak salah jawabannya, badut kak"
+            tingnung.play()
+            tingnung.loop=true
+        }
+    })
+}
+
 
 // function afterpop(){
 //     function waitForFormSubmit() {

@@ -14,11 +14,7 @@ body{
     height: 100vh;
     margin: 0;
     position: relative;
-}
-
-.time p{
-    margin: 0px;
-    margin-right: 20px;
+    overflow: hidden;
 }
 
 .forum-page{

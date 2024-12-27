@@ -2,6 +2,8 @@ from flask import Flask, render_template, request, redirect, jsonify, url_for
 from database import get_db_connection
 app = Flask(__name__,static_folder="static")
 
+application = app
+
 app.debug = True
 @app.route('/')
 def index():
@@ -286,6 +288,28 @@ def delete_announcement(announcement_id):
     finally:
         connection.close()
     return jsonify({"success": True, "message": "Announcement deleted successfully!"})
+
+#=======================================Register==============================================
+@app.route("/register")
+def register():
+    return render_template("registerPage.html")
+
+
+@app.route("/send_input_register", methods=["POST"])
+def send_input_register():
+    username = request.form.get("username")
+    password = request.form.get("password")
+    connection = get_db_connection()
+    if connection is None:
+        return "Failed to connect to the database!"
+    try: 
+        with connection.cursor() as cursor:
+            query = "INSERT INTO trainee (trainee_number, trainee_pass) VALUES (%s, %s)"
+            cursor.execute(query, (username, password))
+            connection.commit()
+    finally:
+        connection.close()
+    return redirect("/")
 
 if __name__ == '__main__':
     app.run(debug=True)

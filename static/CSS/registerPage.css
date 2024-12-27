@@ -1,0 +1,28 @@
+@import url("./global.css");
+
+*{
+    font-family: rubik;
+    font-weight: bold;
+}
+
+body{
+    margin: 0;
+    overflow: hidden;
+}
+
+.usn, .pass, .confirmpass{
+    display: flex;
+    flex-direction: column;
+}
+
+.usn p, .pass p, .confirmpass p{
+    margin-bottom: 5px;
+}
+
+.usn input, .pass input, .confirmpass input{
+    width: 95%;
+    height: 30px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--eggshell);
+}
