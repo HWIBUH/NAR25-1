@@ -3,41 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="{{url_for('static', filename='CSS/forum.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='CSS/forum.css')}}">
+
+    <title>NAR 25-1</title>
 </head>
 <body>
-    <nav class="nav-bar">
-        <div class="nav-inside">
-            <a href="{{url_for('main')}}">25-1</a>
-            <div class="dropdown dropdown-forum">
-                <a class="forum" href="{{ url_for('forum') }}">Forum</a>
-                <div class="dropdown-item">
-                    <a id="forum_add" href="{{ url_for('forum_add')}}">Forum ADD</a>
-                    <br>
-                    <a id="forum_list" href="{{ url_for('forum_list')}}">Forum LIST</a>
+    <section class="forum-page">
+        
+        <nav class="nav-bar">
+            <div class="nav-inside">
+                <a href="{{url_for('main')}}">25-1</a>
+                <div class="dropdown dropdown-forum">
+                    <a class="forum" href="{{ url_for('forum') }}">Forum</a>
+                    <div class="dropdown-item">
+                        <a id="forum_add" href="{{ url_for('forum_add')}}">Forum ADD</a>
+                        <br>
+                        <a id="forum_list" href="{{ url_for('forum_list')}}">Forum LIST</a>
+                    </div>
+                    
                 </div>
+                <a href="{{url_for('leaderboard')}}">Leaderboard</a>
+                <a href="{{url_for('subco')}}">Subco</a>
+                <div class="dropdown dropdown-announcement">
+                    <a class="announcement" href="{{ url_for('announcement') }}">Announcement</a>
+                    <a class="dropdown-item" href="{{ url_for('input_announcement')}}">Input Announcement</a>
+                </div>
+                <a href="{{url_for('gallery')}}">Gallery</a>
             </div>
-            <a href="{{url_for('leaderboard')}}">Leaderboard</a>
-            <a href="{{url_for('subco')}}">Subco</a>
-            <div class="dropdown dropdown-announcement">
-                <a class="announcement" href="{{ url_for('announcement') }}">Announcement</a>
-                <a class="dropdown-item" href="{{ url_for('input_announcement')}}">Input Announcement</a>
+            <div class="time" id="time">
+                <p>Server time :</p>
+                <p id="time-clock"></p>
             </div>
-            <a href="{{url_for('gallery')}}">Gallery</a>
+        </nav>
+        <!--INI YG BUAT T217, ya front end gw nt, nanti di paginate sama di style ya-->
+        <div id="forum-list">
+            
         </div>
+    </section>
 
-        <div id="time">
-            <p>Server Time :</p>
-            <p id="time-clock"></p>
-        </div>
-    </nav>
-
-    <div id="grid-forum">
-
+    <div class="bangun inactive" id="bangunPop"> 
+        <h1>!!!BANGUN BANGUN!!!</h1>
+        <button class="bbut" onclick="popout()">Turn Off</button>
     </div>
-
-    <script src="{{url_for('static',filename='JS/forum.js')}}"></script>
+    <div class="quiz-modal inactive" id="quiz1">
+        <div class="quiz-container inactive" id="quiz2">
+            <p id="title-quiz">Trainee Quiz</p>
+            <div id="image-temp">
+                <img src="{{quiz_trainee_photo}}" alt="Trainee Image" id="trainee-img">
+            </div>
+            <p id="siapa">Siapa Trainee ini? </p>
+            <div id="data-container" data-flag="{{flag}}"></div>
+            <form method="POST" action="/checkForm" class="jawab" id="trainee-form">
+                <input type="text" name="trainee_id" placeholder="Nomor Trainee">
+                <input type="text" name="trainee_name" placeholder="Nama Trainee">
+                <input type="text" name="trainee_major" placeholder="Jurusan">
+                <input type="text" name="trainee_batch" placeholder="Binusian">
+                <button type="submit" id="submit-button">Submit</button>
+            </form>
+        </div>
+    </div>
+    
+    <script src="{{url_for('static',filename='JS/forumList.js')}}"></script>
     <script src="{{url_for('static',filename='JS/alarm.js')}}"></script>
 </body>
-</html> 
+</html>

@@ -79,13 +79,18 @@ def checkForm():
     trainee_major = request.form.get('trainee_major')
     trainee_binusian = request.form.get('trainee_batch')
     connection = get_db_connection()
+    print(trainee_numb)
+    print(trainee_nama)
+    print(trainee_major)
+    print(trainee_binusian)
+    print(trainee_id)
     flag=0
     if connection is None:
         return "Failed to connect to the database!"
     try:
         with connection.cursor() as cursor:
             query = "SELECT * FROM trainee WHERE trainee_number = %s AND trainee_number = %s AND trainee_nama = %s AND trainee_major = %s AND trainee_binusian = %s"
-            cursor.execute(query, (trainee_id,trainee_numb.upper(),trainee_nama.title(),trainee_major,trainee_binusian))
+            cursor.execute(query, (trainee_id, trainee_numb.upper(), trainee_nama.title(), trainee_major,trainee_binusian))
             results=cursor.fetchall()
             print(results)
             if(len(results)>0):
@@ -189,6 +194,20 @@ def forum_api():
                         'data': result
                     })
                 
+@app.route('/forum_all_api', methods = ['GET', 'POST'])
+def forum_list_api():
+    connection = get_db_connection()
+    with connection.cursor() as cursor:
+        # T217 GANTI JADI SESUAI DATABASE NYA WENE
+        query = "SELECT * FROM `forum`"
+        cursor.execute(query)
+        result=cursor.fetchall()
+        return jsonify({
+                        'status': 'success',
+                        'message': 'data fetched succesfully',
+                        'data': result
+                    })
+
 @app.route('/forum_list')
 def forum_list():
     return render_template("forumList.html")
