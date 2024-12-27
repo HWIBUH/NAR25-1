@@ -20,7 +20,7 @@ def query():
     results = None  
     if request.method == 'POST':
         global trainee_number_for_forum_api
-        
+        print(request.headers)
         trainee_numb = request.form.get('trainee_number')
         trainee_number_for_forum_api=trainee_numb
         trainee_pass = request.form.get('trainee_pass')
@@ -126,11 +126,14 @@ def checkForm():
 @app.route("/forum")
 def forum():
     return render_template("forum.html") # nanti ini di ilangin, ganti drop down -T217
+
 #INI BUAT FETCH DATA DR DATA BASE BUAT USER ITU -T217 
+
 @app.route("/forum_todo_api",methods=['GET','POST'])
 def forum_todo_api():
-    print(trainee_number_for_forum_api)
+    trainee_number_for_forum_api=request.headers.get("traineeNumber")
     connection=get_db_connection()
+    print(trainee_number_for_forum_api)
     with connection.cursor() as cursor:
         query="SELECT * FROM forum WHERE trainee_number=%s"
         cursor.execute(query,(trainee_number_for_forum_api))
@@ -215,7 +218,7 @@ def forum_list():
 @app.route('/checkTheBoxAPI', methods=['GET'])
 def checkTheBox():
     forum_id = request.args.get('forum_id')
-    print("box is checked")
+    print("box is checked at "+forum_id)
     connection = get_db_connection()
     with connection.cursor() as cursor:
         query="UPDATE forum SET isAnswered=NOT isAnswered WHERE forum_id=%s"
