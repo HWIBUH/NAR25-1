@@ -297,17 +297,17 @@ def get_subco():
          return jsonify({"success": False, "message": "Failed to connect to the database!"}), 500
     try:
         with connection.cursor() as cursor:
-            query = "SELECT subco_id FROM subco ORDER BY RANDOM() LIMIT 1;"
+            query = "SELECT * FROM subco ORDER BY RAND() LIMIT 1;"
             cursor.execute(query)
-            question = cursor.fetchone()
+            question = cursor.fetchall()
             print("AAAAa")
-            if question is None:
-                return "Tidak ada pertanyaan"
+            # if question is None:
+            #     return "Tidak ada pertanyaan"
             
-            cursor.execute("SELECT * FROM subco WHERE subco_id = %s;", (question[0]))
-            questionall = cursor.fetchone() 
+            # cursor.execute("SELECT * FROM subco WHERE subco_id = %d;", (question[0]))
+            # questionall = cursor.fetchone() 
 
-            return jsonify(questionall)
+            return jsonify(question)
     finally:
         connection.close()
 

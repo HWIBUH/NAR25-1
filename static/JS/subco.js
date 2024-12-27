@@ -18,9 +18,18 @@ async function subco() {
     const respon = await fetch('/api/subco')
     const subbco = await respon.json()
 
-    
+    const soal = document.querySelector(".pertanyaan_subco")
+    const jawaban = document.querySelector(".jawaban_subco")
 
-    console.log(subbco)
+    console.log(soal)
+    console.log(jawaban)
+    console.log(subbco[0].subco_pertanyaan)
+    console.log(subbco[0].subco_jawaban)
+
+    soal.innerText = subbco[0].subco_pertanyaan
+    jawaban.innerText = subbco[0].subco_jawaban
+
+    // console.log(subbco)
 }
 
 function generate(){
