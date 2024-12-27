@@ -13,7 +13,6 @@
         <nav class="nav-bar">
             <div class="nav-inside">
                 <a href="{{url_for('main')}}">25-1</a>
-                 <!-- T217 REQ BUAT DROPDROWN BUAT FORUM ADD, FORUM LIST, FORUM TODO -->
                 <div class="dropdown dropdown-forum">
                     <a class="forum" href="{{ url_for('forum') }}">Forum</a>
                     <div class="dropdown-item">
@@ -21,6 +20,7 @@
                         <br>
                         <a id="forum_list" href="{{ url_for('forum_list')}}">Forum LIST</a>
                     </div>
+                    
                 </div>
                 <a href="{{url_for('leaderboard')}}">Leaderboard</a>
                 <a href="{{url_for('subco')}}">Subco</a>
@@ -30,8 +30,8 @@
                 </div>
                 <a href="{{url_for('gallery')}}">Gallery</a>
             </div>
-            <div class="time">
-                <p>Server time</p>
+            <div class="time" id="time">
+                <p>Server time :</p>
                 <p id="time-clock"></p>
             </div>
         </nav>

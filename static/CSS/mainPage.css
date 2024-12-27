@@ -173,6 +173,10 @@ h1 {
     margin: auto;
 }
 
+#big-time{
+    font-size: 120px;
+}
+
 .quiz-container .active {
     display: block; 
 }

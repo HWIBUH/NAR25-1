@@ -2,6 +2,8 @@ from flask import Flask, render_template, request, redirect, jsonify, url_for
 from database import get_db_connection
 app = Flask(__name__,static_folder="static")
 
+application = app
+
 app.debug = True
 @app.route('/')
 def index():
@@ -191,6 +193,16 @@ def forum_api():
 def forum_list():
     return render_template("forumList.html")
 
+@app.route('/checkTheBoxAPI', methods=['GET'])
+def checkTheBox():
+    forum_id = request.args.get('forum_id')
+    
+    connection = get_db_connection()
+    with connection.cursor() as cursor:
+        query="UPDATE forum SET isAnswered=NOT isAnswered WHERE forum_id=%s"
+        cursor.execute(query,(forum_id))
+        connection.commit()
+    return render_template("forumList.html")
     
 #================================ ANNOUNCEMENT ====================================
 
@@ -276,8 +288,6 @@ def delete_announcement(announcement_id):
     finally:
         connection.close()
     return jsonify({"success": True, "message": "Announcement deleted successfully!"})
-
-
 
 @app.route('/api/subco', methods=['GET'])
 def get_subco():

@@ -9,7 +9,7 @@ function create(html) {
   template.innerHTML = html.trim();
   return template.content.firstElementChild;
 }
-function pop(element) {
+function popAnnouncement(element) {
   console.log("pop");
   console.log(element);
   let target = element;
@@ -47,7 +47,7 @@ async function fetchAnnouncement() {
           <h2>${element.announcement_title}</h2>
           <p>${element.announcement_content}</p>
           <p>Date : ${element.announcement_deadline}</p>
-          <button type="button" class="check-btn" onclick="pop(${element.announcement_id})"></button>
+          <button type="button" class="check-btn" onclick="popAnnouncement(${element.announcement_id})"></button>
       </div>
       `);
     list.appendChild(isi);

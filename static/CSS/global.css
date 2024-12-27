@@ -6,19 +6,21 @@
     --blood-red:#69140E;
 
     /* transparancy 50 */
-    --bean-50:#3c151889;
+    --bean-50:#3c1518bb;
     --hijau-sean-50:#153c3994;
     --eggshell-50:#f5efdc8c;
     --tea-rose-50:#d0ada796;
     --blood-red-50:#69140e94;
 
     /* hover */
-    --bean-hover:#963138;
-    --hijau-sean-hover:#0e2826;
+    --bean-hover:#832b30;
+    --hijau-sean-hover:#21615b;
     --eggshell-hover:#858070fd;
     --tea-rose-hover:#705d59;
     --blood-red-hover:#490e0a;
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
 
 /* CSS Navbar */
 
@@ -61,25 +63,25 @@
 
 .dropdown {
     position: relative;
-  }
+}
   
-  .dropdown-forum:hover .dropdown-item {
+.dropdown-forum:hover .dropdown-item {
     height: fit-content;
     width: 91px;
-    padding: 25px;
+    padding: 15px;
     margin-bottom: 10px;
-  }
+}
 
-  .dropdown-announcement:hover .dropdown-item {
+.dropdown-announcement:hover .dropdown-item {
     height: fit-content;
     width: fit-content;
-    padding: 30px;
+    padding: 15px;
     margin-bottom: 10px;
-  }
+}
   
-  .dropdown-item {
+.dropdown-item {
     position: absolute;
-    background-color: var(--bean);
+    background-color: var(--bean-50);
     border-radius: 10px;
     display: flex;
     flex-direction: column;
@@ -88,24 +90,20 @@
     left: -10%;
     top: 100%;
     transition-duration: 500ms;
-  }
+}
 
-  #forum_add {
-    /* margin-bottom: 2.5px; */
-  }
-
-.time{
+#time{
     display: flex;
     flex-direction: column;
 }
 
-.time p{
+#time p{
     margin: 0px;
     margin-right: 25px;
 }
 
 #time-clock{
-    font-size: 30px;
+   font-size: 30px;
 }
 
 /* CSS Navbar */
