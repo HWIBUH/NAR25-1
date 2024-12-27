@@ -13,3 +13,17 @@ prev.addEventListener("click", (e)=>{
     answer.classList.add("hidden")
     question.classList.remove("hidden")
 })
+
+async function subco() {
+    const respon = await fetch('/api/subco')
+    const subbco = await respon.json()
+
+    
+
+    console.log(subbco)
+}
+
+function generate(){
+    console.log('pppp');
+    subco();
+}

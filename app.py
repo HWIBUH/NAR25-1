@@ -289,27 +289,27 @@ def delete_announcement(announcement_id):
         connection.close()
     return jsonify({"success": True, "message": "Announcement deleted successfully!"})
 
-#=======================================Register==============================================
-@app.route("/register")
-def register():
-    return render_template("registerPage.html")
-
-
-@app.route("/send_input_register", methods=["POST"])
-def send_input_register():
-    username = request.form.get("username")
-    password = request.form.get("password")
+@app.route('/api/subco', methods=['GET'])
+def get_subco():
+    print("AAAAA")
     connection = get_db_connection()
     if connection is None:
-        return "Failed to connect to the database!"
-    try: 
+         return jsonify({"success": False, "message": "Failed to connect to the database!"}), 500
+    try:
         with connection.cursor() as cursor:
-            query = "INSERT INTO trainee (trainee_number, trainee_pass) VALUES (%s, %s)"
-            cursor.execute(query, (username, password))
-            connection.commit()
+            query = "SELECT subco_id FROM subco ORDER BY RANDOM() LIMIT 1;"
+            cursor.execute(query)
+            question = cursor.fetchone()
+            print("AAAAa")
+            if question is None:
+                return "Tidak ada pertanyaan"
+            
+            cursor.execute("SELECT * FROM subco WHERE subco_id = %s;", (question[0]))
+            questionall = cursor.fetchone() 
+
+            return jsonify(questionall)
     finally:
         connection.close()
-    return redirect("/")
 
 if __name__ == '__main__':
     app.run(debug=True)
