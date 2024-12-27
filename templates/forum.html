@@ -21,6 +21,7 @@
                         <br>
                         <a id="forum_list" href="{{ url_for('forum_list')}}">Forum LIST</a>
                     </div>
+                    
                 </div>
                 <a href="{{url_for('leaderboard')}}">Leaderboard</a>
                 <a href="{{url_for('subco')}}">Subco</a>
@@ -30,7 +31,7 @@
                 </div>
                 <a href="{{url_for('gallery')}}">Gallery</a>
             </div>
-            <div class="time">
+            <div class="time" id="time">
                 <p>Server time</p>
                 <p id="time-clock"></p>
             </div>
