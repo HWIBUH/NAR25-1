@@ -40,7 +40,7 @@
     display: flex;
     flex-direction: row;
     gap: 30px;
-    margin-left: 1vw;
+    margin-left: 1.5vw;
 }
 
 .nav-inside a{
@@ -58,6 +58,41 @@
     text-decoration: none;
     color: var(--eggshell-hover);
 }
+
+.dropdown {
+    position: relative;
+  }
+  
+  .dropdown-forum:hover .dropdown-item {
+    height: fit-content;
+    width: 91px;
+    padding: 25px;
+    margin-bottom: 10px;
+  }
+
+  .dropdown-announcement:hover .dropdown-item {
+    height: fit-content;
+    width: fit-content;
+    padding: 30px;
+    margin-bottom: 10px;
+  }
+  
+  .dropdown-item {
+    position: absolute;
+    background-color: var(--bean);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    height: 0%;
+    overflow: hidden;
+    left: -10%;
+    top: 100%;
+    transition-duration: 500ms;
+  }
+
+  #forum_add {
+    /* margin-bottom: 2.5px; */
+  }
 
 .time{
     display: flex;
