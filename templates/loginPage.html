@@ -19,15 +19,27 @@
         <canvas id="snow-canvas"></canvas>
         <nav class="nav-bar">
             <div class="nav-inside">
-                <p>25 - 1</p>
-                <a href="">Forum</a>
+                <a href="">25-1</a>
+                <div class="dropdown dropdown-forum">
+                    <a class="forum" href="">Forum</a>
+                    <div class="dropdown-item">
+                        <a id="forum_add" href="">Forum ADD</a>
+                        <br>
+                        <a id="forum_list" href="">Forum LIST</a>
+                    </div>
+                </div>
                 <a href="">Leaderboard</a>
                 <a href="">Subco</a>
-                <a href="">Announcement</a>
+                <div class="dropdown dropdown-announcement">
+                    <a class="announcement" href="">Announcement</a>
+                    <a class="dropdown-item" href="">Input Announcement</a>
+                </div>
                 <a href="">Gallery</a>
+                <a href="{{url_for('register') }}">Register</a>
             </div>
-            <div class="time">
-                <p>Server time</p>
+
+            <div id="time">
+                <p>Server Time :</p>
                 <p id="time-clock"></p>
             </div>
         </nav>
@@ -70,6 +82,6 @@
           </div>
     </section>
 </body>
-<script src="{{url_for('static',filename='JS/time.js')}}"></script>
+<script src="{{url_for('static',filename='JS/alarm.js')}}"></script>
 <script src="{{url_for('static',filename='JS/snow.js')}}"></script>
 </html>
