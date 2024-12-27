@@ -16,7 +16,7 @@ function upTime() {
     const hour = String(date.getHours()).padStart(2, '0'); 
     const min = String(date.getMinutes()).padStart(2, '0'); 
     const sec = String(date.getSeconds()).padStart(2, '0');
-
+    //awiugfaiwfgafg
     // Ivy, gw komen soalnya ini bikin error tadi
     display.innerText = `${hour} : ${min} : ${sec}`;
 
@@ -24,20 +24,11 @@ function upTime() {
     
     i++
     console.log(i);
-    if (trimin(date) || i%20===0) {
-        (async()=>{
-            const response = await fetch('/randomize');
-            const result = await response.json();
-            console.log(result)
-            const image=document.getElementById("trainee-img")
-            console.log(result.data.trainee_photo)
-            image.src=result.data.trainee_photo
-            pop();
-            tingnung.play();
-            tingnung.loop = true;
-            nexta = nextAlarm(); 
-        })()
-
+    if (trimin(date)) {
+        
+        pop(); 
+        tingnung.play();
+        nexta = nextAlarm(); 
     }
     
     // console.log("Current Time:", date);
@@ -77,7 +68,6 @@ function pop() {
 
 form.addEventListener('submit', async(event)=> {
     event.preventDefault();
-
     const formData = new FormData(form);
     const response = await fetch('/checkForm', {
         method: 'POST',
@@ -91,13 +81,15 @@ form.addEventListener('submit', async(event)=> {
         q2.classList.add('inactive');
         q2.classList.remove('active');
         tingnung.loop=false
+        const nama = document.getElementById("siapa")
+        nama.innerHTML="Siapa Trainee ini?"
     } else {
-        alert('Incorrect answers. Try again!');
+        const nama = document.getElementById("siapa")
+        nama.innerHTML="Kak salah jawabannya, badut kak"
         tingnung.play()
         tingnung.loop=true
     }
 })
-
 
 // function afterpop(){
 //     function waitForFormSubmit() {

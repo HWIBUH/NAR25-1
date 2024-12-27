@@ -61,9 +61,9 @@ def randomize():
                 })
         else:
             return "No quiz data found."
+        
+#================================ BACKEND QUIZ ====================================        
 @app.route('/checkForm', methods=['POST', 'GET'])
-
-#================================ BACKEND QUIZ ====================================
 def checkForm():
     print("checked")
     trainee_numb = request.form.get('trainee_id')
@@ -109,10 +109,21 @@ def checkForm():
                     })
 
 #====================================== FORUM ======================================================
+
+def get_lowest():
+    connection = get_db_connection()
+    with connection.cursor() as cursor:
+        # T217 GANTI JADI SESUAI DATABASE NYA WENE
+        query = " SELECT trainee_number,COUNT(trainee_number) FROM `forum` GROUP BY trainee_number ORDER BY COUNT(trainee_number) ASC LIMIT 1;"
+        cursor.execute(query)
+        result=cursor.fetchall()
+        print(result[0]["trainee_number"])
+        return result[0]["trainee_number"]
 @app.route('/forum', methods = ['GET', 'POST'])
 def forum():
     if request.method == 'POST':
         forum_url = request.form.get('forum_url')
+        forum_url = forum_url.split("\r\n")
         input_tnumber = request.form.get('answerer')
 
         connection = get_db_connection()
@@ -120,24 +131,38 @@ def forum():
             return "Failed to connect to database"
         try:
             with connection.cursor() as cursor:
-                if input_tnumber:
-                    query = "INSERT INTO forum (url, answered, respondent) VALUES (%s, True, %s)"
-                    cursor.execute(query, (forum_url, input_tnumber.upper()))
-                else:
-                    query = "INSERT INTO forum (url) VALUES (%s)"
-                    cursor.execute(query, (forum_url))
+                for i in forum_url:
+                    Tlow=get_lowest()
+                    query = "INSERT INTO forum (forum_link, trainee_number) VALUES (%s,%s)"
+                    cursor.execute(query, (i,Tlow))
+                    connection.commit()
         finally:
-            connection.commit()
             connection.close()
         print(f"User input: {forum_url}")
         return render_template("forum.html", forum_url = forum_url, tnumber = input_tnumber)
     
     return render_template("forum.html")
 
-@app.route('/forum_assignment', methods = ['GET', 'POST'])
+
+#================================ ANNOUNCEMENT API ====================================
+@app.route('/api/forum_runquery', methods = ['GET', 'POST'])
+def forum_api():
+    connection = get_db_connection()
+    with connection.cursor() as cursor:
+        # T217 GANTI JADI SESUAI DATABASE NYA WENE
+        query = "SELECT trainee_number,COUNT(trainee_number) FROM `forum` GROUP BY trainee_number ORDER BY COUNT(trainee_number) DESC;"
+        cursor.execute(query)
+        result=cursor.fetchall()
+        print(result)
+        return jsonify({
+                        'status': 'success',
+                        'message': 'data fetched succesfully',
+                        'data': result
+                    })
+
+@app.route('/forum_assign')
 def forum_assignment():
     return render_template("forum_assign.html")
-
 #================================ ANNOUNCEMENT ====================================
 
 @app.route("/announcement")
@@ -150,6 +175,7 @@ def subco():
 
 @app.route("/leaderboard")
 def leaderboard():
+    print("ke leader board")
     return render_template("leaderboard.html")
 
 #================================ GALERY ====================================
@@ -215,7 +241,7 @@ def delete_announcement(announcement_id):
         return jsonify({"success": False, "message": "Failed to connect to the database!"}), 500
     try:
         with connection.cursor() as cursor:
-            query = "DELETE FROM announcement WHERE announcement_id = %d"
+            query = "DELETE FROM announcement WHERE announcement_id = %s"
             cursor.execute(query, (announcement_id,))
             connection.commit()
     finally:
