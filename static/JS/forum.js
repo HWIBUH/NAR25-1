@@ -1,6 +1,13 @@
 async function generate_data() {
     const response = await fetch("/forum_todo_api")
     const data = await response.json()
+
+    let newGrid = document.createElement("div");
+    newGrid.id = "grid-forum";
+    document.getElementById("forum-list").appendChild(newGrid)
+
+
+
     for (item of data.data){
         let element="<a href= "+item["forum_link"]+">"+item["forum_id"]+"</a>"
         element+=`<input type='checkbox' id = ${item["forum_id"]} ${item["isAnswered"] == 1 ?"checked":""}>`

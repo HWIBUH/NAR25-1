@@ -166,25 +166,6 @@ body {
 }
 
 
-.dropdown {
-  position: relative;
-}
-
-.dropdown:hover .input_announcement {
-  height: 100%;
-  padding: 30px;
-}
-
-.input_announcement {
-  position: absolute;
-  background-color: var(--bean);
-  border-radius: 10px;
-  height: 0%;
-  overflow: hidden;
-  left: -10%;
-  top: 100%;
-}
-
 .time p {
   margin: 0px;
   margin-right: 20px;
