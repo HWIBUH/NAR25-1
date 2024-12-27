@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NAR 25-1</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='CSS/subco.css')}}">
+</head>
+<body>
+    <section class="container">
+        <nav class="nav-bar">
+            <div class="nav-inside">
+                <a href="{{url_for('main')}}">25-1</a>
+                <a id="forum" href="{{url_for('forum')}}">Forum</a>
+                <a href="{{url_for('leaderboard')}}">Leaderboard</a>
+                <a href="{{url_for('subco')}}">Subco</a>
+                <a href="{{url_for('announcement')}}">Announcement</a>
+            </div>
+            <div class="time" id="time">
+                <p>Server Time</p>
+                <p id="time-clock"></p>
+            </div>
+        </nav>
+        <div class="subco-flashcard">
+            <div class="question">
+                <div class="card">
+                    <h2>Subco Flashcard</h2>
+                    <div id="subco">
+                        Jelaskan bagaimana cara algoritma A* menemukan path terpendek
+                    </div>
+                    <button id="show">Show answer</button>
+                </div>
+            </div>
+            <div class="answer hidden">
+                <div class="card">
+                    <h2>Answer</h2>
+                    <div id="subco">Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore alias incidunt magni eaque culpa, asperiores iste maxime laudantium neque ratione ea aliquam cum repudiandae eos? Dicta laudantium voluptate non repellendus.</div>
+                    <div class="wrapper">
+                        <button id="prev">Show question</button>
+                        <button id="next">Next question</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="bangun inactive" id="bangunPop"> 
+        <h1>!!!BANGUN BANGUN!!!</h1>
+        <button class="bbut" onclick="popout()">Turn Off</button>
+    </div>
+    <!-- <button onclick="death()">tinung</button> -->
+    
+    <div class="quiz-modal inactive" id="quiz1">
+        <div class="quiz-container inactive" id="quiz2">
+            <p id="title-quiz">Trainee Quiz</p>
+            <div id="image-temp">
+                <img src="{{quiz_trainee_photo}}" alt="Trainee Image" id="trainee-img">
+            </div>
+            <p id="siapa">Siapa Trainee ini? </p>
+            <div id="data-container" data-flag="{{flag}}"></div>
+            <form method="POST" action="/checkForm" class="jawab" id="trainee-form">
+                <input type="text" name="trainee_id" placeholder="Nomor Trainee">
+                <input type="text" name="trainee_name" placeholder="Nama Trainee">
+                <input type="text" name="trainee_major" placeholder="Jurusan">
+                <input type="text" name="trainee_batch" placeholder="Binusian">
+                <button type="submit" id="submit-button">Submit</button>
+            </form>
+        </div>
+    </div>
+    <script src="{{url_for('static',filename='JS/subco.js')}}"></script>
+    <script src="{{url_for('static',filename='JS/alarm.js')}}"></script>
+</body>
+</html>

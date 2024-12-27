@@ -4,9 +4,9 @@ CREATE TABLE trainee(
     trainee_binusian CHAR(3),
     trainee_major VARCHAR(251),
     trainee_pass VARCHAR(251)    
-)
+)   
 
-INSERT INTO trainee(trainee_number,trainee_pass,trainee_nama,trainee_binusian,trainee_major,trainee_pass) VALUES
+INSERT INTO trainee(trainee_number,trainee_nama,trainee_major,trainee_binusian,trainee_pass) VALUES
 ('T186', 'Marcell Sutiono', 'GAT', 'B27', 'T186Marcell SutionoGATB27'),
 ('T191', 'Jason Tanuwijaya Tariono', 'CS', 'B27', 'T191Jason Tanuwijaya TarionoCSB27'),
 ('T192', 'Rafael Febrian', 'CS', 'B27', 'T192Rafael FebrianCSB27'),

@@ -3,40 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>NAR 25-1</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../CSS/loginPage.css">
+    <link rel="stylesheet" href="{{url_for('static',filename='CSS/loginPage.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='CSS/reindeer.css')}}">
+
 </head>
 <body>
+    
     <section class="login-page">
-        <nav id="nav-bar">
+        <img src="{{url_for('static', filename='assets/christmas-tree.png')}}" alt="" class="hiasan christmas-tree">
+        <img src="{{url_for('static', filename='assets/gifts.png')}}" alt="" class="hiasan gifts">
+        <canvas id="snow-canvas"></canvas>
+        <nav class="nav-bar">
             <div class="nav-inside">
-                <a id="forum" href="">Forum</a>
+                <p>25 - 1</p>
+                <a href="">Forum</a>
                 <a href="">Leaderboard</a>
                 <a href="">Subco</a>
                 <a href="">Announcement</a>
+                <a href="">Gallery</a>
             </div>
             <div class="time">
-                <p>server time</p>
-                <p id="time-clock">23:59</p>
+                <p>Server time</p>
+                <p id="time-clock"></p>
             </div>
         </nav>
-        <div class="login-container">
-            <div>
-                <p id="login-text">Log-in</p>
+        {% if flag==1 %}
+        <h1>Salah Login wey</h1>
+        {% endif %}
+        <form class="login-form" method="POST" action="/login">
+            <div class="login-container">
+                <audio src="{{url_for('static', filename='assets/padoru_padoru.mp3')}}" autoplay loop></audio>
+                <div>
+                    <p id="login-text">Login</p>
+                </div>
+                <div class="usn">
+                    <p>Username</p>
+                    <input type="text" id="trainee_number" name="trainee_number" required>
+                </div>
+                <div class="pass">
+                    <p>Password</p>
+                    <input type="text" id="trainee_pass" name="trainee_pass" required>
+                </div>
+                <button id="submit-button" type="submit">Submit</button>
             </div>
-            <div class="usn">
-                <p>Username</p>
-                <input type="email" name="" id="">
+        </form>
+        <div class="scene">
+            <div class="reindeer-wrapper">
+                <div class="reindeer">
+                  <div class="body"></div>
+                  <div class="leg front"></div>
+                  <div class="leg back"></div>
+                  <div class="name-tag">kentang</div>
+                  <div class="head">
+                    <div class="antler left"></div>
+                    <div class="antler right"></div>
+                    <div class="eye left"></div>
+                    <div class="eye right"></div>
+                    <div class="nose"></div>
+                  </div>
+                </div>
             </div>
-            <div class="pass">
-                <p>Password</p>
-                <input type="password" name="" id="">
-            </div>
-            <button id="submit-button" type="submit">Submit</button>
-        </div>
+          </div>
     </section>
 </body>
+<script src="{{url_for('static',filename='JS/time.js')}}"></script>
+<script src="{{url_for('static',filename='JS/snow.js')}}"></script>
 </html>
