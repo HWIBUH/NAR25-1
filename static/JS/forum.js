@@ -45,38 +45,59 @@ async function generate_data() {
 
     for (item of data.data){
         console.log(item)
+        const parent=document.createElement("div")
+        parent.style.backgroundColor="var(--hijau-sean)"
+
         let element="<a href= "+item["forum_link"]+">"+item["forum_id"]+"</a>"
-        element+=`<input type='checkbox' id = ${item["forum_id"]}`
-        element+=`style="border-radius:5px; margin-left:1vw; width:1vw;" ${item["isAnswered"] == 1 ?"checked":"" }>`
+        const newElement=document.createElement("div")
+        newElement.innerHTML=element
+        newElement.id=item["forum_id"]
+        
+
+        let dropdown = `<option value="0" ${item["answer_status"] == 0 ? "selected" : ""}>Unanswered</option>
+                <option value="1" ${item["answer_status"] == 1 ? "selected" : ""}>Unchecked</option>
+                <option value="2" ${item["answer_status"] == 2 ? "selected" : ""}>Wrong</option>
+                <option value="3" ${item["answer_status"] == 3 ? "selected" : ""}>Correct</option>`;
+        const newDropdown=document.createElement("select")
+        newDropdown.id=item["forum_id"]
+        newDropdown.style.borderRadius="5px";
+        newDropdown.style.marginLeft="1vw";
+        newDropdown.style.Width="5vw";
+        newDropdown.innerHTML=dropdown
+
+        parent.appendChild(newElement)
+        parent.appendChild(newDropdown)
+
         // newCheckbox.style.borderRadius = "5px";
         // newCheckbox.style.marginLeft = "1vw";
         // newCheckbox.style.width = "1vw";
         // newCheckbox.style.backgroundColor = "var(--bean)"
 
-        const newElement=document.createElement("div")
-        newElement.innerHTML=element
-        newElement.id=item["forum_id"]
-        newElement.style.backgroundColor="var(--hijau-sean)"
         // newElement.getElementById("")
-        newElement.addEventListener("change",(event)=>{
+        newDropdown.addEventListener("change",(event)=>{
             // console.log(newElement.id)
             // if (event.target.checked) {
-                (async () => {
-                    // ini tuh buat passing 
-                    
-                    await fetch(`/checkTheBoxAPI?forum_id=${newElement.id}`, {
-                        method: 'GET',
-                    });
-                    console.log("ischeck"+newElement.id)
-                    // const result = await response.json()
-                    
-                })()
+                
+                    (async () => {
+                        console.log(newDropdown.value)
+                        const selectedValue = newDropdown.value;
+                        
+                        // ini tuh buat passing 
+                        
+                        await fetch(`/checkTheBoxAPI?forum_id=${newDropdown.id}`, {
+                            method: 'GET',
+                            headers: {"answerStatus":selectedValue}
+                        });
+                        console.log("ischeck"+newDropdown.id)
+                        // const result = await response.json()
+                        
+                    })()
                 
             // } else {
             //     console.log("ga kecheck")
             // }
         })
-        newGrid.appendChild(newElement)
+        newGrid.appendChild(parent)
         
     }
     document.getElementById("forum-list").appendChild(newGrid)

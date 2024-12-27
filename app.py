@@ -72,6 +72,7 @@ def randomize():
 #================================ BACKEND QUIZ ====================================        
 @app.route('/checkForm', methods=['POST', 'GET'])
 def checkForm():
+    trainee_id=request.headers.get("traineeId")
     print("checked")
     trainee_numb = request.form.get('trainee_id')
     trainee_nama = request.form.get('trainee_name')
@@ -217,11 +218,13 @@ def forum_list():
 @app.route('/checkTheBoxAPI', methods=['GET'])
 def checkTheBox():
     forum_id = request.args.get('forum_id')
+    print(request.headers.get('answerStatus'))
+    answer_status=int(request.headers.get('answerStatus'))
     print("box is checked at "+forum_id)
     connection = get_db_connection()
     with connection.cursor() as cursor:
-        query="UPDATE forum SET isAnswered=NOT isAnswered WHERE forum_id=%s"
-        cursor.execute(query,(forum_id))
+        query="UPDATE forum SET answer_status=%s WHERE forum_id=%s"
+        cursor.execute(query,(answer_status,forum_id))
         connection.commit()
     return render_template("forumList.html")
     
@@ -234,11 +237,65 @@ def announcement():
 @app.route("/subco")
 def subco():
     return render_template("subco.html")
+#================================ PROGRESS =======================================
+@app.route("/progress")
+def progress():
+    return render_template("progress.html")
+
+@app.route("/progress_add", methods=['GET','POST'])
+def progress_add():
+    if request.method == 'POST':
+        numOfFeatures = int(request.form.get('numberOfFeatures'))
+        nameOfFeatures = request.form.get('nameOfFeatures').split("\r\n")
+        print(nameOfFeatures)
+        connection = get_db_connection()
+
+        if connection is None:
+            return "Failed to connect to database"
+        try:
+            with connection.cursor() as cursor:
+                for i in range(numOfFeatures):
+                    query="ALTER TABLE progress ADD "+nameOfFeatures[i]+" VARCHAR(255)"
+                    cursor.execute(query)
+                    connection.commit()
+                    query="UPDATE progress SET "+nameOfFeatures[i]+" = 'belum' "
+                    cursor.execute(query)
+                    connection.commit()
+        finally:
+            connection.close()
+        return render_template("progress.html")
+    
+    return render_template("progress.html")
+
+@app.route("/progress_api",methods=['GET', 'POST'] )
+def progress_api():
+    if request.method == 'GET' or 1==1:
+        connection = get_db_connection()
+        print("ya sampe sini")
+        if connection is None:
+            return "Failed to connect to database"
+        try:
+            with connection.cursor() as cursor:
+                query="SELECT * FROM progress"
+                cursor.execute(query)
+                result=cursor.fetchall()
+                print(result)
+                return jsonify({"data":result})
+        finally:
+            connection.commit()
+            connection.close()
+    return jsonify({"connection":"error"})
+#================================ LEADERBOARD ====================================
 
 @app.route("/leaderboard")
 def leaderboard():
     print("ke leader board")
     return render_template("leaderboard.html")
+
+@app.route("/leaderboard_progress")
+def leaderboard_progress():
+    print("ke leader board")
+    return render_template("leaderboardProgress.html")
 
 #================================ GALERY ====================================
 @app.route("/gallery")

@@ -10,7 +10,7 @@ i=0
 const q1= document.getElementById('quiz1');
 const q2 = document.getElementById('quiz2');
 
-
+let traineeId=""
 function upTime() {
     const date = new Date();
 
@@ -28,11 +28,12 @@ function upTime() {
     }
     i++
     console.log(i);
-    if(trimin(date)||i % 20==0){
+    if(trimin(date)){
         (async()=>{
             const response = await fetch('/randomize');
             const result = await response.json();
-            console.log(result)
+            console.log(result.data.trainee_id)
+            traineeId=result.data.trainee_id
             const image=document.getElementById("trainee-img")
             console.log(result.data.trainee_photo)
             image.src=result.data.trainee_photo
@@ -86,6 +87,7 @@ if(form != null)
         const formData = new FormData(form);
         const response = await fetch('/checkForm', {
             method: 'POST',
+            headers: {"traineeId":traineeId},
             body: formData
         });
         const result = await response.json();
