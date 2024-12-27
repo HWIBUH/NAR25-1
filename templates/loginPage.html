@@ -23,7 +23,10 @@
                 <a href="">Forum</a>
                 <a href="">Leaderboard</a>
                 <a href="">Subco</a>
-                <a href="">Announcement</a>
+                <div class="dropdown">
+                    <a class="announcement" href="{{ url_for('announcement') }}">Announcement</a>
+                    <a class="input_announcement" href="{{ url_for('input_announcement')}}">Input Announcement</a>
+                </div>
                 <a href="">Gallery</a>
             </div>
             <div class="time">
