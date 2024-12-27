@@ -79,13 +79,18 @@ def checkForm():
     trainee_major = request.form.get('trainee_major')
     trainee_binusian = request.form.get('trainee_batch')
     connection = get_db_connection()
+    print(trainee_numb)
+    print(trainee_nama)
+    print(trainee_major)
+    print(trainee_binusian)
+    print(trainee_id)
     flag=0
     if connection is None:
         return "Failed to connect to the database!"
     try:
         with connection.cursor() as cursor:
             query = "SELECT * FROM trainee WHERE trainee_number = %s AND trainee_number = %s AND trainee_nama = %s AND trainee_major = %s AND trainee_binusian = %s"
-            cursor.execute(query, (trainee_id,trainee_numb.upper(),trainee_nama.title(),trainee_major,trainee_binusian))
+            cursor.execute(query, (trainee_id, trainee_numb.upper(), trainee_nama.title(), trainee_major,trainee_binusian))
             results=cursor.fetchall()
             print(results)
             if(len(results)>0):
