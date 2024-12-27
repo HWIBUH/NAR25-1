@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{url_for('static',filename='CSS/forum.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='CSS/progress.css')}}">
 
     <title>NAR 25-1</title>
 </head>
@@ -36,17 +36,15 @@
                 <p id="time-clock"></p>
             </div>
         </nav>
-        <form method="POST" action="/forum_add">
+        <form method="POST" action="/progress_add">
             <div class="forum-container">
-                <div>
-                    <p id="inputforum-text">Input Forum Links Here</p>
-                </div>
-                <label for="answerer">T number</label>
-                <input type="text" name="answerer" id="" placeholder="TXXX">
-                <label for="">Forum Url</label>
+                <p id="inputforum-text">Progress Table</p>
+                <label for="answerer">Number of features</label>
+                <input type="number" name="numberOfFeatures" id="" placeholder="Input a valid number">
+                <label for="">Number of features, endline each one</label>
                 <div class="linkbox">
-                    <textarea id="linkbox-text" placeholder="Url forum" required name="forum_url" rows="10" cols="35" style="resize: none;"></textarea>
-                </div>
+                    <textarea id="linkbox-text" placeholder="Nama Feature" required name="nameOfFeatures" rows="10" cols="35" style="resize: none;"></textarea>
+                </div>  
                 <button id="submit-button" type="submit">Submit</button>
             </div>
         </form>
@@ -54,6 +52,15 @@
             <p> You entered: {{ forum_url }}</p>
             <p> T number: {{tnumber}}</p>
         {% endif %}
+        <button id="show-table">Show Progress Table</button>
+        <div id="parent">
+            <table id="jsonTable">
+                <thead>
+                    <tr id="tableHeader"></tr>
+                </thead>
+                <tbody id="tableBody"></tbody>
+            </table>
+        </div>
     </section>
 
 
@@ -79,6 +86,7 @@
             </form>
         </div>
     </div>
+    <script src="{{url_for('static',filename='JS/progress.js')}}"></script>
 
     <script src="{{url_for('static',filename='JS/alarm.js')}}"></script>
 </body>
