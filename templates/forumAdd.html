@@ -49,12 +49,17 @@
                 <button id="submit-button" type="submit">Submit</button>
             </div>
         </form>
-
         {% if forum_url %}
             <p> You entered: {{ forum_url }}</p>
             <p> T number: {{tnumber}}</p>
         {% endif %}
     </section>
+
+
+    <div class="bangun inactive" id="bangunPop"> 
+        <h1>!!!BANGUN BANGUN!!!</h1>
+        <button class="bbut" onclick="popout()">Turn Off</button>
+    </div>
     
     <div class="quiz-modal inactive" id="quiz1">
         <div class="quiz-container inactive" id="quiz2">

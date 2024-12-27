@@ -189,6 +189,20 @@ def forum_api():
                         'data': result
                     })
                 
+@app.route('/forum_all_api', methods = ['GET', 'POST'])
+def forum_list_api():
+    connection = get_db_connection()
+    with connection.cursor() as cursor:
+        # T217 GANTI JADI SESUAI DATABASE NYA WENE
+        query = "SELECT * FROM `forum`"
+        cursor.execute(query)
+        result=cursor.fetchall()
+        return jsonify({
+                        'status': 'success',
+                        'message': 'data fetched succesfully',
+                        'data': result
+                    })
+
 @app.route('/forum_list')
 def forum_list():
     return render_template("forumList.html")
