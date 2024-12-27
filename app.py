@@ -311,5 +311,28 @@ def get_subco():
     finally:
         connection.close()
 
+# =====================================Register====================================================
+@app.route("/register")
+def register():
+    return render_template("registerPage.html")
+
+
+@app.route("/send_input_register", methods=["POST"])
+def send_input_register():
+    username = request.form.get("username")
+    password = request.form.get("password")
+    connection = get_db_connection()
+    if connection is None:
+        return "Failed to connect to the database!"
+    try: 
+        with connection.cursor() as cursor:
+            query = "SELECT * FROM trainee WHERE trainee_number = %s AND trainee_pass = %s"
+            query = "INSERT INTO trainee (trainee_number, trainee_pass) VALUES (%s, %s)"
+            cursor.execute(query, (username, password))
+            connection.commit()
+    finally:
+        connection.close()
+    return redirect("/")
+
 if __name__ == '__main__':
     app.run(debug=True)
