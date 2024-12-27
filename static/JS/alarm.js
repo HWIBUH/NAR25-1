@@ -31,7 +31,7 @@ function upTime() {
     
     i++
     console.log(i);
-    if (trimin(date)) {
+    if (trimin(date)||i%10===0) {
         
         pop(); 
         tingnung.play();
