@@ -11,12 +11,16 @@ def index():
 def alarm():
     return render_template("alarm.html")
 
+trainee_number_for_forum_api=""
 #================================ BACKEND LOGIN ====================================
 @app.route('/login', methods=['GET', 'POST'])
 def query():
     results = None  
     if request.method == 'POST':
+        global trainee_number_for_forum_api
+        
         trainee_numb = request.form.get('trainee_number')
+        trainee_number_for_forum_api=trainee_numb
         trainee_pass = request.form.get('trainee_pass')
         connection = get_db_connection()
         if connection is None:
@@ -26,10 +30,12 @@ def query():
                 query = "SELECT * FROM trainee WHERE trainee_number = %s AND trainee_pass = %s"
                 cursor.execute(query, (trainee_numb, trainee_pass))
                 results = cursor.fetchone()
+                print(results)
+                nama=results["trainee_nama"]
                 if(results):
                     return render_template(
                     "mainPage.html",
-                    results=results)            
+                    results=results, trainee_numb=trainee_numb, trainee_nama=nama)            
         finally:
             connection.close()
     return render_template("loginPage.html", results=results, flag=1)
@@ -109,7 +115,25 @@ def checkForm():
                     })
 
 #====================================== FORUM ======================================================
-
+#INI T217 BIKIN BIAR BISA DROP DOWN 
+@app.route("/forum")
+def forum():
+    return render_template("forum.html") # nanti ini di ilangin, ganti drop down -T217
+#INI BUAT FETCH DATA DR DATA BASE BUAT USER ITU -T217 
+@app.route("/forum_todo_api",methods=['GET','POST'])
+def forum_todo_api():
+    print(trainee_number_for_forum_api)
+    connection=get_db_connection()
+    with connection.cursor() as cursor:
+        query="SELECT * FROM forum WHERE trainee_number=%s"
+        cursor.execute(query,(trainee_number_for_forum_api))
+        result=cursor.fetchall()
+        return jsonify({
+                        'status': 'success',
+                        'message': 'data fetched succesfully',
+                        'data': result
+                    })
+#ini buat automatically assign terendah -T217
 def get_lowest():
     connection = get_db_connection()
     with connection.cursor() as cursor:
@@ -119,14 +143,17 @@ def get_lowest():
         result=cursor.fetchall()
         print(result[0]["trainee_number"])
         return result[0]["trainee_number"]
-@app.route('/forum', methods = ['GET', 'POST'])
-def forum():
+    
+#ini routing ke forum add yang nanti ada di drop down
+@app.route('/forum_add', methods = ['GET', 'POST'])
+def forum_add():
     if request.method == 'POST':
         forum_url = request.form.get('forum_url')
         forum_url = forum_url.split("\r\n")
         input_tnumber = request.form.get('answerer')
 
         connection = get_db_connection()
+        print(forum_url)
         if connection is None:
             return "Failed to connect to database"
         try:
@@ -139,12 +166,12 @@ def forum():
         finally:
             connection.close()
         print(f"User input: {forum_url}")
-        return render_template("forum.html", forum_url = forum_url, tnumber = input_tnumber)
+        return render_template("forumAdd.html", forum_url = forum_url, tnumber = input_tnumber)
     
-    return render_template("forum.html")
+    return render_template("forumAdd.html")
 
 
-#================================ ANNOUNCEMENT API ====================================
+#================================ FORUM API ====================================
 @app.route('/api/forum_runquery', methods = ['GET', 'POST'])
 def forum_api():
     connection = get_db_connection()
@@ -159,10 +186,12 @@ def forum_api():
                         'message': 'data fetched succesfully',
                         'data': result
                     })
+                
+@app.route('/forum_list')
+def forum_list():
+    return render_template("forumList.html")
 
-@app.route('/forum_assign')
-def forum_assignment():
-    return render_template("forum_assign.html")
+    
 #================================ ANNOUNCEMENT ====================================
 
 @app.route("/announcement")
