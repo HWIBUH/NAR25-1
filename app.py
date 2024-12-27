@@ -191,6 +191,16 @@ def forum_api():
 def forum_list():
     return render_template("forumList.html")
 
+@app.route('/checkTheBoxAPI', methods=['GET'])
+def checkTheBox():
+    forum_id = request.args.get('forum_id')
+    
+    connection = get_db_connection()
+    with connection.cursor() as cursor:
+        query="UPDATE forum SET isAnswered=NOT isAnswered WHERE forum_id=%s"
+        cursor.execute(query,(forum_id))
+        connection.commit()
+    return render_template("forumList.html")
     
 #================================ ANNOUNCEMENT ====================================
 
