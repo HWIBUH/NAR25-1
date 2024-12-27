@@ -12,23 +12,35 @@
     <script>
         var baseUrl = "{{ base_url }}";
         var traineeData = {{ trainee_data|tojson }};
+        var trainerData = {{ trainer_data|tojson }};
     </script>
 </head>
 <body>
     <nav class="nav-bar">
-        <div class="nav-inside">
-            <a href="{{url_for('main')}}">25-1</a>
-            <a href="{{url_for('forum')}}">Forum</a>
-            <a href="{{url_for('leaderboard')}}">Leaderboard</a>
-            <a href="{{url_for('subco')}}">Subco</a>
-            <a href="{{url_for('announcement')}}">Announcement</a>
-            <a href="{{url_for('gallery')}}">Gallery</a>
-        </div>
-        <div  class="time"  id="time">
-            <p>Server Time</p>
-            <p id="time-clock"></p>
-        </div>
-    </nav>
+            <div class="nav-inside">
+                <a href="{{url_for('main')}}">25-1</a>
+                <div class="dropdown dropdown-forum">
+                    <a class="forum" href="{{ url_for('forum') }}">Forum</a>
+                    <div class="dropdown-item">
+                        <a id="forum_add" href="{{ url_for('forum_add')}}">Forum ADD</a>
+                        <br>
+                        <a id="forum_list" href="{{ url_for('forum_list')}}">Forum LIST</a>
+                    </div>
+                </div>
+                <a href="{{url_for('leaderboard')}}">Leaderboard</a>
+                <a href="{{url_for('subco')}}">Subco</a>
+                <div class="dropdown dropdown-announcement">
+                    <a class="announcement" href="{{ url_for('announcement') }}">Announcement</a>
+                    <a class="dropdown-item" href="{{ url_for('input_announcement')}}">Input Announcement</a>
+                </div>
+                <a href="{{url_for('gallery')}}">Gallery</a>
+            </div>
+
+            <div id="time">
+                <p>Server Time :</p>
+                <p id="time-clock"></p>
+            </div>
+        </nav>
     <div class="title">
         <div class="trainee-btn">
             Trainee Gallery

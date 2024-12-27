@@ -14,11 +14,7 @@ body{
     height: 100vh;
     margin: 0;
     position: relative;
-}
-
-.time p{
-    margin: 0px;
-    margin-right: 20px;
+    overflow: hidden;
 }
 
 .forum-page{
@@ -70,6 +66,30 @@ body{
 
 .forum-container label{
     color: var(--eggshell);
+}
+
+.forum-list-container{
+    height: 5vh;
+    background-color: var(--hijau-sean);
+    padding: 1vh;
+    margin: 1vh;
+    border-radius: 1vh;
+    text-align: center;
+}
+
+.forum-list-container a{
+    color: var(--eggshell);
+}
+
+#forum-list{
+    margin-top: 15vh;
+}
+
+#grid-forum{
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    width: 90vw;
+    height: 90vh;
 }
 
 #linkbox-text{
