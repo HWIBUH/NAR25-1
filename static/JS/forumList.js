@@ -4,17 +4,19 @@ async function generate_data() {
 
     let newGrid = document.createElement("div");
     newGrid.id = "grid-forum";
-    document.getElementById("forum-list").appendChild(newGrid)
+    // document.getElementById("forum-list").appendChild(newGrid)
 
 
 
     for (item of data.data){
-        let element="<a href= "+item["forum_link"]+">"+item["forum_id"]+"</a>"
+        let element="<a href= "+item["forum_link"]
+        element+=` style="border-radius:5px; margin-left:1vw; width:1vw;">`+item["forum_id"]+"</a>"
         const newElement=document.createElement("div")
         newElement.innerHTML=element
         newElement.id=item["forum_id"]
-        document.getElementById("forum-list").appendChild(newElement)
+        newGrid.appendChild(newElement)
     }
+    document.getElementById("forum-list").appendChild(newGrid)
 }
     // const classes=document.getElementsByClassName("check")
     // console.log(classes)
