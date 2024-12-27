@@ -8,10 +8,18 @@
     <link rel="stylesheet" href="{{url_for('static',filename='CSS/reindeer.css')}}">
     <link rel="stylesheet" href="{{url_for('static',filename='CSS/background.css')}}">
     <script>
-        sessionStorage.setItem("userInitials", "{{ results['trainee_number']}}")
-        sessionStorage.setItem("userName", "{{ results['trainee_nama']}}")
-        sessionStorage.setItem("userMajor", "{{ results['trainee_major'] }}")
-        sessionStorage.setItem("userBinusian", "{{ results['trainee_binusian']}}")
+        if(!sessionStorage.getItem("userInitials")) {
+            sessionStorage.setItem("userInitials", "{{ results['trainee_number']}}")
+        }
+        if(!sessionStorage.getItem("userName"))  {
+            sessionStorage.setItem("userName", "{{ results['trainee_nama']}}")
+        }
+        if(!sessionStorage.getItem("userMajor")) {
+            sessionStorage.setItem("userMajor", "{{ results['trainee_major'] }}")
+        }
+        if(!sessionStorage.getItem("userBinusian")) {
+            sessionStorage.setItem("userBinusian", "{{ results['trainee_binusian']}}")
+        }
     </script>
 </head>
 <body>
