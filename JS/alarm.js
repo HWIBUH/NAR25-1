@@ -1,10 +1,9 @@
 const display = document.getElementById('time');
 const navdis = document.getElementById('time-clock');
-document.createElement
 let nexta = nextAlarm(); 
-const tingnung = new Audio("../static/assets/death.mp3"); 
+const tingnung = new Audio('../death.mp3'); 
 tingnung.loop = true;
-i=0
+
 function upTime() {
     const date = new Date();
 
@@ -12,19 +11,15 @@ function upTime() {
     const min = String(date.getMinutes()).padStart(2, '0'); 
     const sec = String(date.getSeconds()).padStart(2, '0');
 
-    // Ivy, gw komen soalnya ini bikin error tadi
-    // display.xinnerText = `${hour} : ${min} : ${sec}`;
-
+    display.innerText = `${hour} : ${min} : ${sec}`;
     navdis.innerText = `${hour} : ${min} : ${sec}`;
-    i++
-    console.log(i)
-    if (trimin(date) || i%10==0) {
-        
-        pop();
-        tingnung.play();
+
+    if (trimin(date)) {
+        pop(); 
         nexta = nextAlarm(); 
+        tingnung.play();
     }
-    
+
     // console.log("Current Time:", date);
     // console.log("Next Alarm:", nexta);
 }
@@ -43,29 +38,16 @@ function trimin(curr) {
     return curr.getHours() === nexta.getHours() && curr.getMinutes() === nexta.getMinutes() && curr.getSeconds() === 0;
 }
 
+function pop() {
+    const popup = document.getElementById('bangunPop');
+    popup.classList.add('active');
+}
+
 function popout() {
     const popup = document.getElementById('bangunPop');
     popup.classList.remove('active');
-    popup.classList.add('inactive');
-    const q1= document.getElementById('quiz1');
-    const q2 = document.getElementById('quiz2');
-    q1.classList.add('active');
-    q1.classList.remove('inactive'); 
-    q2.classList.add('active');
-    q2.classList.remove('inactive'); 
+    tingnung.loop = false;
 }
-
-function pop() {
-    const popup = document.getElementById('bangunPop');
-    popup.classList.remove('inactive');
-    popup.classList.add('active');
-
-    
-}
-// function death(){
-//     tingnung.play();
-// }
-
 
 
 setInterval(upTime, 1000);
