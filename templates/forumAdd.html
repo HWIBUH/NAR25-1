@@ -26,16 +26,27 @@
                 <p id="time-clock"></p>
             </div>
         </nav>
-        <!--INI YG BUAT T217, ya front end gw nt, nanti di paginate sama di style ya-->
-        <div id="forum-list">
-            
-        </div>
-    </section>
+        <form method="POST" action="/forum_add">
+            <div class="forum-container">
+                <div>
+                    <p id="inputforum-text">Input Forum Links Here</p>
+                </div>
+                <label for="answerer">T number</label>
+                <input type="text" name="answerer" id="" placeholder="TXXX">
+                <label for="">Forum Url</label>
+                <div class="linkbox">
+                    <textarea id="linkbox-text" placeholder="Url forum" required name="forum_url" rows="10" cols="35" style="resize: none;"></textarea>
+                </div>
+                <button id="submit-button" type="submit">Submit</button>
+            </div>
+        </form>
 
-    <div class="bangun inactive" id="bangunPop"> 
-        <h1>!!!BANGUN BANGUN!!!</h1>
-        <button class="bbut" onclick="popout()">Turn Off</button>
-    </div>
+        {% if forum_url %}
+            <p> You entered: {{ forum_url }}</p>
+            <p> T number: {{tnumber}}</p>
+        {% endif %}
+    </section>
+    
     <div class="quiz-modal inactive" id="quiz1">
         <div class="quiz-container inactive" id="quiz2">
             <p id="title-quiz">Trainee Quiz</p>
@@ -53,7 +64,7 @@
             </form>
         </div>
     </div>
-    <script src="{{url_for('static',filename='JS/forum.js')}}"></script>
+
     <script src="{{url_for('static',filename='JS/alarm.js')}}"></script>
 </body>
 </html>
