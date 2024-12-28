@@ -10,17 +10,15 @@ async function halos() {
         header.unshift('trainee_number');
     }
 
-    // Clear the table headers and body before rendering new data
     tableHeader.innerHTML = "";
     tableBody.innerHTML = "";
 
-    // Render table headers
     header.forEach((head) => {
         const th = document.createElement("th");
         if (head === "trainee_number") {
-            th.innerHTML = `<p>Trainee</p>`; // Change the header text to 'Trainee'
+            th.innerHTML = `<p>Trainee</p>`;
         } else if (head === "RowSum") {
-            th.innerHTML = `<p>RowSum</p>`; // Add the RowSum header
+            th.innerHTML = `<p>RowSum</p>`; 
         } else {
             const newDiv = document.createElement("div");
             const newText = document.createElement("p");
