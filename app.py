@@ -58,12 +58,21 @@ def randomize():
         print(random_quiz["trainee_number"])
         global trainee_id
         trainee_id=random_quiz["trainee_number"]
-        if random_quiz:
+
+        cursor.execute("SELECT TrainerID, TrainerInitial, TrainerName, TrainerGeneration FROM trainers ORDER BY RAND() LIMIT 1")
+        trainer_quiz = cursor.fetchone()
+
+
+        if random_quiz and trainer_quiz:
             return jsonify({
                     'status': 'success',
                     'data': {
                         'trainee_id': random_quiz["trainee_number"],
                         'trainee_photo': random_quiz["trainee_photo"],
+                        'trainer_id' : trainer_quiz["TrainerID"],
+                        'trainer_initial' : trainer_quiz["TrainerInitial"],
+                        'trainer_name' : trainer_quiz["TrainerName"],
+                        'trainer_generation' : trainer_quiz["TrainerGeneration"]
                     },
                 })
         else:
@@ -117,6 +126,57 @@ def checkForm():
                             'trainee_name': trainee_nama,
                             'trainee_major': trainee_major,
                             'trainee_batch': trainee_binusian
+                        },
+                        'flag': flag
+                    })
+
+
+# ============================== TRAINER ==========================================
+@app.route('/checkFormTrainer', methods=['POST', 'GET'])
+def checkFormTrainer():
+    trainer_initial = request.headers.get("trainerInitial")
+    print("checked")
+    input_trainer_initial = request.form.get('input_trainer_initial')
+    input_trainer_fullname = request.form.get('input_trainer_fullname')
+    input_trainer_generation = request.form.get('input_trainer_generation')
+    connection = get_db_connection()
+    # print(trainee_numb)
+    # print(trainee_nama)
+    # print(trainee_major)
+    # print(trainee_binusian)
+    # print(trainee_id)
+    flag=0
+    if connection is None:
+        return "Failed to connect to the database!"
+    try:
+        with connection.cursor() as cursor:
+            query = "SELECT * FROM trainers WHERE TrainerInitial = %s AND TrainerInitial = %s AND TrainerName = %s AND TrainerGeneration = %s;"
+            cursor.execute(query, (trainer_initial, input_trainer_initial.upper(), input_trainer_fullname.title(), input_trainer_generation))
+            
+            results=cursor.fetchall()
+            print(query, (trainer_initial, input_trainer_initial.upper(), input_trainer_fullname.title(), input_trainer_generation) )
+            if(len(results)>0):
+                # print(trainee_numb,trainee_nama,trainee_major,trainee_binusian)
+                flag=1
+                return jsonify({
+                    'status': 'success',
+                    'message': 'benar',
+                    'data': {
+                        'input_trainer_initial': input_trainer_initial,
+                        'input_trainer_fullname': input_trainer_fullname,
+                        'input_trainer_generation': input_trainer_generation
+                    },
+                    'flag': flag
+                })
+    finally:
+        connection.close()
+    return jsonify({
+                        'status': 'success',
+                        'message': 'salah',
+                        'data': {
+                            'input_trainer_initial': input_trainer_initial,
+                            'input_trainer_fullname': input_trainer_fullname,
+                            'input_trainer_generation': input_trainer_generation
                         },
                         'flag': flag
                     })
@@ -376,6 +436,8 @@ def gallery():
 
     return render_template("gallery.html", trainee_data=trainee_data, trainer_data=trainer_data)
 
+
+#=============================== input announcement
 @app.route("/input_announcement")
 def input_announcement():
     return render_template("inputAnnouncement.html")
