@@ -252,15 +252,14 @@ def progress_add():
             return "Failed to connect to database"
         try:
             with connection.cursor() as cursor:
-                query="ALTER TABLE progress ADD "+nameOfFeatures+"INT"
+                query="ALTER TABLE progress ADD "+nameOfFeatures+" INT"
                 cursor.execute(query)
                 connection.commit()
                 query="UPDATE progress SET "+nameOfFeatures+" = 0 "
                 cursor.execute(query)
                 connection.commit()
                 return redirect("/progress")
-        except:
-            return "<h1>Bro, nama tabelnya ga boleh sama sih, (ga case sensitive)<h1>"
+        
         finally:
             connection.close()
         return redirect("/progress")
