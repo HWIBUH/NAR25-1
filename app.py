@@ -2,6 +2,8 @@ from flask import Flask, render_template, request, redirect, jsonify, url_for
 from database import get_db_connection
 app = Flask(__name__,static_folder="static")
 
+application = app
+
 app.debug = True
 @app.route('/')
 def index():
@@ -11,16 +13,13 @@ def index():
 def alarm():
     return render_template("alarm.html")
 
-trainee_number_for_forum_api=""
 #================================ BACKEND LOGIN ====================================
 @app.route('/login', methods=['GET', 'POST'])
 def query():
     results = None  
     if request.method == 'POST':
-        global trainee_number_for_forum_api
-        
+        print("HALOOOOOO")
         trainee_numb = request.form.get('trainee_number')
-        trainee_number_for_forum_api=trainee_numb
         trainee_pass = request.form.get('trainee_pass')
         connection = get_db_connection()
         if connection is None:
@@ -31,8 +30,10 @@ def query():
                 cursor.execute(query, (trainee_numb, trainee_pass))
                 results = cursor.fetchone()
                 print(results)
-                nama=results["trainee_nama"]
-                if(results):
+                
+                if((results)):
+                    nama=results["trainee_nama"]
+                    print(nama)
                     return render_template(
                     "mainPage.html",
                     results=results, trainee_numb=trainee_numb, trainee_nama=nama)            
@@ -77,13 +78,18 @@ def checkForm():
     trainee_major = request.form.get('trainee_major')
     trainee_binusian = request.form.get('trainee_batch')
     connection = get_db_connection()
+    print(trainee_numb)
+    print(trainee_nama)
+    print(trainee_major)
+    print(trainee_binusian)
+    print(trainee_id)
     flag=0
     if connection is None:
         return "Failed to connect to the database!"
     try:
         with connection.cursor() as cursor:
             query = "SELECT * FROM trainee WHERE trainee_number = %s AND trainee_number = %s AND trainee_nama = %s AND trainee_major = %s AND trainee_binusian = %s"
-            cursor.execute(query, (trainee_id,trainee_numb.upper(),trainee_nama.title(),trainee_major,trainee_binusian))
+            cursor.execute(query, (trainee_id, trainee_numb.upper(), trainee_nama.title(), trainee_major,trainee_binusian))
             results=cursor.fetchall()
             print(results)
             if(len(results)>0):
@@ -119,11 +125,14 @@ def checkForm():
 @app.route("/forum")
 def forum():
     return render_template("forum.html") # nanti ini di ilangin, ganti drop down -T217
+
 #INI BUAT FETCH DATA DR DATA BASE BUAT USER ITU -T217 
+
 @app.route("/forum_todo_api",methods=['GET','POST'])
 def forum_todo_api():
-    print(trainee_number_for_forum_api)
+    trainee_number_for_forum_api=request.headers.get("traineeNumber")
     connection=get_db_connection()
+    print(trainee_number_for_forum_api)
     with connection.cursor() as cursor:
         query="SELECT * FROM forum WHERE trainee_number=%s"
         cursor.execute(query,(trainee_number_for_forum_api))
@@ -187,10 +196,34 @@ def forum_api():
                         'data': result
                     })
                 
+@app.route('/forum_all_api', methods = ['GET', 'POST'])
+def forum_list_api():
+    connection = get_db_connection()
+    with connection.cursor() as cursor:
+        # T217 GANTI JADI SESUAI DATABASE NYA WENE
+        query = "SELECT * FROM `forum`"
+        cursor.execute(query)
+        result=cursor.fetchall()
+        return jsonify({
+                        'status': 'success',
+                        'message': 'data fetched succesfully',
+                        'data': result
+                    })
+
 @app.route('/forum_list')
 def forum_list():
     return render_template("forumList.html")
 
+@app.route('/checkTheBoxAPI', methods=['GET'])
+def checkTheBox():
+    forum_id = request.args.get('forum_id')
+    print("box is checked at "+forum_id)
+    connection = get_db_connection()
+    with connection.cursor() as cursor:
+        query="UPDATE forum SET isAnswered=NOT isAnswered WHERE forum_id=%s"
+        cursor.execute(query,(forum_id))
+        connection.commit()
+    return render_template("forumList.html")
     
 #================================ ANNOUNCEMENT ====================================
 
@@ -278,6 +311,51 @@ def delete_announcement(announcement_id):
     finally:
         connection.close()
     return jsonify({"success": True, "message": "Announcement deleted successfully!"})
+
+@app.route('/api/subco', methods=['GET'])
+def get_subco():
+    print("AAAAA")
+    connection = get_db_connection()
+    if connection is None:
+         return jsonify({"success": False, "message": "Failed to connect to the database!"}), 500
+    try:
+        with connection.cursor() as cursor:
+            query = "SELECT * FROM subco ORDER BY RAND() LIMIT 1;"
+            cursor.execute(query)
+            question = cursor.fetchall()
+            print("AAAAa")
+            # if question is None:
+            #     return "Tidak ada pertanyaan"
+            
+            # cursor.execute("SELECT * FROM subco WHERE subco_id = %d;", (question[0]))
+            # questionall = cursor.fetchone() 
+
+            return jsonify(question)
+    finally:
+        connection.close()
+
+# =====================================Register====================================================
+@app.route("/register")
+def register():
+    return render_template("registerPage.html")
+
+
+@app.route("/send_input_register", methods=["POST"])
+def send_input_register():
+    username = request.form.get("username")
+    password = request.form.get("password")
+    connection = get_db_connection()
+    if connection is None:
+        return "Failed to connect to the database!"
+    try: 
+        with connection.cursor() as cursor:
+            query = "SELECT * FROM trainee WHERE trainee_number = %s AND trainee_pass = %s"
+            query = "INSERT INTO trainee (trainee_number, trainee_pass) VALUES (%s, %s)"
+            cursor.execute(query, (username, password))
+            connection.commit()
+    finally:
+        connection.close()
+    return redirect("/")
 
 if __name__ == '__main__':
     app.run(debug=True)

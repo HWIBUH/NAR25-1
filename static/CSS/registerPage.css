@@ -1,54 +1,27 @@
-@import url("global.css");
-
-input:focus{
-    outline: none;
-}
+@import url("./global.css");
 
 *{
-    font-family: "rubik";
+    font-family: rubik;
     font-weight: bold;
 }
 
 body{
+    background: linear-gradient(var(--hijau-sean), #0f201a);
     margin: 0;
     overflow: hidden;
-}
-
-.hiasan{
-    position: absolute;
-}
-
-.christmas-tree{
-    height: 90vh;
-    bottom: -10vh;
-    right: 4vw;
-}
-
-.gifts{
-    height: 45vh;
-    bottom: -8vh;
-    left: 3vw;
-}
-
-.login-form{
-    position: relative;
-    z-index: 1000;
-    /* top: 20vh; */
 }
 
 .login-page{
     width: 100vw;
     height: 100vh;
-    background: linear-gradient(var(--hijau-sean), #0f201a);
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
-.login-container{
-    width: 300px;
-    height: 350px;
+.Regis-container{
+    width: 400px;
+    height: 460px;
     background-color: var(--eggshell);
     border: 3px solid var(--bean);
     display: flex;
@@ -57,9 +30,29 @@ body{
     justify-content: center;
     border-radius: 10px;
     gap: 15px;
+    z-index: 1000;
 }
 
-#login-text{
+.usn, .pass, .confirmpass{
+    display: flex;
+    flex-direction: column;
+    width: 65%;
+}
+
+.usn p, .pass p, .confirmpass p{
+    margin-bottom: 5px;
+    color: var(--bean);
+}
+
+.usn input, .pass input, .confirmpass input{
+    width: 45%;
+    height: 30px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--eggshell);
+}
+
+#regis-text{
     font-size: 40px;
     margin: 0;
     color: var(--bean);
@@ -67,17 +60,7 @@ body{
     border-bottom: 2px solid var(--bean);
 }
 
-.usn, .pass{
-    display: flex;
-    flex-direction: column;
-}
-
-.usn p, .pass p{
-    margin-bottom: 5px;
-    color: var(--bean);
-}
-
-.usn input, .pass input{
+.usn input, .pass input, .confirmpass input{
     width: 98%;
     height: 30px;
     border: none;
@@ -86,8 +69,8 @@ body{
     color: var(--eggshell);
 }
 
-.pass input{
-    margin-bottom: 15px;
+.confirmpass input{
+    margin-bottom: 10px;
 }
 
 #submit-button{
@@ -106,4 +89,20 @@ body{
 
 #snow-canvas{
     z-index: 5;
+}
+
+.hiasan{
+    position: absolute;
+}
+
+.christmas-tree{
+    height: 90vh;
+    bottom: -10vh;
+    right: 4vw;
+}
+
+.gifts{
+    height: 45vh;
+    bottom: -8vh;
+    left: 3vw;
 }

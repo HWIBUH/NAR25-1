@@ -35,11 +35,10 @@ body{
 }
 
 .wrapper {
-    margin-top: 70px;
-    padding: 20px;
-    margin-top: 10vh;
+    /* padding: 20px; */
+    /* margin-top: 10vh; */
     height: 80vh;
-    width: 100vw;
+    /* width: 100vw; */
     display: flex;
     justify-content: center;
     align-items: center;

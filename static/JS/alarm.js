@@ -1,6 +1,7 @@
 const display = document.getElementById('time');
 const navdis = document.getElementById('time-clock');
-const form = document.getElementById('trainee-form');
+const bigTime = document.getElementById('big-time');
+const form = document.getElementById('trainee-form')
 
 let nexta = nextAlarm(); 
 const tingnung = new Audio("../static/assets/death.mp3"); 
@@ -16,19 +17,30 @@ function upTime() {
     const hour = String(date.getHours()).padStart(2, '0'); 
     const min = String(date.getMinutes()).padStart(2, '0'); 
     const sec = String(date.getSeconds()).padStart(2, '0');
-    //awiugfaiwfgafg
     // Ivy, gw komen soalnya ini bikin error tadi
-    display.innerText = `${hour} : ${min} : ${sec}`;
-
-    navdis.innerText = `${hour} : ${min} : ${sec}`;
-    
+    if(navdis != null)
+    {
+        navdis.innerText = `${hour} : ${min} : ${sec}`;
+    }
+    if(bigTime != null)
+    {
+        bigTime.innerText = `${hour} : ${min} : ${sec}`;//tambahin ini buat main page
+    }
     i++
     console.log(i);
-    if (trimin(date)) {
-        
-        pop(); 
-        tingnung.play();
-        nexta = nextAlarm(); 
+    if(trimin(date)||i % 20==0){
+        (async()=>{
+            const response = await fetch('/randomize');
+            const result = await response.json();
+            console.log(result)
+            const image=document.getElementById("trainee-img")
+            console.log(result.data.trainee_photo)
+            image.src=result.data.trainee_photo
+            pop();
+            tingnung.play();
+            tingnung.loop = true;
+            nexta = nextAlarm(); 
+        })()
     }
     
     // console.log("Current Time:", date);
@@ -66,30 +78,33 @@ function pop() {
     popup.classList.add('active');
 }
 
-form.addEventListener('submit', async(event)=> {
-    event.preventDefault();
-    const formData = new FormData(form);
-    const response = await fetch('/checkForm', {
-        method: 'POST',
-        body: formData
-    });
-    const result = await response.json();
-    console.log(result);
-    if (result.flag === 1) {
-        q1.classList.add('inactive');
-        q1.classList.remove('active'); 
-        q2.classList.add('inactive');
-        q2.classList.remove('active');
-        tingnung.loop=false
-        const nama = document.getElementById("siapa")
-        nama.innerHTML="Siapa Trainee ini?"
-    } else {
-        const nama = document.getElementById("siapa")
-        nama.innerHTML="Kak salah jawabannya, badut kak"
-        tingnung.play()
-        tingnung.loop=true
-    }
-})
+if(form != null)
+{
+    form.addEventListener('submit', async(event)=> {
+        event.preventDefault();
+    
+        const formData = new FormData(form);
+        const response = await fetch('/checkForm', {
+            method: 'POST',
+            body: formData
+        });
+        const result = await response.json();
+        console.log(result);
+        if (result.flag === 1) {
+            q1.classList.add('inactive');
+            q1.classList.remove('active'); 
+            q2.classList.add('inactive');
+            q2.classList.remove('active');
+            tingnung.loop=false
+            await fetch('/mainPage');
+        } else {
+            const siapa=document.getElementById("siapa")
+            siapa.innerText="Badut kak, kok salah"
+            tingnung.play()
+            tingnung.loop=true
+        }
+    })
+}
 
 // function afterpop(){
 //     function waitForFormSubmit() {
@@ -143,4 +158,3 @@ form.addEventListener('submit', async(event)=> {
 // }
 
 setInterval(upTime, 1000);
-

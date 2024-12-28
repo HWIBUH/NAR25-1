@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{url_for('static',filename='CSS/registerPage.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='CSS/reindeer.css')}}">
+</head>
+<body>
+    <img src="{{url_for('static', filename='assets/christmas-tree.png')}}" alt="" class="hiasan christmas-tree">
+    <img src="{{url_for('static', filename='assets/gifts.png')}}" alt="" class="hiasan gifts">
+    <canvas id="snow-canvas"></canvas>
+    <nav class="nav-bar">
+        <div class="nav-inside">
+            <a href="">25-1</a>
+            <div class="dropdown dropdown-forum">
+                <a class="forum" href="">Forum</a>
+                <div class="dropdown-item">
+                    <a id="forum_add" href="">Forum ADD</a>
+                    <br>
+                    <a id="forum_list" href="">Forum LIST</a>
+                </div>
+            </div>
+            <a href="">Leaderboard</a>
+            <a href="">Subco</a>
+            <div class="dropdown dropdown-announcement">
+                <a class="announcement" href="">Announcement</a>
+                <a class="dropdown-item" href="">Input Announcement</a>
+            </div>
+            <a href="">Gallery</a>
+            <a href="{{url_for('index') }}">Login</a>
+        </div>
+
+        <div id="time">
+            <p>Server Time :</p>
+            <p id="time-clock"></p>
+        </div>
+    </nav>
+    <section class="login-page">
+        <div class="Regis-container"> <!--ada di loginpage.css-->
+            <div>
+                <p id="regis-text">Register</p>
+            </div>
+            <div class="usn">
+                <p>Username</p>
+                <input type="email" name="" id="">
+            </div>
+            <div class="pass">
+                <p>Password</p>
+                <input type="password" name="" id="">
+            </div>
+            <div class="confirmpass">
+                <p>Confirm Password</p>
+                <input type="password" name="" id="">
+            </div>
+            <button id="submit-button" type="submit">Submit</button>
+            <p class="login-link">Apakah Anda sudah punya akun? <a href="{{url_for('index') }}">Login</a></p>
+        </div>
+        <div class="scene">
+            <div class="reindeer-wrapper">
+                <div class="reindeer">
+                  <div class="body"></div>
+                  <div class="leg front"></div>
+                  <div class="leg back"></div>
+                  <div class="name-tag">kentang</div>
+                  <div class="head">
+                    <div class="antler left"></div>
+                    <div class="antler right"></div>
+                    <div class="eye left"></div>
+                    <div class="eye right"></div>
+                    <div class="nose"></div>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+<script src="{{url_for('static',filename='JS/alarm.js')}}"></script>
+<script src="{{url_for('static',filename='JS/snow.js')}}"></script>
+</html>
