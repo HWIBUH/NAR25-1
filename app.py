@@ -306,7 +306,7 @@ def progress():
 def progress_add():
     if request.method == 'POST':
         # numOfFeatures = int(request.form.get('numberOfFeatures'))
-        nameOfFeatures = request.form.get('nameOfFeatures')
+        nameOfFeatures = request.form.get('nameOfFeatures').strip()
         connection = get_db_connection()
         if connection is None:
             return "Failed to connect to database"
@@ -380,6 +380,29 @@ def check_progress_api():
         connection.commit()
     return render_template("forumList.html")
 
+@app.route("/api/progress_runquery",methods=['GET', 'POST'] )
+def progress_api_run():
+    if request.method == 'GET' or 1==1:
+        connection = get_db_connection()
+        if connection is None:
+            return "Failed to connect to database"
+        try:
+            with connection.cursor() as cursor:
+                cursor.execute("SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'progress'")
+                column_name = cursor.fetchall()
+                columns = [name["COLUMN_NAME"] for name in column_name]
+                print(columns)
+                sum_expression = " + ".join(columns)
+                query= f"SELECT *, ({sum_expression}) AS RowSum FROM progress ORDER BY RowSum DESC"
+                
+                cursor.execute(query)
+                result=cursor.fetchall()
+                print(result)
+                return jsonify({"data":result})
+        finally:
+            connection.commit()
+            connection.close()
+    return jsonify({"connection":"error"})
 
 #================================ LEADERBOARD ====================================
 
