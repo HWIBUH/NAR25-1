@@ -11,12 +11,10 @@ i=0
 const q1= document.getElementById('quiz1');
 const q2 = document.getElementById('quiz2');
 
-const qTrainer1 = document.getElementById('quizTrainer1');
-const qTrainer2 = document.getElementById('quizTrainer2');
-
+const qTrainer1 = document.getElementById('qTrainer1');
 
 let traineeId=""
-let trainerIntial = ""
+let trainerInitial = ""
 
 function upTime() {
     const date = new Date();
@@ -40,17 +38,22 @@ function upTime() {
             const response = await fetch('/randomize');
 
             const result = await response.json();
-            console.log(result.data.trainee_id)
+            console.log(result.data)
+            console.log(result.data.trainer_initial)
+            console.log(typeof(result.data.trainer_initial))
+            // console.log(result.trainer_initial)
+            // console.log(result.data.trainee_id)
             traineeId=result.data.trainee_id
             
             const image=document.getElementById("trainee-img")
-            console.log(result.data.trainee_photo)
+            // console.log(result.data.trainee_photo)
             image.src=result.data.trainee_photo
 
-            const initialQuiz = getElementById("initial-quiz")
-            let trainerInitial = result.trainer_initial
-            let trainerName = result.trainer_name
-            let trainerGeneration = result.trainer_generation
+            const initialQuiz = document.getElementById("initial-quiz")
+            console.log(initialQuiz);
+            trainerInitial = result.data.trainer_initial
+            // let trainerName = result.data.trainer_name
+            // let trainerGeneration = result.data.trainer_generation
 
             initialQuiz.innerText = trainerInitial
 
@@ -140,10 +143,10 @@ if(trainerForm != null)
             const result = await response.json();
             console.log(result);
             if (result.flag === 1) {
+
+                alert(qTrainer1);
                 qTrainer1.classList.add('inactive');
-                qTrainer1.classList.remove('active'); 
-                qTrainer2.classList.add('inactive');
-                qTrainer2.classList.remove('active');
+                qTrainer1.classList.remove('active');
                 tingnung.loop=false
                 await fetch('/mainPage');
             } else {

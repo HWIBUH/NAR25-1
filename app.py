@@ -69,7 +69,6 @@ def randomize():
                     'data': {
                         'trainee_id': random_quiz["trainee_number"],
                         'trainee_photo': random_quiz["trainee_photo"],
-
                         'trainer_id' : trainer_quiz["TrainerID"],
                         'trainer_initial' : trainer_quiz["TrainerInitial"],
                         'trainer_name' : trainer_quiz["TrainerName"],
@@ -135,7 +134,7 @@ def checkForm():
 # ============================== TRAINER ==========================================
 @app.route('/checkFormTrainer', methods=['POST', 'GET'])
 def checkFormTrainer():
-    trainer_initial =request.headers.get("trainerInitial")
+    trainer_initial = request.headers.get("trainerInitial")
     print("checked")
     input_trainer_initial = request.form.get('input_trainer_initial')
     input_trainer_fullname = request.form.get('input_trainer_fullname')
@@ -153,14 +152,15 @@ def checkFormTrainer():
         with connection.cursor() as cursor:
             query = "SELECT * FROM trainers WHERE TrainerInitial = %s AND TrainerInitial = %s AND TrainerName = %s AND TrainerGeneration = %s;"
             cursor.execute(query, (trainer_initial, input_trainer_initial.upper(), input_trainer_fullname.title(), input_trainer_generation))
+            
             results=cursor.fetchall()
-            print(results)
+            print(query, (trainer_initial, input_trainer_initial.upper(), input_trainer_fullname.title(), input_trainer_generation) )
             if(len(results)>0):
                 # print(trainee_numb,trainee_nama,trainee_major,trainee_binusian)
                 flag=1
                 return jsonify({
                     'status': 'success',
-                    'message': 'Form processed successfully!',
+                    'message': 'benar',
                     'data': {
                         'input_trainer_initial': input_trainer_initial,
                         'input_trainer_fullname': input_trainer_fullname,
@@ -172,7 +172,7 @@ def checkFormTrainer():
         connection.close()
     return jsonify({
                         'status': 'success',
-                        'message': 'Form processed successfully!',
+                        'message': 'salah',
                         'data': {
                             'input_trainer_initial': input_trainer_initial,
                             'input_trainer_fullname': input_trainer_fullname,

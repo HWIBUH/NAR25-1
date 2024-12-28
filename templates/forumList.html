@@ -61,6 +61,19 @@
                 <button type="submit" id="submit-button">Submit</button>
             </form>
         </div>
+
+        <div class="quiz-container active trainer-quiz" id="qTrainer1">
+            <p id="title-quiz">Trainer Quiz</p>
+            <p id="initial-quiz">harusnya masuk sini</p>
+            <p id="siapa">Siapa Trainer ini? </p>
+            <!-- <div id="data-container" data-flag="{{flag}}"></div> -->
+            <form method="POST" action="/checkFormTrainer" class="jawab" id="trainer-form">
+                <input type="text" name="input_trainer_initial" placeholder="Inisial Trainer">
+                <input type="text" name="input_trainer_fullname" placeholder="Nama Trainer">
+                <input type="text" name="input_trainer_generation" placeholder="Angkatan">
+                <button type="submit" id="submit-button">Submit</button>
+            </form>
+        </div>
     </div>
     
     <script src="{{url_for('static',filename='JS/forumList.js')}}"></script>
