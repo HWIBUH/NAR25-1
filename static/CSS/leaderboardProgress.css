@@ -1,23 +1,19 @@
 @import url("global.css");
-@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
-
-input:focus{
-    outline: none;
-}
+@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
 
 *{
-    font-family: "rubik";
+    font-family: "Rubik";
     font-weight: bold;
 }
 
 body{
+    background-color: var(--eggshell);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
     margin: 0;
-    background: #F5EFDC;
-    /* overflow: hidden; */
-}
-
-#forum{
-    margin-left: 40px;
+    position: relative;
 }
 
 .time p{
@@ -25,89 +21,95 @@ body{
     margin-right: 20px;
 }
 
-/* .forum {
-    display: flex;
-    justify-content: center;
-    
-} */
-#parent{
-    margin-top: 10vh;
-}
-
-.wrapper {
-    /* padding: 20px; */
-    /* margin-top: 10vh; */
-    height: 80vh;
-    /* width: 100vw; */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-
-/* .leaderboardborder {
-    border-radius: 10;
-} */
-
-.judul {
-    border: 0px;
-    border-radius: 10px;
-    height: 40px;
-    width: 80vw;
-    background: #3b4a2c;
-}
-
-.heading {
-    color: #F5EFDC;
-    padding-top: 10px;
-}
-
-.isinya {
-    color: #3C1518;
-    margin: 0;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.baris1 {
-    margin: 0;
-    height: 40px;
-    border-radius: 10px;
-    background: #F5EFDC;
-    display: flex;
-    align-items: center;
-    justify-content: center; 
-}
-
-.baris2 {
-    margin: 0;
-    height: 40px;
-    border-radius: 10px;
-    background: #D0ADA7;
-    display: flex;
-    align-items: center;
-    justify-content: center; 
-}
-
-ul{
-    list-style-type: none;
-    display: flex;
-    flex-direction: row;
-    /* align-items: center; */
-    justify-content: space-between;
-    /* margin: 10px; */
-    padding-right: 30px;
-}
-
-.butt_on {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
+.forum-page{
     position: relative;
-    top: 20px;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.forum-container{
+    width: 300px;
+    max-height: 70vh;
+    background-color: var( --hijau-sean);
+    border: 3px solid var(--bean);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    gap: 10px;
+    padding: 1vw;
+}
+
+.forum-container input{
+    width: 100%;
+    border-radius: 0.5vw;
+    background-color: var(--eggshell);
+}
+
+#submit-button{
+    width: 100px;
+    height: 25px;
+    border-radius: 5px;
+    border: none;
+    /* font-weight: bold; */
+    background-color: var(--hijau-sean-hover);
+    color: var(--eggshell);
+    transition-duration: 500ms;
+}
+
+#inputforum-text{
+    font-size: 20px;
+    margin: 0;
+    color: var(--eggshell);
+    /* font-weight: bold; */
+}
+
+.forum-container label{
+    color: var(--eggshell);
+}
+
+.forum-list-container{
+    height: 5vh;
+    background-color: var(--hijau-sean);
+    padding: 1vh;
+    margin: 1vh;
+    border-radius: 1vh;
+    text-align: center;
+}
+
+.forum-list-container a{
+    color: var(--eggshell);
+}
+
+#forum-list{
+    margin-top: 15vh;
+}
+
+#grid-forum{
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    width: 90vw;
+    height: 90vh;
+    gap:1vw
+}
+
+#grid-forum div{
+    background-color: var(--hijau-sean-hover);
+    border-radius: 1vw;
+    text-align: center;
+    padding:20% ;
+}
+
+#grid-forum div a{
+    color:var(--eggshell);
+}
+#linkbox-text{
+    background-color: var(--eggshell);
+    border-radius: 0.5vw;
 }
 
 .bangun {
@@ -283,3 +285,96 @@ ul{
         font-size: 60px;
     }
 }
+
+#jsonTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#jsonTable th{
+    background-color: var(--hijau-sean);
+    color: white;
+    padding: 5px 10px;
+    width: 100px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+#jsonTable td {
+    color: var(--bean);
+    padding: 5px 10px;
+    width: 100px;
+    border-radius: 10px;
+    text-align: center;
+    vertical-align: middle; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+}
+
+#jsonTable select {
+    width: 100px;
+    padding: 5px;
+    box-sizing: border-box;
+    font-family: "Rubik", sans-serif;
+    text-align: center;
+}
+
+
+#jsonTable select option{
+    font-family: "Rubik", sans-serif;
+    
+}
+
+#parent {
+    margin: 10px;
+    width: 80vw;
+}
+
+
+#tableHeader {
+    /* display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row; */
+    background-color: var(--bean-hover);
+    border: 1px solid var(--hijau-sean);
+    padding: 10px;
+}
+
+#tableBody {
+    width: 80vw;
+    display: flex;
+    position: relative;
+    justify-content: space-between;
+    /* gap: 10px;    */
+    padding: 10px;
+    align-items: center;
+    flex-direction: column;
+    background-color: var(--tea-rose);
+    padding: 10px;
+    /* width: 100%;
+    height: 100%; */
+}
+
+.datatable {
+    width: 80vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid var(--hijau-sean);
+}
+
+tr {
+    width: 80vw;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+/* .datatable {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+} */
