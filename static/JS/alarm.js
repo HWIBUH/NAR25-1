@@ -2,6 +2,7 @@ const display = document.getElementById('time');
 const navdis = document.getElementById('time-clock');
 const bigTime = document.getElementById('big-time');
 const form = document.getElementById('trainee-form')
+const trainerForm = document.getElementById('trainer-form');
 
 let nexta = nextAlarm(); 
 const tingnung = new Audio("../static/assets/death.mp3"); 
@@ -10,7 +11,11 @@ i=0
 const q1= document.getElementById('quiz1');
 const q2 = document.getElementById('quiz2');
 
+const qTrainer1 = document.getElementById('qTrainer1');
+
 let traineeId=""
+let trainerInitial = ""
+
 function upTime() {
     const date = new Date();
 
@@ -31,13 +36,29 @@ function upTime() {
     if(trimin(date)){
         (async()=>{
             const response = await fetch('/randomize');
+
             const result = await response.json();
-            console.log(result.data.trainee_id)
+            console.log(result.data)
+            console.log(result.data.trainer_initial)
+            console.log(typeof(result.data.trainer_initial))
+            // console.log(result.trainer_initial)
+            // console.log(result.data.trainee_id)
             traineeId=result.data.trainee_id
+            
             const image=document.getElementById("trainee-img")
-            console.log(result.data.trainee_photo)
+            // console.log(result.data.trainee_photo)
             image.src=result.data.trainee_photo
+
+            const initialQuiz = document.getElementById("initial-quiz")
+            console.log(initialQuiz);
+            trainerInitial = result.data.trainer_initial
+            // let trainerName = result.data.trainer_name
+            // let trainerGeneration = result.data.trainer_generation
+
+            initialQuiz.innerText = trainerInitial
+
             pop();
+
             tingnung.play();
             tingnung.loop = true;
             nexta = nextAlarm(); 
@@ -107,6 +128,35 @@ if(form != null)
         }
     })
 }
+
+if(trainerForm != null)
+    {
+        trainerForm.addEventListener('submit', async(event)=> {
+            event.preventDefault();
+        
+            const formData = new FormData(trainerForm);
+            const response = await fetch('/checkFormTrainer', {
+                method: 'POST',
+                headers: {"trainerInitial":trainerInitial},
+                body: formData
+            });
+            const result = await response.json();
+            console.log(result);
+            if (result.flag === 1) {
+
+                alert(qTrainer1);
+                qTrainer1.classList.add('inactive');
+                qTrainer1.classList.remove('active');
+                tingnung.loop=false
+                await fetch('/mainPage');
+            } else {
+                const siapa=document.getElementById("siapa")
+                siapa.innerText="Badut kak, kok salah"
+                tingnung.play()
+                tingnung.loop=true
+            }
+        })
+    }
 
 // function afterpop(){
 //     function waitForFormSubmit() {
