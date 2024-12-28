@@ -7,6 +7,7 @@
 }
 
 body{
+    overflow: hidden;
     background-color: var(--eggshell);
     display: flex;
     justify-content: center;
@@ -98,6 +99,9 @@ body{
 }
 
 #grid-forum div{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
     background-color: var(--hijau-sean-hover);
     border-radius: 1vw;
     text-align: center;
@@ -232,6 +236,18 @@ body{
 .active{
     display : block;
 }
+
+#grid-forum select{
+    margin: 0;
+    border: none;
+    border-radius: 20px;
+    width: 80%;
+    background-color: rgb(0, 98, 69);
+    color: white;
+    transition-duration: 500ms;
+}
+
+/* #grid-forum select:hover */
 
 /* quiz */
 /* .quiz-modal{
