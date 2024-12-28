@@ -2,8 +2,13 @@ CREATE TABLE FORUM(
     forum_id INT PRIMARY KEY AUTO_INCREMENT,
     forum_link VARCHAR(255) NOT NULL,
     trainee_number VARCHAR(10) DEFAULT '',
-    isAnswered BOOLEAN DEFAULT FALSE
+    answer_status INT DEFAULT 0 
 )
+--answer_status
+--UNANSWERED = 0
+--UNCHECKED = 1
+--WRONG = 2
+--CORRECT = 3
 
     INSERT INTO Forum (forum_id, forum_link, trainee_number) VALUES
     (1, 'https://nar.binus.ac.id/presentation/question/0ec8c367-e07a-ef11-a1c3-9440c921bcaf/6d02e1ac-9a81-ef11-a1c3-9440c921bcaf/9aa49d27-f168-472c-a591-9764c3ac415f', ''),
