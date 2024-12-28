@@ -2,6 +2,7 @@ const display = document.getElementById('time');
 const navdis = document.getElementById('time-clock');
 const bigTime = document.getElementById('big-time');
 const form = document.getElementById('trainee-form')
+const trainerForm = document.getElementById('trainer-form');
 
 let nexta = nextAlarm(); 
 const tingnung = new Audio("../static/assets/death.mp3"); 
@@ -10,7 +11,13 @@ i=0
 const q1= document.getElementById('quiz1');
 const q2 = document.getElementById('quiz2');
 
+const qTrainer1 = document.getElementById('quizTrainer1');
+const qTrainer2 = document.getElementById('quizTrainer2');
+
+
 let traineeId=""
+let trainerIntial = ""
+
 function upTime() {
     const date = new Date();
 
@@ -31,13 +38,24 @@ function upTime() {
     if(trimin(date)){
         (async()=>{
             const response = await fetch('/randomize');
+
             const result = await response.json();
             console.log(result.data.trainee_id)
             traineeId=result.data.trainee_id
+            
             const image=document.getElementById("trainee-img")
             console.log(result.data.trainee_photo)
             image.src=result.data.trainee_photo
+
+            const initialQuiz = getElementById("initial-quiz")
+            let trainerInitial = result.trainer_initial
+            let trainerName = result.trainer_name
+            let trainerGeneration = result.trainer_generation
+
+            initialQuiz.innerText = trainerInitial
+
             pop();
+
             tingnung.play();
             tingnung.loop = true;
             nexta = nextAlarm(); 
@@ -107,6 +125,35 @@ if(form != null)
         }
     })
 }
+
+if(trainerForm != null)
+    {
+        trainerForm.addEventListener('submit', async(event)=> {
+            event.preventDefault();
+        
+            const formData = new FormData(trainerForm);
+            const response = await fetch('/checkFormTrainer', {
+                method: 'POST',
+                headers: {"trainerInitial":trainerInitial},
+                body: formData
+            });
+            const result = await response.json();
+            console.log(result);
+            if (result.flag === 1) {
+                qTrainer1.classList.add('inactive');
+                qTrainer1.classList.remove('active'); 
+                qTrainer2.classList.add('inactive');
+                qTrainer2.classList.remove('active');
+                tingnung.loop=false
+                await fetch('/mainPage');
+            } else {
+                const siapa=document.getElementById("siapa")
+                siapa.innerText="Badut kak, kok salah"
+                tingnung.play()
+                tingnung.loop=true
+            }
+        })
+    }
 
 // function afterpop(){
 //     function waitForFormSubmit() {
