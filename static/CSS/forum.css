@@ -7,6 +7,7 @@
 }
 
 body{
+    overflow: hidden;
     background-color: var(--eggshell);
     display: flex;
     justify-content: center;
