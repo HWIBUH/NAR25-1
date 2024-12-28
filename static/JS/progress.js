@@ -1,32 +1,43 @@
-const parent= document.getElementById("parent")
+document.getElementById("show-table").addEventListener("click", async () => {
+    console.log("Button clicked");
+    const data = await fetch("/progress_api");
+    const result = await data.json();
 
-
-
-document.getElementById("show-table").addEventListener("click",async () => {
-    const data = await fetch("/progress_api")
-    const result = await data.json()
-    
     const tableHeader = document.getElementById("tableHeader");
-    const tableBody = document.getElementById("tableBody")
-    const header = Object.keys(result.data[0])
-    console.log(header)
-    for(head of header){
-        console.log(head)
-        const th = document.createElement("th");
-        th.textContent = head
-        tableHeader.appendChild(th);
+    const tableBody = document.getElementById("tableBody");
+
+    tableHeader.innerHTML = "";
+    tableBody.innerHTML = "";
+
+    const header = Object.keys(result.data[0]);
+
+    const traineeNumberIndex = header.indexOf('trainee_number');
+    if (traineeNumberIndex > -1) {
+        header.splice(traineeNumberIndex, 1);
+        header.unshift('trainee_number');
     }
 
-    for(item of result.data){
-        const tr = document.createElement("tr");
-        console.log(item)
-        for(head of header){
-            console.log(head)
-            const td = document.createElement("td");
-            td.innerText = item[head]
-            
-            tr.appendChild(td);
+    let isTrainee = true
+
+    header.forEach((head) => {
+        const th = document.createElement("th");
+        if(isTrainee){
+            isTrainee = false
+            th.textContent = 'TNumber'
+        }else{
+            th.textContent = head;
         }
+        console.log(head)
+        tableHeader.appendChild(th);
+    });
+
+    result.data.forEach((row) => {
+        const tr = document.createElement("tr");
+        header.forEach((head) => {
+            const td = document.createElement("td");
+            td.textContent = row[head] || ""; 
+            tr.appendChild(td);
+        });
         tableBody.appendChild(tr);
-    }
-})
+    });
+});
