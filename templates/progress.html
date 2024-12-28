@@ -36,14 +36,16 @@
                 <p id="time-clock"></p>
             </div>
         </nav>
-        <form method="POST" action="/progress_add">
+        <form method="POST" action="/progress_add" id="my-form">
             <div class="forum-container">
                 <p id="inputforum-text">Progress Table</p>
-                <label for="answerer">Number of features</label>
-                <input type="number" name="numberOfFeatures" id="" placeholder="Input a valid number">
-                <label for="">Number of features, endline each one</label>
+                <label for="answerer">Feature name must be unique</label>
+
+                <label>Number of features, submit each one</label>
+                <label> NO SPACES IN THE NAME </label>
+                <label>FEATURE NAME IS NOT CASE SENSITIVE</label>
                 <div class="linkbox">
-                    <textarea id="linkbox-text" placeholder="Nama Feature" required name="nameOfFeatures" rows="10" cols="35" style="resize: none;"></textarea>
+                    <input type="text" id="linkbox-text" placeholder="Nama Feature" required name="nameOfFeatures" rows="10" cols="35" style="resize: none;"></textarea>
                 </div>  
                 <button id="submit-button" type="submit">Submit</button>
             </div>
@@ -52,13 +54,15 @@
             <p> You entered: {{ forum_url }}</p>
             <p> T number: {{tnumber}}</p>
         {% endif %}
+
         <button id="show-table">Show Progress Table</button>
+
         <div id="parent">
             <table id="jsonTable">
-                <thead>
-                    <tr id="tableHeader"></tr>
-                </thead>
-                <tbody id="tableBody"></tbody>
+                <th>
+                    <tr id="tableHeader" class="datatable"></tr>
+                </th>
+                <tbody id="tableBody" class="datatable"></tbody>
             </table>
         </div>
     </section>
@@ -73,8 +77,8 @@
         <div class="quiz-container inactive" id="quiz2">
             <p id="title-quiz">Trainee Quiz</p>
             <div id="image-temp">
-                <img src="{{quiz_trainee_photo}}" alt="Trainee Image" id="trainee-img">
-            </div>
+                <img src="{{quiz_trainee_photo}}" alt="Trainee Image" id="trae-img">
+            </div>ine
             <p id="siapa">Siapa Trainee ini? </p>
             <div id="data-container" data-flag="{{flag}}"></div>
             <form method="POST" action="/checkForm" class="jawab" id="trainee-form">
@@ -85,6 +89,19 @@
                 <button type="submit" id="submit-button">Submit</button>
             </form>
         </div>
+        <div class="quiz-container inactive trainer-quiz" id="quiz3">
+            <p id="title-quiz">Trainer Quiz</p>
+            <p id="initial-quiz"></p>
+            <p id="siapa">Siapa Trainer ini? </p>
+            <!-- <div id="data-container" data-flag="{{flag}}"></div> -->
+            <form method="POST" action="/checkForm" class="jawab" id="trainer-form">
+                <input type="text" name="trainer_name" placeholder="Nama Trainer">
+                <input type="text" name="jabatan_trainer" placeholder="Jabatan">
+                <input type="text" name="angkatan_trainer" placeholder="Angkatan">
+                <button type="submit" id="submit-button">Submit</button>
+            </form>
+        </div>
+
     </div>
     <script src="{{url_for('static',filename='JS/progress.js')}}"></script>
 

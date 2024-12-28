@@ -245,33 +245,52 @@ def progress():
 @app.route("/progress_add", methods=['GET','POST'])
 def progress_add():
     if request.method == 'POST':
-        numOfFeatures = int(request.form.get('numberOfFeatures'))
-        nameOfFeatures = request.form.get('nameOfFeatures').split("\r\n")
-        print(nameOfFeatures)
+        # numOfFeatures = int(request.form.get('numberOfFeatures'))
+        nameOfFeatures = request.form.get('nameOfFeatures')
         connection = get_db_connection()
-
         if connection is None:
             return "Failed to connect to database"
         try:
             with connection.cursor() as cursor:
-                for i in range(numOfFeatures):
-                    query="ALTER TABLE progress ADD "+nameOfFeatures[i]+" VARCHAR(255)"
-                    cursor.execute(query)
-                    connection.commit()
-                    query="UPDATE progress SET "+nameOfFeatures[i]+" = 'belum' "
-                    cursor.execute(query)
-                    connection.commit()
+                query="ALTER TABLE progress ADD "+nameOfFeatures+" INT"
+                cursor.execute(query)
+                connection.commit()
+                query="UPDATE progress SET "+nameOfFeatures+" = 0 "
+                cursor.execute(query)
+                connection.commit()
+                return redirect("/progress")
+        
         finally:
             connection.close()
-        return render_template("progress.html")
+        return redirect("/progress")
     
     return render_template("progress.html")
+
+@app.route("/progress_delete", methods=["DELETE"])
+def progress_delete():
+    columnToDelete=request.headers.get("deleteColumn")
+    connection = get_db_connection()
+    
+    if connection is None:
+        return "Failed to connect to database"
+    try:
+        with connection.cursor() as cursor:
+            print(columnToDelete)
+            query = f"ALTER TABLE progress DROP COLUMN {columnToDelete}"
+            result=cursor.execute(query)
+            print(result)
+            print("KEHAPUS KOLOMNYA")
+            connection.commit()
+        return render_template("progress.html")
+    except:
+        return "database progress doesn't exist"
+    finally:
+        connection.close()
 
 @app.route("/progress_api",methods=['GET', 'POST'] )
 def progress_api():
     if request.method == 'GET' or 1==1:
         connection = get_db_connection()
-        print("ya sampe sini")
         if connection is None:
             return "Failed to connect to database"
         try:
@@ -285,6 +304,23 @@ def progress_api():
             connection.commit()
             connection.close()
     return jsonify({"connection":"error"})
+
+
+@app.route("/checkTheProgressAPI",methods=['GET', 'POST'] )
+def check_progress_api():
+    dropdown_id = request.headers.get('dropdownId') #T217Feature
+    answer_status=request.headers.get('answerStatus')
+    # print("box is checked at "+ dropdown_id[4:]+" "+dropdown_id[:4] )
+    connection = get_db_connection()
+    with connection.cursor() as cursor:
+        
+        query=f"UPDATE progress SET {dropdown_id[4:]} = {answer_status} WHERE trainee_number = '{dropdown_id[:4]}' " 
+        print(query)
+        cursor.execute(query)
+        connection.commit()
+    return render_template("forumList.html")
+
+
 #================================ LEADERBOARD ====================================
 
 @app.route("/leaderboard")

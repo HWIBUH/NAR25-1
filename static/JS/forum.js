@@ -76,7 +76,6 @@ async function generate_data() {
         newDropdown.addEventListener("change",(event)=>{
             // console.log(newElement.id)
             // if (event.target.checked) {
-                
                     (async () => {
                         console.log(newDropdown.value)
                         const selectedValue = newDropdown.value;
@@ -89,7 +88,6 @@ async function generate_data() {
                         });
                         console.log("ischeck"+newDropdown.id)
                         // const result = await response.json()
-                        
                     })()
                 
             // } else {
