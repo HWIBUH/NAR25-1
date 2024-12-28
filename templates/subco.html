@@ -19,6 +19,7 @@
                         <a id="forum_list" href="{{ url_for('forum_list')}}">Forum LIST</a>
                     </div>
                 </div>
+                <a href="{{url_for('progress')}}">Progress</a>
                 <a href="{{url_for('leaderboard')}}">Leaderboard</a>
                 <a href="{{url_for('subco')}}">Subco</a>
                 <div class="dropdown dropdown-announcement">
@@ -37,7 +38,7 @@
             <div class="question">
                 <div class="card">
                     <h2>Subco Flashcard</h2>
-                    <div id="subco">
+                    <div id="subco" class="pertanyaan_subco">
                         Jelaskan bagaimana cara algoritma A* menemukan path terpendek
                     </div>
                     <button id="show">Show answer</button>
@@ -46,10 +47,10 @@
             <div class="answer hidden">
                 <div class="card">
                     <h2>Answer</h2>
-                    <div id="subco">Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore alias incidunt magni eaque culpa, asperiores iste maxime laudantium neque ratione ea aliquam cum repudiandae eos? Dicta laudantium voluptate non repellendus.</div>
+                    <div id="subco" class="jawaban_subco">Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore alias incidunt magni eaque culpa, asperiores iste maxime laudantium neque ratione ea aliquam cum repudiandae eos? Dicta laudantium voluptate non repellendus.</div>
                     <div class="wrapper">
                         <button id="prev">Show question</button>
-                        <button id="next">Next question</button>
+                        <button id="next" onclick="generate()">Next question</button>
                     </div>
                 </div>
             </div>

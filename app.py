@@ -13,16 +13,13 @@ def index():
 def alarm():
     return render_template("alarm.html")
 
-trainee_number_for_forum_api=""
 #================================ BACKEND LOGIN ====================================
 @app.route('/login', methods=['GET', 'POST'])
 def query():
     results = None  
     if request.method == 'POST':
-        global trainee_number_for_forum_api
-        
+        print("HALOOOOOO")
         trainee_numb = request.form.get('trainee_number')
-        trainee_number_for_forum_api=trainee_numb
         trainee_pass = request.form.get('trainee_pass')
         connection = get_db_connection()
         if connection is None:
@@ -33,8 +30,10 @@ def query():
                 cursor.execute(query, (trainee_numb, trainee_pass))
                 results = cursor.fetchone()
                 print(results)
-                nama=results["trainee_nama"]
-                if(results):
+                
+                if((results)):
+                    nama=results["trainee_nama"]
+                    print(nama)
                     return render_template(
                     "mainPage.html",
                     results=results, trainee_numb=trainee_numb, trainee_nama=nama)            
@@ -73,19 +72,25 @@ def randomize():
 #================================ BACKEND QUIZ ====================================        
 @app.route('/checkForm', methods=['POST', 'GET'])
 def checkForm():
+    trainee_id=request.headers.get("traineeId")
     print("checked")
     trainee_numb = request.form.get('trainee_id')
     trainee_nama = request.form.get('trainee_name')
     trainee_major = request.form.get('trainee_major')
     trainee_binusian = request.form.get('trainee_batch')
     connection = get_db_connection()
+    print(trainee_numb)
+    print(trainee_nama)
+    print(trainee_major)
+    print(trainee_binusian)
+    print(trainee_id)
     flag=0
     if connection is None:
         return "Failed to connect to the database!"
     try:
         with connection.cursor() as cursor:
             query = "SELECT * FROM trainee WHERE trainee_number = %s AND trainee_number = %s AND trainee_nama = %s AND trainee_major = %s AND trainee_binusian = %s"
-            cursor.execute(query, (trainee_id,trainee_numb.upper(),trainee_nama.title(),trainee_major,trainee_binusian))
+            cursor.execute(query, (trainee_id, trainee_numb.upper(), trainee_nama.title(), trainee_major,trainee_binusian))
             results=cursor.fetchall()
             print(results)
             if(len(results)>0):
@@ -121,11 +126,14 @@ def checkForm():
 @app.route("/forum")
 def forum():
     return render_template("forum.html") # nanti ini di ilangin, ganti drop down -T217
+
 #INI BUAT FETCH DATA DR DATA BASE BUAT USER ITU -T217 
+
 @app.route("/forum_todo_api",methods=['GET','POST'])
 def forum_todo_api():
-    print(trainee_number_for_forum_api)
+    trainee_number_for_forum_api=request.headers.get("traineeNumber")
     connection=get_db_connection()
+    print(trainee_number_for_forum_api)
     with connection.cursor() as cursor:
         query="SELECT * FROM forum WHERE trainee_number=%s"
         cursor.execute(query,(trainee_number_for_forum_api))
@@ -189,6 +197,20 @@ def forum_api():
                         'data': result
                     })
                 
+@app.route('/forum_all_api', methods = ['GET', 'POST'])
+def forum_list_api():
+    connection = get_db_connection()
+    with connection.cursor() as cursor:
+        # T217 GANTI JADI SESUAI DATABASE NYA WENE
+        query = "SELECT * FROM `forum`"
+        cursor.execute(query)
+        result=cursor.fetchall()
+        return jsonify({
+                        'status': 'success',
+                        'message': 'data fetched succesfully',
+                        'data': result
+                    })
+
 @app.route('/forum_list')
 def forum_list():
     return render_template("forumList.html")
@@ -196,11 +218,13 @@ def forum_list():
 @app.route('/checkTheBoxAPI', methods=['GET'])
 def checkTheBox():
     forum_id = request.args.get('forum_id')
-    
+    print(request.headers.get('answerStatus'))
+    answer_status=int(request.headers.get('answerStatus'))
+    print("box is checked at "+forum_id)
     connection = get_db_connection()
     with connection.cursor() as cursor:
-        query="UPDATE forum SET isAnswered=NOT isAnswered WHERE forum_id=%s"
-        cursor.execute(query,(forum_id))
+        query="UPDATE forum SET answer_status=%s WHERE forum_id=%s"
+        cursor.execute(query,(answer_status,forum_id))
         connection.commit()
     return render_template("forumList.html")
     
@@ -213,11 +237,65 @@ def announcement():
 @app.route("/subco")
 def subco():
     return render_template("subco.html")
+#================================ PROGRESS =======================================
+@app.route("/progress")
+def progress():
+    return render_template("progress.html")
+
+@app.route("/progress_add", methods=['GET','POST'])
+def progress_add():
+    if request.method == 'POST':
+        numOfFeatures = int(request.form.get('numberOfFeatures'))
+        nameOfFeatures = request.form.get('nameOfFeatures').split("\r\n")
+        print(nameOfFeatures)
+        connection = get_db_connection()
+
+        if connection is None:
+            return "Failed to connect to database"
+        try:
+            with connection.cursor() as cursor:
+                for i in range(numOfFeatures):
+                    query="ALTER TABLE progress ADD "+nameOfFeatures[i]+" VARCHAR(255)"
+                    cursor.execute(query)
+                    connection.commit()
+                    query="UPDATE progress SET "+nameOfFeatures[i]+" = 'belum' "
+                    cursor.execute(query)
+                    connection.commit()
+        finally:
+            connection.close()
+        return render_template("progress.html")
+    
+    return render_template("progress.html")
+
+@app.route("/progress_api",methods=['GET', 'POST'] )
+def progress_api():
+    if request.method == 'GET' or 1==1:
+        connection = get_db_connection()
+        print("ya sampe sini")
+        if connection is None:
+            return "Failed to connect to database"
+        try:
+            with connection.cursor() as cursor:
+                query="SELECT * FROM progress"
+                cursor.execute(query)
+                result=cursor.fetchall()
+                print(result)
+                return jsonify({"data":result})
+        finally:
+            connection.commit()
+            connection.close()
+    return jsonify({"connection":"error"})
+#================================ LEADERBOARD ====================================
 
 @app.route("/leaderboard")
 def leaderboard():
     print("ke leader board")
     return render_template("leaderboard.html")
+
+@app.route("/leaderboard_progress")
+def leaderboard_progress():
+    print("ke leader board")
+    return render_template("leaderboardProgress.html")
 
 #================================ GALERY ====================================
 @app.route("/gallery")
@@ -297,17 +375,17 @@ def get_subco():
          return jsonify({"success": False, "message": "Failed to connect to the database!"}), 500
     try:
         with connection.cursor() as cursor:
-            query = "SELECT subco_id FROM subco ORDER BY RANDOM() LIMIT 1;"
+            query = "SELECT * FROM subco ORDER BY RAND() LIMIT 1;"
             cursor.execute(query)
-            question = cursor.fetchone()
+            question = cursor.fetchall()
             print("AAAAa")
-            if question is None:
-                return "Tidak ada pertanyaan"
+            # if question is None:
+            #     return "Tidak ada pertanyaan"
             
-            cursor.execute("SELECT * FROM subco WHERE subco_id = %s;", (question[0]))
-            questionall = cursor.fetchone() 
+            # cursor.execute("SELECT * FROM subco WHERE subco_id = %d;", (question[0]))
+            # questionall = cursor.fetchone() 
 
-            return jsonify(questionall)
+            return jsonify(question)
     finally:
         connection.close()
 

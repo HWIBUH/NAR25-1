@@ -1,7 +1,7 @@
 const display = document.getElementById('time');
 const navdis = document.getElementById('time-clock');
 const bigTime = document.getElementById('big-time');
-const form = document.getElementById('trainee-form');
+const form = document.getElementById('trainee-form')
 
 let nexta = nextAlarm(); 
 const tingnung = new Audio("../static/assets/death.mp3"); 
@@ -10,16 +10,14 @@ i=0
 const q1= document.getElementById('quiz1');
 const q2 = document.getElementById('quiz2');
 
-
+let traineeId=""
 function upTime() {
     const date = new Date();
 
-    const hour = String(date.getHours()).padStart(2, '0');
+    const hour = String(date.getHours()).padStart(2, '0'); 
     const min = String(date.getMinutes()).padStart(2, '0'); 
     const sec = String(date.getSeconds()).padStart(2, '0');
-    //awiugfaiwfgafg
     // Ivy, gw komen soalnya ini bikin error tadi
-    // display.innerText = `${hour} : ${min} : ${sec}`; ini kalo gadicommand bakal ngubah divnya langsung
     if(navdis != null)
     {
         navdis.innerText = `${hour} : ${min} : ${sec}`;
@@ -28,14 +26,22 @@ function upTime() {
     {
         bigTime.innerText = `${hour} : ${min} : ${sec}`;//tambahin ini buat main page
     }
-    
     i++
     console.log(i);
-    if (trimin(date)) {
-        
-        pop(); 
-        tingnung.play();
-        nexta = nextAlarm(); 
+    if(trimin(date)){
+        (async()=>{
+            const response = await fetch('/randomize');
+            const result = await response.json();
+            console.log(result.data.trainee_id)
+            traineeId=result.data.trainee_id
+            const image=document.getElementById("trainee-img")
+            console.log(result.data.trainee_photo)
+            image.src=result.data.trainee_photo
+            pop();
+            tingnung.play();
+            tingnung.loop = true;
+            nexta = nextAlarm(); 
+        })()
     }
     
     // console.log("Current Time:", date);
@@ -77,9 +83,11 @@ if(form != null)
 {
     form.addEventListener('submit', async(event)=> {
         event.preventDefault();
+    
         const formData = new FormData(form);
         const response = await fetch('/checkForm', {
             method: 'POST',
+            headers: {"traineeId":traineeId},
             body: formData
         });
         const result = await response.json();
@@ -90,17 +98,15 @@ if(form != null)
             q2.classList.add('inactive');
             q2.classList.remove('active');
             tingnung.loop=false
-            const nama = document.getElementById("siapa")
-            nama.innerHTML="Siapa Trainee ini?"
+            await fetch('/mainPage');
         } else {
-            const nama = document.getElementById("siapa")
-            nama.innerHTML="Kak salah jawabannya, badut kak"
+            const siapa=document.getElementById("siapa")
+            siapa.innerText="Badut kak, kok salah"
             tingnung.play()
             tingnung.loop=true
         }
     })
 }
-
 
 // function afterpop(){
 //     function waitForFormSubmit() {
@@ -154,4 +160,3 @@ if(form != null)
 // }
 
 setInterval(upTime, 1000);
-
