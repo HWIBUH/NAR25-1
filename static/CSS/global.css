@@ -65,7 +65,7 @@
     position: relative;
 }
   
-.dropdown-forum:hover .dropdown-item {
+.dropdown-forum:hover .dropdown-item{
     height: fit-content;
     width: 91px;
     padding: 15px;

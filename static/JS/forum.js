@@ -7,7 +7,6 @@
 //     document.getElementById("forum-list").appendChild(newGrid)
 
 
-
 //     for (item of data.data){
 //         let element="<a href= "+item["forum_link"]+" target='_blank' >"+item["forum_id"]+"</a>"
 //         let newElement=document.createElement("div") //.classList.add("forum-container")
