@@ -34,6 +34,7 @@
                     <a id="forum_list" href="{{ url_for('forum_list')}}">Forum LIST</a>
                 </div>
             </div>
+            <a href="{{url_for('progress')}}">Progress</a>
             <a href="{{url_for('leaderboard')}}">Leaderboard</a>
             <a href="{{url_for('subco')}}">Subco</a>
             <div class="dropdown dropdown-announcement">
@@ -43,11 +44,11 @@
             <a href="{{url_for('gallery')}}">Gallery</a>
         </div>
 
-      <div id="time">
-          <p>Server Time :</p>
-          <p id="time-clock"></p>
-      </div>
-  </nav>
+        <div id="time">
+            <p>Server Time :</p>
+            <p id="time-clock"></p>
+        </div>
+    </nav>
 
       <form action="/send_input_announcement" class="input-box flex-col" method="POST">
         <label for="title">Announcement Title</label>
@@ -68,22 +69,35 @@
   <!-- <button onclick="death()">tinung</button> -->
   
   <div class="quiz-modal inactive" id="quiz1">
-      <div class="quiz-container inactive" id="quiz2">
-          <p id="title-quiz">Trainee Quiz</p>
-          <div id="image-temp">
-              <img src="{{quiz_trainee_photo}}" alt="Trainee Image" id="trainee-img">
-          </div>
-          <p id="siapa">Siapa Trainee ini? </p>
-          <div id="data-container" data-flag="{{flag}}"></div>
-          <form method="POST" action="/checkForm" class="jawab" id="trainee-form">
-              <input type="text" name="trainee_id" placeholder="Nomor Trainee">
-              <input type="text" name="trainee_name" placeholder="Nama Trainee">
-              <input type="text" name="trainee_major" placeholder="Jurusan">
-              <input type="text" name="trainee_batch" placeholder="Binusian">
-              <button type="submit" id="submit-button">Submit</button>
-          </form>
-      </div>
-  </div>
+    <div class="quiz-container inactive" id="quiz2">
+        <p id="title-quiz">Trainee Quiz</p>
+        <div id="image-temp">
+            <img src="{{quiz_trainee_photo}}" alt="Trainee Image" id="trainee-img">
+        </div>
+        <p id="siapa">Siapa Trainee ini? </p>
+        <div id="data-container" data-flag="{{flag}}"></div>
+        <form method="POST" action="/checkForm" class="jawab" id="trainee-form">
+            <input type="text" name="trainee_id" placeholder="Nomor Trainee">
+            <input type="text" name="trainee_name" placeholder="Nama Trainee">
+            <input type="text" name="trainee_major" placeholder="Jurusan">
+            <input type="text" name="trainee_batch" placeholder="Binusian">
+            <button type="submit" id="submit-button">Submit</button>
+        </form>
+    </div>
+
+    <div class="quiz-container active trainer-quiz" id="qTrainer1">
+        <p id="title-quiz">Trainer Quiz</p>
+        <p id="initial-quiz">harusnya masuk sini</p>
+        <p id="siapa">Siapa Trainer ini? </p>
+        <!-- <div id="data-container" data-flag="{{flag}}"></div> -->
+        <form method="POST" action="/checkFormTrainer" class="jawab" id="trainer-form">
+            <input type="text" name="input_trainer_initial" placeholder="Inisial Trainer">
+            <input type="text" name="input_trainer_fullname" placeholder="Nama Trainer">
+            <input type="text" name="input_trainer_generation" placeholder="Angkatan">
+            <button type="submit" id="submit-button">Submit</button>
+        </form>
+    </div>
+</div>
 
 
     <script src="{{url_for('static',filename='JS/input_announcement.js')}}"></script>

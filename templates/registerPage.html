@@ -16,23 +16,23 @@
     <canvas id="snow-canvas"></canvas>
     <nav class="nav-bar">
         <div class="nav-inside">
-            <a href="">25-1</a>
+            <a href="{{url_for('main')}}">25-1</a>
             <div class="dropdown dropdown-forum">
-                <a class="forum" href="">Forum</a>
+                <a class="forum" href="{{ url_for('forum') }}">Forum</a>
                 <div class="dropdown-item">
-                    <a id="forum_add" href="">Forum ADD</a>
+                    <a id="forum_add" href="{{ url_for('forum_add')}}">Forum ADD</a>
                     <br>
-                    <a id="forum_list" href="">Forum LIST</a>
+                    <a id="forum_list" href="{{ url_for('forum_list')}}">Forum LIST</a>
                 </div>
             </div>
-            <a href="">Leaderboard</a>
-            <a href="">Subco</a>
+            <a href="{{url_for('progress')}}">Progress</a>
+            <a href="{{url_for('leaderboard')}}">Leaderboard</a>
+            <a href="{{url_for('subco')}}">Subco</a>
             <div class="dropdown dropdown-announcement">
-                <a class="announcement" href="">Announcement</a>
-                <a class="dropdown-item" href="">Input Announcement</a>
+                <a class="announcement" href="{{ url_for('announcement') }}">Announcement</a>
+                <a class="dropdown-item" href="{{ url_for('input_announcement')}}">Input Announcement</a>
             </div>
-            <a href="">Gallery</a>
-            <a href="{{url_for('index') }}">Login</a>
+            <a href="{{url_for('gallery')}}">Gallery</a>
         </div>
 
         <div id="time">
