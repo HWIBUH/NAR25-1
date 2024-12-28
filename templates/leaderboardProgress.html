@@ -1,13 +1,15 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{url_for('static',filename='CSS/leaderboard.css')}}">
-    
+    <link rel="stylesheet" href="{{url_for('static',filename='CSS/leaderboardProgress.css')}}">
+
     <title>NAR 25-1</title>
 </head>
 <body>
-    <div class="container">
+    <section class="forum-page">
+        
         <nav class="nav-bar">
             <div class="nav-inside">
                 <a href="{{url_for('main')}}">25-1</a>
@@ -21,8 +23,6 @@
                 </div>
                 <a href="{{url_for('progress')}}">Progress</a>
                 <a href="{{url_for('leaderboard')}}">Leaderboard</a>
-                <!-- NANTI BIKIN DROP DROWN YAA -T217 -->
-                <a id="forum_add" href="{{ url_for('leaderboard_progress')}}">Leaderboard Progress</a>
                 <a href="{{url_for('subco')}}">Subco</a>
                 <div class="dropdown dropdown-announcement">
                     <a class="announcement" href="{{ url_for('announcement') }}">Announcement</a>
@@ -36,154 +36,43 @@
                 <p id="time-clock"></p>
             </div>
         </nav>
-        <div class="wrapper">
-            <div class="forum">
-                <h1>FORUM</h1>
+        <!--<form method="POST" action="/progress_add" id="my-form">
+            <div class="forum-container">
+                <p id="inputforum-text">Progress Table</p>
+                <label for="answerer">Feature name must be unique</label>
+
+                <label>Number of features, submit each one</label>
+                <label> NO SPACES IN THE NAME </label>
+                <label>FEATURE NAME IS NOT CASE SENSITIVE</label>
+                <div class="linkbox">
+                    <input type="text" id="linkbox-text" placeholder="Nama Feature" required name="nameOfFeatures" rows="10" cols="35" style="resize: none;"></textarea>
+                </div>  
+                <button id="submit-button" type="submit">Submit</button>
             </div>
-            
-                <div class="leaderhead" id="parent">
-                    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-                    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-                    <div class="judul">
-                        <ul class="heading">
-                            <li>No</li>
-                            <li>Jumlah</li>
-                            <li>Tnumber</li>
-                        </ul>
-                    </div> 
-                    <!--<div class="baris1 page1" >
-                        <ul class="isinya">
-                            <li>1. </li>
-                            <li>T999 - Budiono Siregar - CS - B29</li>
-                            <li>99</li>
-                        </ul>
-                    </div>
-                     
-                    <div class="baris2 page1">
-                        <ul class="isinya">
-                            <li>1. </li>
-                            <li>T999 - Budiono Siregar - CS - B29</li>
-                            <li>99</li>
-                        </ul>
-                    </div>
-                    <div class="baris1 page1">
-                        <ul class="isinya">
-                            <li>1. </li>
-                            <li>T999 - Budiono Siregar - CS - B29</li>
-                            <li>99</li>
-                        </ul>
-                    </div>
-                    <div class="baris2 page1">
-                        <ul class="isinya">
-                            <li>1. </li>
-                            <li>T999 - Budiono Siregar - CS - B29</li>
-                            <li>99</li>
-                        </ul>
-                    </div>
-                    <div class="baris1 page1">
-                        <ul class="isinya">
-                            <li>1. </li>
-                            <li>T999 - Budiono Siregar - CS - B29</li>
-                            <li>99</li>
-                        </ul>
-                    </div>
-                    <div class="baris2 page1">
-                        <ul class="isinya">
-                            <li>1. </li>
-                            <li>T999 - Budiono Siregar - CS - B29</li>
-                            <li>99</li>
-                        </ul>
-                    </div>
-                    <div class="baris1 page1">
-                        <ul class="isinya">
-                            <li>1. </li>
-                            <li>T999 - Budiono Siregar - CS - B29</li>
-                            <li>99</li>
-                        </ul>
-                    </div>
-                    <div class="baris2 page1">
-                        <ul class="isinya">
-                            <li>1. </li>
-                            <li>T999 - Budiono Siregar - CS - B29</li>
-                            <li>99</li>
-                        </ul>
-                    </div>
-                    <div class="baris1 page1">
-                        <ul class="isinya">
-                            <li>1. </li>
-                            <li>T999 - Budiono Siregar - CS - B29</li>
-                            <li>99</li>
-                        </ul>
-                    </div>
-                    <div class="baris2 page1">
-                        <ul class="isinya">
-                            <li>1. </li>
-                            <li>T999 - Budiono Siregar - CS - B29</li>
-                            <li>99</li>
-                        </ul>
-                    </div>
+        </form>
+        {% if forum_url %}
+            <p> You entered: {{ forum_url }}</p>
+            <p> T number: {{tnumber}}</p>
+        {% endif %}
 
+        <button id="show-table">Show Progress Table</button>-->
 
-                    <div class="baris1 page2">
-                        <ul class="isinya">
-                            <li>1. </li>
-                            <li>T999 - Budiono Siregar - CS - B29</li>
-                            <li>99</li>
-                        </ul>
-                    </div>
-                    <div class="baris2 page2">
-                        <ul class="isinya">
-                            <li>1. </li>
-                            <li>T999 - Budiono Siregar - CS - B29</li>
-                            <li>99</li>
-                        </ul>
-                    </div>
-                    <div class="baris1 page2">
-                        <ul class="isinya">
-                            <li>1. </li>
-                            <li>T999 - Budiono Siregar - CS - B29</li>
-                            <li>99</li>
-                        </ul>
-                    </div>
-                    <div class="baris2 page2">
-                        <ul class="isinya">
-                            <li>1. </li>
-                            <li>T999 - Budiono Siregar - CS - B29</li>
-                            <li>99</li>     
-                        </ul>
-                    </div>
-                    <div class="baris1 page2">
-                        <ul class="isinya">
-                            <li>1. </li>
-                            <li>T999 - Budiono Siregar - CS - B29</li>
-                            <li>99</li>
-                        </ul>
-                    </div>
-                    <div class="baris2 page2">
-                        <ul class="isinya">
-                            <li>1. </li>
-                            <li>T999 - Budiono Siregar - CS - B29</li>
-                            <li>99</li>
-                        </ul>
-                    </div>
-                    <div class="baris1 page2">
-                        <ul class="isinya">
-                            <li>1. </li>
-                            <li>T999 - Budiono Siregar - CS - B29</li>
-                            <li>99</li>
-                        </ul>
-                    </div>
-                    <div class="butt_on">
-                        <button type="button" class="butt_on1"> 1 </button>
-                        <button type="button" class="butt_on2"> 2 </button>
-                    </div>-->
-                </div>
+        <div id="parent">
+            <table id="jsonTable">
+                <th>
+                    <tr id="tableHeader" class="datatable"></tr>
+                </th>
+                <tbody id="tableBody" class="datatable"></tbody>
+            </table>
         </div>
-    </div>
+    </section>
+
+
     <div class="bangun inactive" id="bangunPop"> 
         <h1>!!!BANGUN BANGUN!!!</h1>
         <button class="bbut" onclick="popout()">Turn Off</button>
     </div>
+    
     <div class="quiz-modal inactive" id="quiz1">
         <div class="quiz-container inactive" id="quiz2">
             <p id="title-quiz">Trainee Quiz</p>
@@ -191,18 +80,19 @@
                 <img src="{{quiz_trainee_photo}}" alt="Trainee Image" id="trainee-img">
             </div>
             <p id="siapa">Siapa Trainee ini? </p>
-            <div id="data-container" data-flag="{{flag}}"></div>
+
             <form method="POST" action="/checkForm" class="jawab" id="trainee-form">
                 <input type="text" name="trainee_id" placeholder="Nomor Trainee">
                 <input type="text" name="trainee_name" placeholder="Nama Trainee">
                 <input type="text" name="trainee_major" placeholder="Jurusan">
                 <input type="text" name="trainee_batch" placeholder="Binusian">
                 <button type="submit" id="submit-button">Submit</button>
-            </form> 
+            </form>
         </div>
+
     </div>
-    <script src="{{url_for('static',filename='JS/jquery-3.6.0.min.js')}}"></script>
-    <script src="{{url_for('static',filename='JS/leaderboard.js')}}"></script>
+    <script src="{{url_for('static',filename='JS/leaderboardProgress.js')}}"></script>
+
     <script src="{{url_for('static',filename='JS/alarm.js')}}"></script>
 </body>
 </html>

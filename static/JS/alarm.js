@@ -28,7 +28,7 @@ function upTime() {
     }
     i++
     console.log(i);
-    if(trimin(date)){
+    if(trimin(date) || i%20==0){
         (async()=>{
             const response = await fetch('/randomize');
             const result = await response.json();
