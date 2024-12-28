@@ -73,8 +73,8 @@
         <div class="quiz-container inactive" id="quiz2">
             <p id="title-quiz">Trainee Quiz</p>
             <div id="image-temp">
-                <img src="{{quiz_trainee_photo}}" alt="Trainee Image" id="trainee-img">
-            </div>
+                <img src="{{quiz_trainee_photo}}" alt="Trainee Image" id="trae-img">
+            </div>ine
             <p id="siapa">Siapa Trainee ini? </p>
             <div id="data-container" data-flag="{{flag}}"></div>
             <form method="POST" action="/checkForm" class="jawab" id="trainee-form">
@@ -85,6 +85,19 @@
                 <button type="submit" id="submit-button">Submit</button>
             </form>
         </div>
+        <div class="quiz-container inactive trainer-quiz" id="quiz3">
+            <p id="title-quiz">Trainer Quiz</p>
+            <p id="initial-quiz"></p>
+            <p id="siapa">Siapa Trainer ini? </p>
+            <!-- <div id="data-container" data-flag="{{flag}}"></div> -->
+            <form method="POST" action="/checkForm" class="jawab" id="trainer-form">
+                <input type="text" name="trainer_name" placeholder="Nama Trainer">
+                <input type="text" name="jabatan_trainer" placeholder="Jabatan">
+                <input type="text" name="angkatan_trainer" placeholder="Angkatan">
+                <button type="submit" id="submit-button">Submit</button>
+            </form>
+        </div>
+
     </div>
     <script src="{{url_for('static',filename='JS/progress.js')}}"></script>
 
