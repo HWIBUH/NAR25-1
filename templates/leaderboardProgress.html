@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{url_for('static',filename='CSS/forum.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='CSS/leaderboardProgress.css')}}">
 
     <title>NAR 25-1</title>
 </head>
@@ -36,16 +36,43 @@
                 <p id="time-clock"></p>
             </div>
         </nav>
-        <!--INI YG BUAT T217, ya front end gw nt, nanti di paginate sama di style ya-->
-        <div id="forum-list">
-            
+        <!--<form method="POST" action="/progress_add" id="my-form">
+            <div class="forum-container">
+                <p id="inputforum-text">Progress Table</p>
+                <label for="answerer">Feature name must be unique</label>
+
+                <label>Number of features, submit each one</label>
+                <label> NO SPACES IN THE NAME </label>
+                <label>FEATURE NAME IS NOT CASE SENSITIVE</label>
+                <div class="linkbox">
+                    <input type="text" id="linkbox-text" placeholder="Nama Feature" required name="nameOfFeatures" rows="10" cols="35" style="resize: none;"></textarea>
+                </div>  
+                <button id="submit-button" type="submit">Submit</button>
+            </div>
+        </form>
+        {% if forum_url %}
+            <p> You entered: {{ forum_url }}</p>
+            <p> T number: {{tnumber}}</p>
+        {% endif %}
+
+        <button id="show-table">Show Progress Table</button>-->
+
+        <div id="parent">
+            <table id="jsonTable">
+                <th>
+                    <tr id="tableHeader" class="datatable"></tr>
+                </th>
+                <tbody id="tableBody" class="datatable"></tbody>
+            </table>
         </div>
     </section>
+
 
     <div class="bangun inactive" id="bangunPop"> 
         <h1>!!!BANGUN BANGUN!!!</h1>
         <button class="bbut" onclick="popout()">Turn Off</button>
     </div>
+    
     <div class="quiz-modal inactive" id="quiz1">
         <div class="quiz-container inactive" id="quiz2">
             <p id="title-quiz">Trainee Quiz</p>
@@ -53,7 +80,7 @@
                 <img src="{{quiz_trainee_photo}}" alt="Trainee Image" id="trainee-img">
             </div>
             <p id="siapa">Siapa Trainee ini? </p>
-            <div id="data-container" data-flag="{{flag}}"></div>
+
             <form method="POST" action="/checkForm" class="jawab" id="trainee-form">
                 <input type="text" name="trainee_id" placeholder="Nomor Trainee">
                 <input type="text" name="trainee_name" placeholder="Nama Trainee">
@@ -62,6 +89,7 @@
                 <button type="submit" id="submit-button">Submit</button>
             </form>
         </div>
+
 
         <div class="quiz-container active trainer-quiz" id="qTrainer1">
             <p id="title-quiz">Trainer Quiz</p>
@@ -76,8 +104,8 @@
             </form>
         </div>
     </div>
-    <script src="{{url_for('static',filename='JS/jquery-3.6.0.min.js')}}"></script>
-    <script src="{{url_for('static',filename='JS/forum.js')}}"></script>
+    <script src="{{url_for('static',filename='JS/leaderboardProgress.js')}}"></script>
+
     <script src="{{url_for('static',filename='JS/alarm.js')}}"></script>
 </body>
 </html>

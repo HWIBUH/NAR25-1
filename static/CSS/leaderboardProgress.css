@@ -1,20 +1,23 @@
 @import url("global.css");
-@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+
+input:focus{
+    outline: none;
+}
 
 *{
-    font-family: "Rubik";
+    font-family: "rubik";
     font-weight: bold;
 }
 
 body{
-    overflow: hidden;
-    background-color: var(--eggshell);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
     margin: 0;
-    position: relative;
+    background: #F5EFDC;
+    /* overflow: hidden; */
+}
+
+#forum{
+    margin-left: 40px;
 }
 
 .time p{
@@ -22,98 +25,89 @@ body{
     margin-right: 20px;
 }
 
-.forum-page{
-    position: relative;
-    width: 700px;
+/* .forum {
     display: flex;
-    flex-direction: column;
     justify-content: center;
-    align-items: center;
+    
+} */
+#parent{
+    margin-top: 10vh;
 }
 
-.forum-container{
-    width: 300px;
-    max-height: 70vh;
-    background-color: var( --hijau-sean);
-    border: 3px solid var(--bean);
+.wrapper {
+    /* padding: 20px; */
+    /* margin-top: 10vh; */
+    height: 80vh;
+    /* width: 100vw; */
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* .leaderboardborder {
+    border-radius: 10;
+} */
+
+.judul {
+    border: 0px;
     border-radius: 10px;
-    gap: 10px;
-    padding: 1vw;
+    height: 40px;
+    width: 80vw;
+    background: #3b4a2c;
 }
 
-.forum-container input{
-    width: 100%;
-    border-radius: 0.5vw;
-    background-color: var(--eggshell);
+.heading {
+    color: #F5EFDC;
+    padding-top: 10px;
 }
 
-#submit-button{
-    width: 100px;
-    height: 25px;
-    border-radius: 5px;
-    border: none;
-    /* font-weight: bold; */
-    background-color: var(--hijau-sean-hover);
-    color: var(--eggshell);
-    transition-duration: 500ms;
-}
-
-#inputforum-text{
-    font-size: 20px;
+.isinya {
+    color: #3C1518;
     margin: 0;
-    color: var(--eggshell);
-    /* font-weight: bold; */
-}
-
-.forum-container label{
-    color: var(--eggshell);
-}
-
-.forum-list-container{
-    height: 5vh;
-    background-color: var(--hijau-sean);
-    padding: 1vh;
-    margin: 1vh;
-    border-radius: 1vh;
-    text-align: center;
-}
-
-.forum-list-container a{
-    color: var(--eggshell);
-}
-
-#forum-list{
-    margin-top: 15vh;
-}
-
-#grid-forum{
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    width: 90vw;
-    height: 90vh;
-    gap:1vw
-}
-
-#grid-forum div{
+    width: 100%;
     display: flex;
-    flex-direction: column;
-    gap: 10px;
-    background-color: var(--hijau-sean-hover);
-    border-radius: 1vw;
-    text-align: center;
-    padding:20% ;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 }
 
-#grid-forum div a{
-    color:var(--eggshell);
+.baris1 {
+    margin: 0;
+    height: 40px;
+    border-radius: 10px;
+    background: #F5EFDC;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
 }
-#linkbox-text{
-    background-color: var(--eggshell);
-    border-radius: 0.5vw;
+
+.baris2 {
+    margin: 0;
+    height: 40px;
+    border-radius: 10px;
+    background: #D0ADA7;
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+}
+
+ul{
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    /* align-items: center; */
+    justify-content: space-between;
+    /* margin: 10px; */
+    padding-right: 30px;
+}
+
+.butt_on {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    position: relative;
+    top: 20px;
 }
 
 .bangun {
@@ -236,18 +230,6 @@ body{
 .active{
     display : block;
 }
-
-#grid-forum select{
-    margin: 0;
-    border: none;
-    border-radius: 20px;
-    width: 80%;
-    background-color: rgb(0, 98, 69);
-    color: white;
-    transition-duration: 500ms;
-}
-
-/* #grid-forum select:hover */
 
 /* quiz */
 /* .quiz-modal{
