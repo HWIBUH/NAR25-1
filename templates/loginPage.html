@@ -28,16 +28,20 @@
                         <a id="forum_list" href="">Forum LIST</a>
                     </div>
                 </div>
-                <a href="">Leaderboard</a>
+                <a href="">Progress</a>
+                <div class="dropdown dropdown-announcement">
+                    <a class="announcement" href="">Leaderboard Progress</a>
+                    <a class="dropdown-item" href="">Leaderboard Forum</a>
+                </div>
                 <a href="">Subco</a>
                 <div class="dropdown dropdown-announcement">
                     <a class="announcement" href="">Announcement</a>
                     <a class="dropdown-item" href="">Input Announcement</a>
                 </div>
                 <a href="">Gallery</a>
-                <a href="{{url_for('register') }}">Register</a>
+                <a id="forum_list" href="{{ url_for('register')}}">Register</a>
             </div>
-
+    
             <div id="time">
                 <p>Server Time :</p>
                 <p id="time-clock"></p>

@@ -18,7 +18,11 @@
                         <a id="forum_list" href="{{ url_for('forum_list')}}">Forum LIST</a>
                     </div>
                 </div>
-                <a href="{{url_for('leaderboard')}}">Leaderboard</a>
+                <a href="{{url_for('progress')}}">Progress</a>
+                <div class="dropdown dropdown-announcement">
+                    <a class="announcement" href="{{ url_for('leaderboard_progress') }}">Leaderboard Progress</a>
+                    <a class="dropdown-item" href="{{ url_for('leaderboard')}}">Leaderboard Forum</a>
+                </div>
                 <a href="{{url_for('subco')}}">Subco</a>
                 <div class="dropdown dropdown-announcement">
                     <a class="announcement" href="{{ url_for('announcement') }}">Announcement</a>
