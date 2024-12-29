@@ -302,38 +302,37 @@ def announcement():
 @app.route("/subco")
 def subco():
     return render_template("subco.html")
+
 #================================ PROGRESS =======================================
 @app.route("/progress")
 def progress():
     return render_template("progress.html")
 
-@app.route("/progress_add", methods=['GET','POST'])
+@app.route("/progress_add", methods=['GET', 'POST'])
 def progress_add():
     if request.method == 'POST':
-        # numOfFeatures = int(request.form.get('numberOfFeatures'))
         nameOfFeatures = request.form.get('nameOfFeatures').strip()
+        featurePoints = request.form.get('featurePoints').strip()
         connection = get_db_connection()
         if connection is None:
             return "Failed to connect to database"
         try:
             with connection.cursor() as cursor:
-                query="ALTER TABLE progress ADD "+nameOfFeatures+" INT"
+                query = f"ALTER TABLE progress ADD COLUMN {nameOfFeatures} DECIMAL(10, 2) DEFAULT 0.00"
                 cursor.execute(query)
-                connection.commit()
-                query="UPDATE progress SET "+nameOfFeatures+" = 0 "
-                cursor.execute(query)
+                query = "INSERT INTO feature_points (feature_name, feature_points) VALUES (%s, %s)"
+                cursor.execute(query, (nameOfFeatures, featurePoints))
                 connection.commit()
                 return redirect("/progress")
-        
         finally:
             connection.close()
-        return redirect("/progress")
-    
     return render_template("progress.html")
+
+
 
 @app.route("/progress_delete", methods=["DELETE"])
 def progress_delete():
-    columnToDelete=request.headers.get("deleteColumn")
+    columnToDelete = request.headers.get("deleteColumn")
     connection = get_db_connection()
     
     if connection is None:
@@ -342,13 +341,18 @@ def progress_delete():
         with connection.cursor() as cursor:
             print(columnToDelete)
             query = f"ALTER TABLE progress DROP COLUMN {columnToDelete}"
-            result=cursor.execute(query)
-            print(result)
-            print("KEHAPUS KOLOMNYA")
+            cursor.execute(query)
+            print("Column deleted from progress table")
+            
+            query = "DELETE FROM feature_points WHERE feature_name = %s"
+            cursor.execute(query, (columnToDelete,))
+            print("Row deleted from feature_points table")
+            
             connection.commit()
         return render_template("progress.html")
-    except:
-        return "database progress doesn't exist"
+    except Exception as e:
+        print(f"Error: {e}")
+        return "An error occurred while deleting the column and row"
     finally:
         connection.close()
 
@@ -370,44 +374,129 @@ def progress_api():
             connection.close()
     return jsonify({"connection":"error"})
 
-
-@app.route("/checkTheProgressAPI",methods=['GET', 'POST'] )
+@app.route("/checkTheProgressAPI", methods=['GET', 'POST'])
 def check_progress_api():
-    dropdown_id = request.headers.get('dropdownId') #T217Feature
-    answer_status=request.headers.get('answerStatus')
-    # print("box is checked at "+ dropdown_id[4:]+" "+dropdown_id[:4] )
-    connection = get_db_connection()
-    with connection.cursor() as cursor:
+    if request.method == 'GET':
+        answer_status = float(request.headers.get("answerStatus"))  
+        dropdown_id = request.headers.get("dropdownId")  
+        trainee_number, feature_name = dropdown_id[:4], dropdown_id[4:]
         
-        query=f"UPDATE progress SET {dropdown_id[4:]} = {answer_status} WHERE trainee_number = '{dropdown_id[:4]}' " 
-        print(query)
-        cursor.execute(query)
-        connection.commit()
-    return render_template("forumList.html")
-
-@app.route("/api/progress_runquery",methods=['GET', 'POST'] )
-def progress_api_run():
-    if request.method == 'GET' or 1==1:
         connection = get_db_connection()
         if connection is None:
             return "Failed to connect to database"
         try:
             with connection.cursor() as cursor:
-                cursor.execute("SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'progress'")
-                column_name = cursor.fetchall()
-                columns = [name["COLUMN_NAME"] for name in column_name]
-                print(columns)
-                sum_expression = " + ".join(columns)
-                query= f"SELECT *, ({sum_expression}) AS RowSum FROM progress ORDER BY RowSum DESC"
+                query = f"UPDATE progress SET {feature_name} = %s WHERE trainee_number = %s"
+                cursor.execute(query, (answer_status, trainee_number))
+                connection.commit()
+        finally:
+            connection.close()
+        return "Success"
+
+@app.route("/api/progress_runquery", methods=['GET', 'POST'])
+def progress_api_run():
+    if request.method == 'GET':
+        connection = get_db_connection()
+        if connection is None:
+            return "Failed to connect to database"
+        try:
+            with connection.cursor() as cursor:
+                cursor.execute("SELECT feature_name, feature_points FROM feature_points")
+                feature_data = cursor.fetchall()
+
+                row_sum_parts = []
+                for feature in feature_data:
+                    feature_name = feature["feature_name"]
+                    feature_points = feature["feature_points"]
+                    row_sum_parts.append(f"{feature_name} * {feature_points}")
                 
+                row_sum_expression = " + ".join(row_sum_parts)
+
+                query = f"""
+                    SELECT *, ({row_sum_expression}) AS RowSum
+                    FROM progress
+                    ORDER BY RowSum DESC
+                """
                 cursor.execute(query)
-                result=cursor.fetchall()
+                result = cursor.fetchall()
+                return jsonify({"data": result})
+        finally:
+            connection.close()
+    return jsonify({"connection": "error"})
+
+
+
+
+
+#=================================== CASE ========================================
+#ini case tinggal dicopas dari progress ya -T207 
+#ini bekas copas progress sebelumnya, yang belom ditambahin poin per fitur
+
+@app.route("/case")
+def case():
+    return render_template("case.html")
+
+@app.route("/case_add", methods=['GET','POST'])
+def case_add():
+    if request.method == 'POST':
+        nameOfFeatures = request.form.get('nameOfFeatures').strip()
+        connection = get_db_connection()
+        if connection is None:
+            return "Failed to connect to database"
+        try:
+            with connection.cursor() as cursor:
+                query = "ALTER TABLE `case` ADD " + nameOfFeatures + " INT"
+                cursor.execute(query)
+                connection.commit()
+                query = "UPDATE `case` SET " + nameOfFeatures + " = 0"
+                cursor.execute(query)
+                connection.commit()
+                return redirect("/case")
+        finally:
+            connection.close()
+        return redirect("/case")
+    
+    return render_template("case.html")
+
+@app.route("/case_delete", methods=["DELETE"])
+def case_delete():
+    columnToDelete = request.headers.get("deleteColumn")
+    connection = get_db_connection()
+    
+    if connection is None:
+        return "Failed to connect to database"
+    try:
+        with connection.cursor() as cursor:
+            print(columnToDelete)
+            query = f"ALTER TABLE `case` DROP COLUMN {columnToDelete}"
+            result = cursor.execute(query)
+            print(result)
+            print("Column deleted")
+            connection.commit()
+        return render_template("case.html")
+    except:
+        return "Database `case` doesn't exist"
+    finally:
+        connection.close()
+
+@app.route("/case_api", methods=['GET', 'POST'])
+def case_api():
+    if request.method == 'GET' or 1 == 1:
+        connection = get_db_connection()
+        if connection is None:
+            return "Failed to connect to database"
+        try:
+            with connection.cursor() as cursor:
+                query = "SELECT * FROM `case`"
+                cursor.execute(query)
+                result = cursor.fetchall()
                 print(result)
-                return jsonify({"data":result})
+                return jsonify({"data": result})
         finally:
             connection.commit()
             connection.close()
-    return jsonify({"connection":"error"})
+    return jsonify({"connection": "error"})
+
 
 #================================ LEADERBOARD ====================================
 

@@ -18,7 +18,7 @@ async function halos() {
         if (head === "trainee_number") {
             th.innerHTML = `<p>Trainee</p>`;
         } else if (head === "RowSum") {
-            th.innerHTML = `<p>RowSum</p>`; 
+            th.innerHTML = `<p>Points</p>`; 
         } else {
             const newDiv = document.createElement("div");
             const newText = document.createElement("p");
@@ -41,7 +41,6 @@ async function halos() {
         tableHeader.appendChild(th);
     });
 
-    // Render table rows
     result.data.forEach((item) => {
         const tr = document.createElement("tr");
         header.forEach((head) => {
@@ -49,25 +48,37 @@ async function halos() {
             if (head === "trainee_number" || head === "RowSum") {
                 td.innerText = item[head];
             } else {
-                let dropdown = `<option value="0" ${item[head] == 0 ? "selected" : ""}>Belum</option>
-                <option value="1" ${item[head] == 1 ? "selected" : ""}>Sentuh</option>
-                <option value="2" ${item[head] == 2 ? "selected" : ""}>Debug</option>
-                <option value="3" ${item[head] == 3 ? "selected" : ""}>Kelar</option>`;
+                const dropdown = `
+                    <option value="0" ${parseFloat(item[head]) === 0 ? "selected" : ""}>Belum</option>
+                    <option value="0.35" ${parseFloat(item[head]) === 0.35 ? "selected" : ""}>Sentuh</option>
+                    <option value="0.65" ${parseFloat(item[head]) === 0.65 ? "selected" : ""}>Debugging</option>
+                    <option value="1" ${parseFloat(item[head]) === 1 ? "selected" : ""}>Selesai</option>`;
+                
                 const newDropdown = document.createElement("select");
                 newDropdown.id = item["trainee_number"] + head;
-                newDropdown.style.borderRadxius = "5px";
+                newDropdown.style.borderRadius = "5px";
                 newDropdown.style.marginLeft = "1vw";
                 newDropdown.style.width = "5vw";
                 newDropdown.innerHTML = dropdown;
+                newDropdown.value = item[head];
+                
                 newDropdown.addEventListener("change", async () => {
-                    console.log(newDropdown.value);
                     const selectedValue = newDropdown.value;
-                    console.log(newDropdown.id);
-                    console.log(selectedValue);
-                    await fetch(`/checkTheProgressAPI`, {
-                        method: 'GET',
-                        headers: { "answerStatus": selectedValue, "dropdownId": newDropdown.id }
-                    });
+                    const dropdownId = newDropdown.id;
+                    console.log(`Updating ${dropdownId} to ${selectedValue}`);
+                    try {
+                        const response = await fetch(`/checkTheProgressAPI`, {
+                            method: 'GET',
+                            headers: { "answerStatus": selectedValue, "dropdownId": dropdownId }
+                        });
+                        if (response.ok) {
+                            console.log(`Value updated: ${selectedValue} for ${dropdownId}`);
+                        } else {
+                            console.error("Failed to update the value");
+                        }
+                    } catch (error) {
+                        console.error("Error while updating:", error);
+                    }
                 });
                 td.appendChild(newDropdown);
             }
@@ -75,6 +86,8 @@ async function halos() {
         });
         tableBody.appendChild(tr);
     });
+    
+    
 }
 
 halos();
