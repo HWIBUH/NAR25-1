@@ -30,7 +30,7 @@ $(document).ready(function() {
 
         let container = $('<div>').attr('class', 'grid-item');
 
-        if (i % 2 === 0) {
+        if (i % 2 == 0) {
             container.addClass('green');
         } else {
             container.addClass('red');
