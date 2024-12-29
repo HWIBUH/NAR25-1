@@ -4,9 +4,13 @@ app = Flask(__name__,static_folder="static")
 
 application = app
 
+results = None
+
 app.debug = True
 @app.route('/')
 def index():
+    global results
+    results = None 
     return render_template("loginPage.html")
 
 @app.route('/alarm')
@@ -16,7 +20,8 @@ def alarm():
 #================================ BACKEND LOGIN ====================================
 @app.route('/login', methods=['GET', 'POST'])
 def query():
-    results = None  
+    global results
+    results = None 
     if request.method == 'POST':
         print("HALOOOOOO")
         trainee_numb = request.form.get('trainee_number')
@@ -31,7 +36,7 @@ def query():
                 results = cursor.fetchone()
                 print(results)
                 
-                if((results)):
+                if(results):
                     nama=results["trainee_nama"]
                     print(nama)
                     return render_template(
@@ -606,15 +611,20 @@ def register():
 @app.route("/send_input_register", methods=["POST"])
 def send_input_register():
     username = request.form.get("username")
+    tnum = request.form.get("name")
     password = request.form.get("password")
+    confirm = request.form.get("password-con")
+    if(password != confirm):
+        return register()
+    
     connection = get_db_connection()
     if connection is None:
         return "Failed to connect to the database!"
     try: 
         with connection.cursor() as cursor:
-            query = "SELECT * FROM trainee WHERE trainee_number = %s AND trainee_pass = %s"
-            query = "INSERT INTO trainee (trainee_number, trainee_pass) VALUES (%s, %s)"
-            cursor.execute(query, (username, password))
+            query = "SELECT * FROM trainee WHERE trainee_number = %s AND trainee_pass = %s AND trainee_nama = %s"
+            query = "INSERT INTO trainee (trainee_number, trainee_pass, trainee_nama) VALUES (%s, %s, %s)"
+            cursor.execute(query, (username, password, tnum))
             connection.commit()
     finally:
         connection.close()

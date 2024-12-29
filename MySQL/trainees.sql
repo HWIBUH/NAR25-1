@@ -1,5 +1,5 @@
 CREATE TABLE trainee(
-	trainee_number CHAR(4) PRIMARY KEY,
+	trainee_number VARCHAR(251) PRIMARY KEY,
     trainee_nama VARCHAR(251),
     trainee_binusian CHAR(3),
     trainee_major VARCHAR(251),
