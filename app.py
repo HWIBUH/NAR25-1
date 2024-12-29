@@ -318,7 +318,6 @@ def progress_add():
             return "Failed to connect to database"
         try:
             with connection.cursor() as cursor:
-                # Ensure the column type is DECIMAL for precise storage
                 query = f"ALTER TABLE progress ADD COLUMN {nameOfFeatures} DECIMAL(10, 2) DEFAULT 0.00"
                 cursor.execute(query)
                 query = "INSERT INTO feature_points (feature_name, feature_points) VALUES (%s, %s)"
@@ -430,6 +429,9 @@ def progress_api_run():
 
 
 #=================================== CASE ========================================
+#ini case tinggal dicopas dari progress ya -T207 
+#ini bekas copas progress sebelumnya, yang belom ditambahin poin per fitur
+
 @app.route("/case")
 def case():
     return render_template("case.html")
