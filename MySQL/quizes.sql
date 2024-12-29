@@ -1,6 +1,6 @@
 CREATE TABLE quiz(
     quiz_id int(4) PRIMARY KEY AUTO_INCREMENT,
-	trainee_number CHAR(4) ,
+	trainee_number VARCHAR(251) ,
     trainee_photo LONGTEXT,
     FOREIGN KEY (trainee_number) REFERENCES trainee(trainee_number)
 )

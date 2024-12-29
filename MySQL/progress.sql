@@ -1,5 +1,5 @@
 CREATE TABLE progress(
-	trainee_number CHAR(4) ,
+	trainee_number VARCHAR(251) ,
     FOREIGN KEY (trainee_number) REFERENCES trainee(trainee_number)
 )
 

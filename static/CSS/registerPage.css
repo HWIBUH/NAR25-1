@@ -24,13 +24,18 @@ body{
     height: 460px;
     background-color: var(--eggshell);
     border: 3px solid var(--bean);
+    border-radius: 10px;
+    gap: 15px;
+    z-index: 1000;
+}
+
+.Regis-container form {
+    width: inherit;
+    height: inherit;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border-radius: 10px;
-    gap: 15px;
-    z-index: 1000;
 }
 
 .usn, .pass, .confirmpass{

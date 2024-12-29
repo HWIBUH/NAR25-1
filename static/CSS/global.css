@@ -41,7 +41,7 @@
 .nav-inside{
     display: flex;
     flex-direction: row;
-    gap: 30px;
+    gap: 25px;
     margin-left: 1.5vw;
 }
 
@@ -103,7 +103,7 @@
 }
 
 #time-clock{
-   font-size: 30px;
+   font-size: 25px;
 }
 
 /* CSS Navbar */

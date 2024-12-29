@@ -46,23 +46,31 @@
     </nav>
     <section class="login-page">
         <div class="Regis-container"> <!--ada di loginpage.css-->
-            <div>
-                <p id="regis-text">Register</p>
-            </div>
-            <div class="usn">
-                <p>Username</p>
-                <input type="email" name="" id="">
-            </div>
-            <div class="pass">
-                <p>Password</p>
-                <input type="password" name="" id="">
-            </div>
-            <div class="confirmpass">
-                <p>Confirm Password</p>
-                <input type="password" name="" id="">
-            </div>
-            <button id="submit-button" type="submit">Submit</button>
-            <p class="login-link">Apakah Anda sudah punya akun? <a href="{{url_for('index') }}">Login</a></p>
+            <form method="post" action="/send_input_register">
+                <div>
+                    <p id="regis-text">Register</p>
+                </div>
+                <div class="usn">
+                    <p>Username</p>
+                    <input type="text" name="username" id="username" required>
+                </div>
+                <div class="usn">
+                    <p>name</p>
+                    <input type="text" name="name" id="name" required>
+                </div>
+                <div class="pass">
+                    <p>Password</p>
+                    <input type="password" name="password" id="password" required>
+                </div>
+                <div class="confirmpass">
+                    <p>Confirm Password</p>
+                    <input type="password" name="password-con" id="password-con">
+                </div>
+                <button id="submit-button" type="submit">Submit</button>                
+                <p class="login-link">Apakah Anda sudah punya akun? <a href="{{url_for('index') }}">Login</a></p>
+            </form>
+
+            
         </div>
         <div class="scene">
             <div class="reindeer-wrapper">

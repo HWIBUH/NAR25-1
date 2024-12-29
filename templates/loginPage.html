@@ -10,9 +10,11 @@
     <link rel="stylesheet" href="{{url_for('static',filename='CSS/loginPage.css')}}">
     <link rel="stylesheet" href="{{url_for('static',filename='CSS/reindeer.css')}}">
 
+    <script>
+        sessionStorage.clear()
+    </script>
 </head>
 <body>
-    
     <section class="login-page">
         <img src="{{url_for('static', filename='assets/christmas-tree.png')}}" alt="" class="hiasan christmas-tree">
         <img src="{{url_for('static', filename='assets/gifts.png')}}" alt="" class="hiasan gifts">
