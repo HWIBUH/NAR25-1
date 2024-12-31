@@ -12,90 +12,78 @@ input:focus{
 
 body{
     margin: 0;
+    padding: 0;
     background: #F5EFDC;
-    /* overflow: hidden; */
 }
 
-#forum{
-    margin-left: 40px;
-}
-
-
-/* .forum {
-    display: flex;
-    justify-content: center;
-    
-} */
-#parent{
-    margin-top: 10vh;
+.container {
+    position: relative;
 }
 
 .wrapper {
     /* padding: 20px; */
     /* margin-top: 10vh; */
-    height: 80vh;
-    /* width: 100vw; */
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
-/* .leaderboardborder {
-    border-radius: 10;
-} */
+.forum{
+    margin-left: 40px;
+}
+
+#parent{
+    margin-top: 5vh;
+}
 
 .judul {
     border: 0px;
     border-radius: 10px;
-    height: 40px;
+    height: 7.5vh;
     width: 80vw;
     background: #3b4a2c;
 }
 
-.heading {
+.judul .heading {
     color: #F5EFDC;
     padding-top: 10px;
 }
 
-.isinya {
-    color: #3C1518;
-    margin: 0;
-    width: 100%;
+.page1 {
+    width: 80vw;
+    height: 7.5vh;
+    border-radius: 10px;
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
 }
 
 .baris1 {
-    margin: 0;
-    height: 40px;
-    border-radius: 10px;
-    background: #F5EFDC;
-    display: flex;
-    align-items: center;
-    justify-content: center; 
+    background-color: #F5EFDC;
 }
 
 .baris2 {
-    margin: 0;
-    height: 40px;
-    border-radius: 10px;
-    background: #D0ADA7;
-    display: flex;
-    align-items: center;
-    justify-content: center; 
+    background-color: #D0ADA7;
 }
 
-ul{
+ul {
     list-style-type: none;
     display: flex;
     flex-direction: row;
-    /* align-items: center; */
     justify-content: space-between;
-    /* margin: 10px; */
-    padding-right: 30px;
+    padding: 0;
+    max-width: 80vw;
+}
+
+.isinya {
+    color: #3C1518;
+}
+
+li {
+    width: 27.5vw;
+    text-align: center;
 }
 
 .butt_on {

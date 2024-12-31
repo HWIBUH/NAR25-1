@@ -79,7 +79,6 @@ body{
 }
 
 .grid-item{
-    /* background-color: var(--hijau-sean); */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -104,8 +103,10 @@ body{
 .grid-item .details{
     background-color: var(--eggshell);
     border-radius: calc(1vw - 1vh);
-    font-weight: 500;
+    font-weight: 450;
     width: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .green{
@@ -118,10 +119,4 @@ body{
     border: 3px solid var(--bean);
     background-color: var(--bean);
     color: var(--bean);
-}
-
-
-
-#forum{
-    margin-left: 40px;
 }
