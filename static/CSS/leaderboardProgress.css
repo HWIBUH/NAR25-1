@@ -108,7 +108,9 @@ body{
 
 #parent {
     width: 80vw;
+    height: 100vh;
     position: relative;
+    top: 20vh;
 }
 
 #jsonTable {

@@ -412,11 +412,10 @@ def progress_api_run():
                 
                 row_sum_expression = " + ".join(row_sum_parts)
 
-                query = f"""
-                    SELECT *, ({row_sum_expression}) AS RowSum
-                    FROM progress
-                    ORDER BY RowSum DESC
-                """
+                print("idk what is this : ", row_sum_parts)
+                print("variable", row_sum_expression)
+
+                query = f"""SELECT *, ({row_sum_expression}) AS RowSum FROM progress ORDER BY RowSum DESC"""
                 cursor.execute(query)
                 result = cursor.fetchall()
                 return jsonify({"data": result})

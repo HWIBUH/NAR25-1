@@ -21,13 +21,23 @@ body{
     margin-right: 20px;
 }
 
-.forum-page{
+.progress-container {
     position: relative;
-    width: 100vw;
+    width: 80vw;
+    height: 100vh;
+    top: 20vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.forum-page{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 
 .forum-container{
