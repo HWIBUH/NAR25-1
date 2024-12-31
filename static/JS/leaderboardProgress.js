@@ -10,8 +10,6 @@ async function halos() {
         header.unshift('trainee_number');
     }
 
-    console.log(result)
-
     tableHeader.innerHTML = "";
     tableBody.innerHTML = "";
 
