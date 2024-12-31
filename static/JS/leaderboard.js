@@ -19,7 +19,7 @@ async function fetchData(){
     console.log(result.data)
     for(object of result.data){
         c++
-        let element = '<ul class="isinya"><li>'+(c-2)+'.</li><li>'+object["COUNT(trainee_number)"]+'</li><li>'+object["trainee_number"]+'</li></ul>'  
+        let element = '<ul class="isinya"><li>'+(c-1)+'.</li><li>'+object["COUNT(trainee_number)"]+'</li><li>'+object["trainee_number"]+'</li></ul>'  
         
         
         if(object["trainee_number"]==""){

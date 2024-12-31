@@ -252,7 +252,7 @@ def forum_api():
     connection = get_db_connection()
     with connection.cursor() as cursor:
         # T217 GANTI JADI SESUAI DATABASE NYA WENE
-        query = "SELECT trainee_number,COUNT(trainee_number) FROM `forum` GROUP BY trainee_number ORDER BY COUNT(trainee_number) DESC;"
+        query = "SELECT trainee_number,COUNT(trainee_number) FROM `forum` WHERE answer_status > 0 GROUP BY trainee_number ORDER BY COUNT(trainee_number) DESC;"
         cursor.execute(query)
         result=cursor.fetchall()
         print(result)
@@ -282,14 +282,14 @@ def forum_list():
 
 @app.route('/checkTheBoxAPI', methods=['GET'])
 def checkTheBox():
-    forum_id = request.args.get('forum_id')
+    forum_id = int(request.args.get('forum_id'))
     print(request.headers.get('answerStatus'))
     answer_status=int(request.headers.get('answerStatus'))
-    print("box is checked at "+forum_id)
+    print("box is checked at ",forum_id)
     connection = get_db_connection()
     with connection.cursor() as cursor:
         query="UPDATE forum SET answer_status=%s WHERE forum_id=%s"
-        cursor.execute(query,(answer_status,forum_id))
+        cursor.execute(query, (answer_status, forum_id))
         connection.commit()
     return render_template("forumList.html")
     
