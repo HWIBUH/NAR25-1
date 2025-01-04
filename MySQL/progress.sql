@@ -22,7 +22,7 @@ INSERT INTO progress(trainee_number) VALUES
 ('T330'),
 ('T355');
 
-CREATE TABLE case (
+CREATE TABLE `case` (
     trainee_number CHAR(4),
     FOREIGN KEY (trainee_number) REFERENCES trainee(trainee_number)
 );
