@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{url_for('static',filename='CSS/progress.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='CSS/leaderboardProgress.css')}}">
+
     <title>NAR 25-1</title>
 </head>
 <body>
     <section class="forum-page">
+        
         <nav class="nav-bar">
             <div class="nav-inside">
                 <a href="{{url_for('main')}}">25-1</a>
@@ -32,44 +34,27 @@
                 <a href="{{url_for('gallery')}}">Gallery</a>
                 <a href="{{url_for('index')}}">Logout</a>
             </div>
+
             <div id="time">
                 <p>Server Time :</p>
                 <p id="time-clock"></p>
             </div>
         </nav>
 
-        <div class="progress-container">
-            <form method="POST" action="/progress_add" id="my-form">
-                <div class="forum-container">
-                    <p id="inputforum-text">Progress Table</p>
-                    <label for="answerer">Feature name must be unique</label>
-                    <label>Number of features, submit each one</label>
-                    <label> NO SPACES IN THE NAME </label>
-                    <label>FEATURE NAME IS NOT CASE SENSITIVE</label>
-                    <div class="linkbox">
-                        <input type="text" id="linkbox-text" placeholder="Nama Feature" required name="nameOfFeatures" rows="10" cols="35" style="resize: none;">
-                    </div>
-                    <div class="linkbox">
-                        <input type="number" id="feature-points" placeholder="Feature Points" required name="featurePoints" step="1" min="0">
-                    </div>
-                    <button id="submit-button" type="submit">Submit</button>
-                </div>
-            </form>
-            {% if forum_url %}
-                <p> You entered: {{ forum_url }}</p>
-                <p> T number: {{tnumber}}</p>
-            {% endif %}
-
-            <button id="show-table">Show Progress Table</button>
-
-            <div id="parent">
-                <table id="jsonTable">
-                    <thead>
-                        <tr id="tableHeader" class="datatable"></tr>
-                    </thead>
-                </table>
-            </div>
+        <div id="parent">
+            <table id="jsonTable">
+                <thead>
+                    <tr id="tableHeader" class="datatable"></tr>
+                </thead>
+                <tbody id="tableBody" class="datatable">
+                    <tr>
+                        <!-- <td class="dummy"><h1></h1>Feature Masih kosong, buat terlebih dahulu</td> -->
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </section>
+
 
     <div class="bangun inactive" id="bangunPop"> 
         <h1>!!!BANGUN BANGUN!!!</h1>
@@ -80,10 +65,10 @@
         <div class="quiz-container inactive" id="quiz2">
             <p id="title-quiz">Trainee Quiz</p>
             <div id="image-temp">
-                <img src="{{quiz_trainee_photo}}" alt="Trainee Image" id="trae-img">
+                <img src="{{quiz_trainee_photo}}" alt="Trainee Image" id="trainee-img">
             </div>
             <p id="siapa">Siapa Trainee ini? </p>
-            <div id="data-container" data-flag="{{flag}}"></div>
+
             <form method="POST" action="/checkForm" class="jawab" id="trainee-form">
                 <input type="text" name="trainee_id" placeholder="Nomor Trainee">
                 <input type="text" name="trainee_name" placeholder="Nama Trainee">
@@ -92,10 +77,13 @@
                 <button type="submit" id="submit-button">Submit</button>
             </form>
         </div>
-        <div class="quiz-container inactive trainer-quiz" id="qTrainer1">
+
+
+        <div class="quiz-container active trainer-quiz" id="qTrainer1">
             <p id="title-quiz">Trainer Quiz</p>
             <p id="initial-quiz">harusnya masuk sini</p>
             <p id="siapa">Siapa Trainer ini? </p>
+            <!-- <div id="data-container" data-flag="{{flag}}"></div> -->
             <form method="POST" action="/checkFormTrainer" class="jawab" id="trainer-form">
                 <input type="text" name="input_trainer_initial" placeholder="Inisial Trainer">
                 <input type="text" name="input_trainer_fullname" placeholder="Nama Trainer">
@@ -104,7 +92,8 @@
             </form>
         </div>
     </div>
-    <script src="{{url_for('static',filename='JS/progress.js')}}"></script>
+    <script src="{{url_for('static',filename='JS/leaderboardCase.js')}}"></script>
+
     <script src="{{url_for('static',filename='JS/alarm.js')}}"></script>
 </body>
 </html>
