@@ -287,8 +287,36 @@ body{
 }
 
 #jsonTable {
-    height: auto;
-    width: auto;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#jsonTable th{
+    background-color: var(--hijau-sean);
+    color: white;
+    padding: 5px 10px;
+    width: 100px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+#jsonTable td {
+    color: var(--bean);
+    padding: 5px 10px;
+    width: 100px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+#jsonTable select {
+    width: 100px;
+    padding: 5px;
+    box-sizing: border-box;
+    font-family: "Rubik", sans-serif;
+}
+
+#jsonTable select option{
+    font-family: "Rubik", sans-serif;
 }
 
 #parent {

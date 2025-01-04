@@ -34,6 +34,7 @@
                     <a id="forum_list" href="{{ url_for('forum_list')}}">Forum LIST</a>
                 </div>
             </div>
+            <a href="{{url_for('progress')}}">Progress</a>
             <a href="{{url_for('leaderboard')}}">Leaderboard</a>
             <a href="{{url_for('subco')}}">Subco</a>
             <div class="dropdown dropdown-announcement">
@@ -43,11 +44,11 @@
             <a href="{{url_for('gallery')}}">Gallery</a>
         </div>
 
-      <div id="time">
-          <p>Server Time :</p>
-          <p id="time-clock"></p>
-      </div>
-  </nav>
+        <div id="time">
+            <p>Server Time :</p>
+            <p id="time-clock"></p>
+        </div>
+    </nav>
 
       <form action="/send_input_announcement" class="input-box flex-col" method="POST">
         <label for="title">Announcement Title</label>

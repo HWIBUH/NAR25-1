@@ -45,6 +45,9 @@
                 <label> NO SPACES IN THE NAME </label>
                 <label>FEATURE NAME IS NOT CASE SENSITIVE</label>
                 <div class="linkbox">
+                    <input type="number" id="linkbox-text" placeholder="Feature Weight" required name="weightOfFeatures" rows="10" cols="35" style="resize: none;"></textarea>
+                </div>
+                <div class="linkbox">
                     <input type="text" id="linkbox-text" placeholder="Nama Feature" required name="nameOfFeatures" rows="10" cols="35" style="resize: none;"></textarea>
                 </div>  
                 <button id="submit-button" type="submit">Submit</button>
@@ -59,9 +62,9 @@
 
         <div id="parent">
             <table id="jsonTable">
-                <th>
+                <thead>
                     <tr id="tableHeader" class="datatable"></tr>
-                </th>
+                </thead>
                 <tbody id="tableBody" class="datatable"></tbody>
             </table>
         </div>
@@ -78,7 +81,7 @@
             <p id="title-quiz">Trainee Quiz</p>
             <div id="image-temp">
                 <img src="{{quiz_trainee_photo}}" alt="Trainee Image" id="trae-img">
-            </div>ine
+            </div>
             <p id="siapa">Siapa Trainee ini? </p>
             <div id="data-container" data-flag="{{flag}}"></div>
             <form method="POST" action="/checkForm" class="jawab" id="trainee-form">

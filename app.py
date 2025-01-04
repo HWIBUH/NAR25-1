@@ -297,6 +297,7 @@ def announcement():
 @app.route("/subco")
 def subco():
     return render_template("subco.html")
+
 #================================ PROGRESS =======================================
 @app.route("/progress")
 def progress():
@@ -306,16 +307,21 @@ def progress():
 def progress_add():
     if request.method == 'POST':
         # numOfFeatures = int(request.form.get('numberOfFeatures'))
-        nameOfFeatures = request.form.get('nameOfFeatures').strip()
+        
+        weightOfFeatures=request.form.get('weightOfFeatures')
+        nameOfFeatures =request.form.get('nameOfFeatures').strip()
+        fitur=nameOfFeatures+"#"+weightOfFeatures
+        print(fitur) #JADI IDENYA BUAT NARO BOBOTNYA DINAMANYA
+        # KYK MAINPAGE#22
         connection = get_db_connection()
         if connection is None:
             return "Failed to connect to database"
         try:
             with connection.cursor() as cursor:
-                query="ALTER TABLE progress ADD "+nameOfFeatures+" INT"
+                query=f"ALTER TABLE progress ADD `{fitur}` FLOAT" #this returns syntax error
                 cursor.execute(query)
                 connection.commit()
-                query="UPDATE progress SET "+nameOfFeatures+" = 0 "
+                query=f"UPDATE progress SET `{fitur}` = 0 "
                 cursor.execute(query)
                 connection.commit()
                 return redirect("/progress")
@@ -341,7 +347,7 @@ def progress_delete():
             print(result)
             print("KEHAPUS KOLOMNYA")
             connection.commit()
-        return render_template("progress.html")
+        return redirect("/progress")
     except:
         return "database progress doesn't exist"
     finally:
@@ -366,6 +372,7 @@ def progress_api():
     return jsonify({"connection":"error"})
 
 
+
 @app.route("/checkTheProgressAPI",methods=['GET', 'POST'] )
 def check_progress_api():
     dropdown_id = request.headers.get('dropdownId') #T217Feature
@@ -380,6 +387,7 @@ def check_progress_api():
         connection.commit()
     return render_template("forumList.html")
 
+#==========================================INI BUAT AMBIL DATA COLOUMNYA==========================
 @app.route("/api/progress_runquery",methods=['GET', 'POST'] )
 def progress_api_run():
     if request.method == 'GET' or 1==1:
@@ -388,13 +396,15 @@ def progress_api_run():
             return "Failed to connect to database"
         try:
             with connection.cursor() as cursor:
+                
                 cursor.execute("SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'progress'")
                 column_name = cursor.fetchall()
-                columns = [name["COLUMN_NAME"] for name in column_name]
+                columns = [name["COLUMN_NAME"][:-2] for name in column_name[1:]] # INI BUAT AMBIL SEMUA NAMA COLUMNNYA
+                weight = [name["COLUMN_NAME"][-2:] for name in column_name[1:]] #INI BUAT AMBIL WEIGHTNYA 
+                #NTAR LOOPING WEIGHT NYA SAMA KOLOMNYA
                 print(columns)
-                sum_expression = " + ".join(columns)
-                query= f"SELECT *, ({sum_expression}) AS RowSum FROM progress ORDER BY RowSum DESC"
-                
+                print(weight)
+                query= f"SELECT *, () AS RowSum FROM progress ORDER BY RowSum DESC" #INI SYNTAX ERRORNYA
                 cursor.execute(query)
                 result=cursor.fetchall()
                 print(result)
