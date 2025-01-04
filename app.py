@@ -252,7 +252,7 @@ def forum_api():
     connection = get_db_connection()
     with connection.cursor() as cursor:
         # T217 GANTI JADI SESUAI DATABASE NYA WENE
-        query = "SELECT trainee_number,COUNT(trainee_number) FROM `forum` WHERE answer_status > 0 GROUP BY trainee_number ORDER BY COUNT(trainee_number) DESC;"
+        query = "SELECT trainee_number,COUNT(trainee_number) FROM `forum` WHERE answer_status >= 0 GROUP BY trainee_number ORDER BY COUNT(trainee_number) DESC;"
         cursor.execute(query)
         result=cursor.fetchall()
         print(result)
@@ -374,7 +374,7 @@ def progress_api():
             connection.close()
     return jsonify({"connection":"error"})
 
-@app.route("/checkTheProgressAPI", methods=['GET', 'POST'])
+@app.route("/checkProgressAPI", methods=['GET', 'POST'])
 def check_progress_api():
     if request.method == 'GET':
         answer_status = float(request.headers.get("answerStatus"))  
@@ -439,22 +439,20 @@ def case():
 def case_add():
     if request.method == 'POST':
         nameOfFeatures = request.form.get('nameOfFeatures').strip()
+        featurePoints = request.form.get('featurePoints').strip()
         connection = get_db_connection()
         if connection is None:
             return "Failed to connect to database"
         try:
             with connection.cursor() as cursor:
-                query = "ALTER TABLE `case` ADD " + nameOfFeatures + " INT"
+                query = f"ALTER TABLE `case` ADD COLUMN {nameOfFeatures} DECIMAL(10, 2) DEFAULT 0.00"
                 cursor.execute(query)
-                connection.commit()
-                query = "UPDATE `case` SET " + nameOfFeatures + " = 0"
-                cursor.execute(query)
+                query = "INSERT INTO fp_case (feature_name, feature_points) VALUES (%s, %s)"
+                cursor.execute(query, (nameOfFeatures, featurePoints))
                 connection.commit()
                 return redirect("/case")
         finally:
             connection.close()
-        return redirect("/case")
-    
     return render_template("case.html")
 
 @app.route("/case_delete", methods=["DELETE"])
@@ -468,31 +466,85 @@ def case_delete():
         with connection.cursor() as cursor:
             print(columnToDelete)
             query = f"ALTER TABLE `case` DROP COLUMN {columnToDelete}"
-            result = cursor.execute(query)
-            print(result)
-            print("Column deleted")
+            cursor.execute(query)
+            print("Column deleted from case table")
+            
+            query = "DELETE FROM fp_case WHERE feature_name = %s"
+            cursor.execute(query, (columnToDelete,))
+            print("Row deleted from fp_case table")
+            
             connection.commit()
         return render_template("case.html")
-    except:
-        return "Database `case` doesn't exist"
+    except Exception as e:
+        print(f"Error: {e}")
+        return "An error occurred while deleting the column and row"
     finally:
         connection.close()
 
-@app.route("/case_api", methods=['GET', 'POST'])
+@app.route("/case_api",methods=['GET', 'POST'] )
 def case_api():
-    if request.method == 'GET' or 1 == 1:
+    if request.method == 'GET' or 1==1:
         connection = get_db_connection()
         if connection is None:
             return "Failed to connect to database"
         try:
             with connection.cursor() as cursor:
-                query = "SELECT * FROM `case`"
+                query="SELECT * FROM `case`"
                 cursor.execute(query)
-                result = cursor.fetchall()
+                result=cursor.fetchall()
                 print(result)
-                return jsonify({"data": result})
+                return jsonify({"data":result})
         finally:
             connection.commit()
+            connection.close()
+    return jsonify({"connection":"error"})
+
+@app.route("/checkCaseAPI", methods=['GET', 'POST'])
+def check_case_api():
+    if request.method == 'GET':
+        answer_status = float(request.headers.get("answerStatus"))  
+        dropdown_id = request.headers.get("dropdownId")  
+        trainee_number, feature_name = dropdown_id[:4], dropdown_id[4:]
+        
+        connection = get_db_connection()
+        if connection is None:
+            return "Failed to connect to database"
+        try:
+            with connection.cursor() as cursor:
+                query = f"UPDATE `case` SET {feature_name} = %s WHERE trainee_number = %s"
+                cursor.execute(query, (answer_status, trainee_number))
+                connection.commit()
+        finally:
+            connection.close()
+        return "Success"
+
+@app.route("/api/case_runquery", methods=['GET', 'POST'])
+def case_api_run():
+    if request.method == 'GET':
+        connection = get_db_connection()
+        if connection is None:
+            return "Failed to connect to database"
+        try:
+            with connection.cursor() as cursor:
+                cursor.execute("SELECT feature_name, feature_points FROM `fp_case`")
+                feature_data = cursor.fetchall()
+
+                row_sum_parts = []
+                for feature in feature_data:
+                    feature_name = feature["feature_name"]
+                    feature_points = feature["feature_points"]
+                    row_sum_parts.append(f"{feature_name} * {feature_points}")
+                
+                row_sum_expression = " + ".join(row_sum_parts)
+
+                print("idk what is this : ", row_sum_parts)
+                print("variable", row_sum_expression)
+
+                query = f"""SELECT *, ({row_sum_expression}) AS RowSum FROM `case` ORDER BY RowSum DESC"""
+                cursor.execute(query)
+                result = cursor.fetchall()
+                return jsonify({"data": result})
+        finally:
             connection.close()
     return jsonify({"connection": "error"})
 
@@ -508,6 +560,11 @@ def leaderboard():
 def leaderboard_progress():
     print("ke leader board")
     return render_template("leaderboardProgress.html")
+
+@app.route("/lb_case")
+def leaderboard_case():
+    print("ke lb case")
+    return render_template("leaderboardCase.html")
 
 #================================ GALERY ====================================
 @app.route("/gallery")
@@ -625,15 +682,19 @@ def send_input_register():
     connection = get_db_connection()
     if connection is None:
         return "Failed to connect to the database!"
+    if password != confirm:
+        return "Password beda sama Confirm Password"
     try: 
         with connection.cursor() as cursor:
             query = "SELECT * FROM trainee WHERE trainee_number = %s AND trainee_pass = %s AND trainee_nama = %s"
             query = "INSERT INTO trainee (trainee_number, trainee_pass, trainee_nama) VALUES (%s, %s, %s)"
             cursor.execute(query, (username, password, tnum))
             connection.commit()
+    
     finally:
         connection.close()
-    return redirect("/")
+    
+    return redirect("/login")
 
 if __name__ == '__main__':
     app.run(debug=True)

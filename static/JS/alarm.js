@@ -31,8 +31,8 @@ function upTime() {
     {
         bigTime.innerText = `${hour} : ${min} : ${sec}`;//tambahin ini buat main page
     }
-    i++
-    console.log(i);
+   // i++
+    //console.log(i);
     if(trimin(date)){
         (async()=>{
             const response = await fetch('/randomize');

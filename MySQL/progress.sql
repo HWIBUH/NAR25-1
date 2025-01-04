@@ -27,7 +27,7 @@ CREATE TABLE `case` (
     FOREIGN KEY (trainee_number) REFERENCES trainee(trainee_number)
 );
 
-INSERT INTO `case` (trainee_number) VALUES
+INSERT INTO case (trainee_number) VALUES
 ('T186'),
 ('T191'),
 ('T192'),
@@ -47,6 +47,11 @@ INSERT INTO `case` (trainee_number) VALUES
 ('T355');
 
 CREATE TABLE feature_points (
+    feature_name VARCHAR(255) PRIMARY KEY,
+    feature_points FLOAT NOT NULL
+);
+
+CREATE TABLE fp_case (
     feature_name VARCHAR(255) PRIMARY KEY,
     feature_points FLOAT NOT NULL
 );
