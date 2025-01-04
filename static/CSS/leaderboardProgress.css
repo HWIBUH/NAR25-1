@@ -13,12 +13,6 @@ body{
     align-items: center;
     height: 100vh;
     margin: 0;
-    position: relative;
-}
-
-.time p{
-    margin: 0px;
-    margin-right: 20px;
 }
 
 .forum-page{
@@ -112,178 +106,11 @@ body{
     border-radius: 0.5vw;
 }
 
-.bangun {
-    font-family: 'Rubik', sans-serif;
-    font-weight: bold;
-    border: solid 3px black;
-    background-color: var(--blood-red);
-    color: var(--eggshell);
-    width: 600px;
-    text-align: center;
-    border-radius: 20px;
-    padding: 30px 50px;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 10; 
-    display: none;  
-}
-
-.bangun .active {
-    display: block;
-}
-
-.bbut {
-    margin: auto;
-    border-style: none;
-    width: 200px;
-    border-radius: 5px;
-    padding: 10px 20px;
-    font-family: 'Rubik', sans-serif;
-    font-size: 20px;
-    cursor: pointer;
-    background-color: var(--tea-rose);
-    color: var(--eggshell);
-    border: solid 1px black;
-}
-
-.quiz-modal{
-    width: 100vw;
+#parent {
+    width: 80vw;
     height: 100vh;
-    background-color: rgba(0, 0, 0, 0.629);
-    z-index: 1000;
-    position: absolute;
-}
-
-.quiz-container{
-    background-color: var(--tea-rose);
-    color: var(--bean);
-    text-align: center;
-    border-style: solid;
-    border-width: 2px;
-    border-radius: 10px;
-    padding: 10px;
-    width: 350px;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 20; 
-}
-
-#title-quiz{
-    font-size: 30px;
-}
-
-.jawab{
-    border-radius: 10px;
-    border-style: none;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
-    gap: 15px;
-    width: 100%;
-}
-
-.jawab input{
-    background-color: var(--eggshell);
-    border-style: none;
-    border-radius: 5px;
-    padding: 10px;
-    width: 70%;
-}
-
-.jawab input::placeholder{
-    color: var(--bean);
-}
-
-#submit-button{
-    background-color: var(--bean);
-    padding: 5px;
-    color: var(--eggshell);
-    width: 150px;
-    border-radius: 5px;
-    border-style: none;
-    transition-duration: 500ms;
-}
-
-#submit-button:hover{
-    background-color: var(--bean-hover);
-}
-
-#image-temp{
-    background-color: var(--eggshell);
-    width: 100px;
-    height: 100px;
-    margin: auto;
-}
-
-.quiz-container .active {
-    display: block; 
-}
-
-.inactive{
-    display : none;
-}
-
-.active{
-    display : block;
-}
-
-/* quiz */
-/* .quiz-modal{
-    width: 100vw;
-    height: 100vh;
-    position: absolute;
-    background-color: rgba(0, 0, 0, 0.719);
-    z-index: 1000;
-} */
-
-@media screen and (max-width: 810px) {
-    .clock {
-        width: 500px;
-        font-size: 70px;
-    }
-}
-
-@media screen and (max-width: 765px) {
-    .nav-inside{
-        gap: 20px;
-        margin-left: 3vw;
-    }
-
-    .nav-inside a{
-        font-size: 15px;
-    }
-
-    #time-clock {
-        font-size: 25px;
-    }
-}
-
-@media screen and (max-width: 690px) {
-    .nav-inside{
-        gap: 15px;
-        margin-left: 3vw;
-    }
-
-    .nav-inside a{
-        font-size: 15px;
-    }
-
-    #time-clock {
-        font-size: 25px;
-    }
-}
-
-@media screen and (max-width: 610px) {
-    .clock {
-        width: 400px;
-        font-size: 60px;
-    }
+    position: relative;
+    top: 20vh;
 }
 
 #jsonTable {
@@ -326,10 +153,6 @@ body{
     
 }
 
-#parent {
-    margin: 10px;
-    width: 80vw;
-}
 
 
 #tableHeader {

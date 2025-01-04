@@ -20,13 +20,17 @@
                     </div>
                 </div>
                 <a href="{{url_for('progress')}}">Progress</a>
-                <a href="{{url_for('leaderboard')}}">Leaderboard</a>
+                <div class="dropdown dropdown-announcement">
+                    <a class="announcement" href="{{ url_for('leaderboard_progress') }}">Leaderboard Progress</a>
+                    <a class="dropdown-item" href="{{ url_for('leaderboard')}}">Leaderboard Forum</a>
+                </div>
                 <a href="{{url_for('subco')}}">Subco</a>
                 <div class="dropdown dropdown-announcement">
                     <a class="announcement" href="{{ url_for('announcement') }}">Announcement</a>
                     <a class="dropdown-item" href="{{ url_for('input_announcement')}}">Input Announcement</a>
                 </div>
                 <a href="{{url_for('gallery')}}">Gallery</a>
+                <a href="{{url_for('index')}}">Logout</a>
             </div>
 
             <div id="time">
@@ -56,6 +60,7 @@
             </div>
         </div>
     </section>
+    
     <div class="bangun inactive" id="bangunPop"> 
         <h1>!!!BANGUN BANGUN!!!</h1>
         <button class="bbut" onclick="popout()">Turn Off</button>

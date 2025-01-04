@@ -10,9 +10,11 @@
     <link rel="stylesheet" href="{{url_for('static',filename='CSS/loginPage.css')}}">
     <link rel="stylesheet" href="{{url_for('static',filename='CSS/reindeer.css')}}">
 
+    <script>
+        sessionStorage.clear()
+    </script>
 </head>
 <body>
-    
     <section class="login-page">
         <img src="{{url_for('static', filename='assets/christmas-tree.png')}}" alt="" class="hiasan christmas-tree">
         <img src="{{url_for('static', filename='assets/gifts.png')}}" alt="" class="hiasan gifts">
@@ -28,16 +30,20 @@
                         <a id="forum_list" href="">Forum LIST</a>
                     </div>
                 </div>
-                <a href="">Leaderboard</a>
+                <a href="">Progress</a>
+                <div class="dropdown dropdown-announcement">
+                    <a class="announcement" href="">Leaderboard Progress</a>
+                    <a class="dropdown-item" href="">Leaderboard Forum</a>
+                </div>
                 <a href="">Subco</a>
                 <div class="dropdown dropdown-announcement">
                     <a class="announcement" href="">Announcement</a>
                     <a class="dropdown-item" href="">Input Announcement</a>
                 </div>
                 <a href="">Gallery</a>
-                <a href="{{url_for('register') }}">Register</a>
+                <a id="forum_list" href="{{ url_for('register')}}">Register</a>
             </div>
-
+    
             <div id="time">
                 <p>Server Time :</p>
                 <p id="time-clock"></p>
@@ -58,7 +64,7 @@
                 </div>
                 <div class="pass">
                     <p>Password</p>
-                    <input type="text" id="trainee_pass" name="trainee_pass" required>
+                    <input type="password" id="trainee_pass" name="trainee_pass" required>
                 </div>
                 <button id="submit-button" type="submit">Submit</button>
             </div>

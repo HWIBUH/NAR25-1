@@ -3,14 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='CSS/leaderboardProgress.css')}}">
+
     <title>NAR 25-1</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{url_for('static',filename='CSS/announcement.css')}}">
 </head>
-<body onload="generate()">
-    <section class="flex-col">
+<body>
+    <section class="forum-page">
+        
         <nav class="nav-bar">
             <div class="nav-inside">
                 <a href="{{url_for('main')}}">25-1</a>
@@ -41,23 +40,27 @@
                 <p id="time-clock"></p>
             </div>
         </nav>
-        
-        <div class="announcement-outer-box">
-            <div class="announcement-box" id="list-card">
-                <!-- <div class="announcement-card">
-                    <h2>Testing</h2>
-                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Enim velit optio necessitatibus quisquam corporis sint illo temporibus provident obcaecati suscipit dignissimos possimus dolorum, a veritatis dolorem aliquid nulla expedita laborum.</p>
-                    <p>04:02:30 </p>
-                    <button type="button" class="check-btn" onclick="pop()"></button>
-                </div> -->
-            </div>
-        </div>
 
+        <div id="parent">
+            <table id="jsonTable">
+                <thead>
+                    <tr id="tableHeader" class="datatable"></tr>
+                </thead>
+                <tbody id="tableBody" class="datatable">
+                    <tr>
+                        <!-- <td class="dummy"><h1></h1>Feature Masih kosong, buat terlebih dahulu</td> -->
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </section>
-    <div class="bangun inactive" id="bangunPop">
+
+
+    <div class="bangun inactive" id="bangunPop"> 
         <h1>!!!BANGUN BANGUN!!!</h1>
         <button class="bbut" onclick="popout()">Turn Off</button>
     </div>
+    
     <div class="quiz-modal inactive" id="quiz1">
         <div class="quiz-container inactive" id="quiz2">
             <p id="title-quiz">Trainee Quiz</p>
@@ -65,7 +68,7 @@
                 <img src="{{quiz_trainee_photo}}" alt="Trainee Image" id="trainee-img">
             </div>
             <p id="siapa">Siapa Trainee ini? </p>
-            <div id="data-container" data-flag="{{flag}}"></div>
+
             <form method="POST" action="/checkForm" class="jawab" id="trainee-form">
                 <input type="text" name="trainee_id" placeholder="Nomor Trainee">
                 <input type="text" name="trainee_name" placeholder="Nama Trainee">
@@ -74,6 +77,7 @@
                 <button type="submit" id="submit-button">Submit</button>
             </form>
         </div>
+
 
         <div class="quiz-container active trainer-quiz" id="qTrainer1">
             <p id="title-quiz">Trainer Quiz</p>
@@ -88,7 +92,8 @@
             </form>
         </div>
     </div>
-    <script src="{{url_for('static',filename='JS/announcement.js')}}"></script>
+    <script src="{{url_for('static',filename='JS/leaderboardCase.js')}}"></script>
+
     <script src="{{url_for('static',filename='JS/alarm.js')}}"></script>
 </body>
 </html>

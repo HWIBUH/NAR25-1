@@ -39,13 +39,17 @@
                     </div>
                 </div>
                 <a href="{{url_for('progress')}}">Progress</a>
-                <a href="{{url_for('leaderboard')}}">Leaderboard</a>
+                <div class="dropdown dropdown-announcement">
+                    <a class="announcement" href="{{ url_for('leaderboard_progress') }}">Leaderboard Progress</a>
+                    <a class="dropdown-item" href="{{ url_for('leaderboard')}}">Leaderboard Forum</a>
+                </div>
                 <a href="{{url_for('subco')}}">Subco</a>
                 <div class="dropdown dropdown-announcement">
                     <a class="announcement" href="{{ url_for('announcement') }}">Announcement</a>
                     <a class="dropdown-item" href="{{ url_for('input_announcement')}}">Input Announcement</a>
                 </div>
                 <a href="{{url_for('gallery')}}">Gallery</a>
+                <a href="{{url_for('index')}}">Logout</a>
             </div>
             
             <h2 id="welcome-text"> Welcome, {{trainee_numb}} {{trainee_nama}} </h2>
@@ -118,6 +122,7 @@
 <script src="{{url_for('static',filename='JS/snow.js')}}"></script>
 <script>
     document.getElementById("welcome-text").innerHTML = `Welcome, ${sessionStorage.getItem("userInitials")} ${sessionStorage.getItem("userName")}`
+    console.log(sessionStorage)
 </script>
 </html>
 

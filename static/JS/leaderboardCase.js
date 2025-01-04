@@ -1,5 +1,5 @@
 async function halos() {
-    const data = await fetch("/api/progress_runquery");
+    const data = await fetch("/api/case_runquery");
     const result = await data.json();
     const tableHeader = document.getElementById("tableHeader");
     const tableBody = document.getElementById("tableBody");
@@ -28,7 +28,7 @@ async function halos() {
             newButton.innerText = "DELETE";
             newButton.addEventListener("click", async () => {
                 console.log(newButton.id);
-                await fetch("/progress_delete", {
+                await fetch("/case_delete", {
                     method: "DELETE",
                     headers: { "deleteColumn": newButton.id }
                 });
@@ -67,7 +67,7 @@ async function halos() {
                     const dropdownId = newDropdown.id;
                     console.log(`Updating ${dropdownId} to ${selectedValue}`);
                     try {
-                        const response = await fetch(`/checkProgressAPI`, {
+                        const response = await fetch(`/checkCaseAPI`, {
                             method: 'GET',
                             headers: { "answerStatus": selectedValue, "dropdownId": dropdownId }
                         });

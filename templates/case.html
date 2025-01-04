@@ -3,14 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='CSS/case.css')}}">
     <title>NAR 25-1</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{url_for('static',filename='CSS/announcement.css')}}">
 </head>
-<body onload="generate()">
-    <section class="flex-col">
+<body>
+    <section class="forum-page">
         <nav class="nav-bar">
             <div class="nav-inside">
                 <a href="{{url_for('main')}}">25-1</a>
@@ -35,34 +32,56 @@
                 <a href="{{url_for('gallery')}}">Gallery</a>
                 <a href="{{url_for('index')}}">Logout</a>
             </div>
-
             <div id="time">
                 <p>Server Time :</p>
                 <p id="time-clock"></p>
             </div>
         </nav>
-        
-        <div class="announcement-outer-box">
-            <div class="announcement-box" id="list-card">
-                <!-- <div class="announcement-card">
-                    <h2>Testing</h2>
-                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Enim velit optio necessitatibus quisquam corporis sint illo temporibus provident obcaecati suscipit dignissimos possimus dolorum, a veritatis dolorem aliquid nulla expedita laborum.</p>
-                    <p>04:02:30 </p>
-                    <button type="button" class="check-btn" onclick="pop()"></button>
-                </div> -->
+
+        <div class="progress-container">
+            <form method="POST" action="/case_add" id="my-form">
+                <div class="forum-container">
+                    <p id="inputforum-text">Case Table</p>
+                    <label for="answerer">Feature name must be unique</label>
+                    <label>Number of features, submit each one</label>
+                    <label> NO SPACES IN THE NAME </label>
+                    <label>FEATURE NAME IS NOT CASE SENSITIVE</label>
+                    <div class="linkbox">
+                        <input type="text" id="linkbox-text" placeholder="Nama Feature" required name="nameOfFeatures" rows="10" cols="35" style="resize: none;">
+                    </div>
+                    <div class="linkbox">
+                        <input type="number" id="feature-points" placeholder="Feature Points" required name="featurePoints" step="1" min="0">
+                    </div>
+                    <button id="submit-button" type="submit">Submit</button>
+                </div>
+            </form>
+            {% if forum_url %}
+                <p> You entered: {{ forum_url }}</p>
+                <p> T number: {{tnumber}}</p>
+            {% endif %}
+
+            <button id="show-table">Show Case Table</button>
+
+            <div id="parent">
+                <table id="jsonTable">
+                    <thead>
+                        <tr id="tableHeader" class="datatable"></tr>
+                    </thead>
+                </table>
             </div>
         </div>
-
     </section>
-    <div class="bangun inactive" id="bangunPop">
+
+    <div class="bangun inactive" id="bangunPop"> 
         <h1>!!!BANGUN BANGUN!!!</h1>
         <button class="bbut" onclick="popout()">Turn Off</button>
     </div>
+    
     <div class="quiz-modal inactive" id="quiz1">
         <div class="quiz-container inactive" id="quiz2">
             <p id="title-quiz">Trainee Quiz</p>
             <div id="image-temp">
-                <img src="{{quiz_trainee_photo}}" alt="Trainee Image" id="trainee-img">
+                <img src="{{quiz_trainee_photo}}" alt="Trainee Image" id="trae-img">
             </div>
             <p id="siapa">Siapa Trainee ini? </p>
             <div id="data-container" data-flag="{{flag}}"></div>
@@ -74,12 +93,10 @@
                 <button type="submit" id="submit-button">Submit</button>
             </form>
         </div>
-
-        <div class="quiz-container active trainer-quiz" id="qTrainer1">
+        <div class="quiz-container inactive trainer-quiz" id="qTrainer1">
             <p id="title-quiz">Trainer Quiz</p>
             <p id="initial-quiz">harusnya masuk sini</p>
             <p id="siapa">Siapa Trainer ini? </p>
-            <!-- <div id="data-container" data-flag="{{flag}}"></div> -->
             <form method="POST" action="/checkFormTrainer" class="jawab" id="trainer-form">
                 <input type="text" name="input_trainer_initial" placeholder="Inisial Trainer">
                 <input type="text" name="input_trainer_fullname" placeholder="Nama Trainer">
@@ -88,7 +105,7 @@
             </form>
         </div>
     </div>
-    <script src="{{url_for('static',filename='JS/announcement.js')}}"></script>
+    <script src="{{url_for('static',filename='JS/case.js')}}"></script>
     <script src="{{url_for('static',filename='JS/alarm.js')}}"></script>
 </body>
 </html>

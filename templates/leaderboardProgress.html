@@ -22,13 +22,17 @@
                     </div>
                 </div>
                 <a href="{{url_for('progress')}}">Progress</a>
-                <a href="{{url_for('leaderboard')}}">Leaderboard</a>
+                <div class="dropdown dropdown-announcement">
+                    <a class="announcement" href="{{ url_for('leaderboard_progress') }}">Leaderboard Progress</a>
+                    <a class="dropdown-item" href="{{ url_for('leaderboard')}}">Leaderboard Forum</a>
+                </div>
                 <a href="{{url_for('subco')}}">Subco</a>
                 <div class="dropdown dropdown-announcement">
                     <a class="announcement" href="{{ url_for('announcement') }}">Announcement</a>
                     <a class="dropdown-item" href="{{ url_for('input_announcement')}}">Input Announcement</a>
                 </div>
                 <a href="{{url_for('gallery')}}">Gallery</a>
+                <a href="{{url_for('index')}}">Logout</a>
             </div>
 
             <div id="time">
@@ -36,33 +40,17 @@
                 <p id="time-clock"></p>
             </div>
         </nav>
-        <!--<form method="POST" action="/progress_add" id="my-form">
-            <div class="forum-container">
-                <p id="inputforum-text">Progress Table</p>
-                <label for="answerer">Feature name must be unique</label>
-
-                <label>Number of features, submit each one</label>
-                <label> NO SPACES IN THE NAME </label>
-                <label>FEATURE NAME IS NOT CASE SENSITIVE</label>
-                <div class="linkbox">
-                    <input type="text" id="linkbox-text" placeholder="Nama Feature" required name="nameOfFeatures" rows="10" cols="35" style="resize: none;"></textarea>
-                </div>  
-                <button id="submit-button" type="submit">Submit</button>
-            </div>
-        </form>
-        {% if forum_url %}
-            <p> You entered: {{ forum_url }}</p>
-            <p> T number: {{tnumber}}</p>
-        {% endif %}
-
-        <button id="show-table">Show Progress Table</button>-->
 
         <div id="parent">
             <table id="jsonTable">
                 <thead>
                     <tr id="tableHeader" class="datatable"></tr>
                 </thead>
-                <tbody id="tableBody" class="datatable"></tbody>
+                <tbody id="tableBody" class="datatable">
+                    <tr>
+                        <!-- <td class="dummy"><h1></h1>Feature Masih kosong, buat terlebih dahulu</td> -->
+                    </tr>
+                </tbody>
             </table>
         </div>
     </section>

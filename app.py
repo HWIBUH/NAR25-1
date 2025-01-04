@@ -4,9 +4,13 @@ app = Flask(__name__,static_folder="static")
 
 application = app
 
+results = None
+
 app.debug = True
 @app.route('/')
 def index():
+    global results
+    results = None 
     return render_template("loginPage.html")
 
 @app.route('/alarm')
@@ -16,7 +20,8 @@ def alarm():
 #================================ BACKEND LOGIN ====================================
 @app.route('/login', methods=['GET', 'POST'])
 def query():
-    results = None  
+    global results
+    results = None 
     if request.method == 'POST':
         print("HALOOOOOO")
         trainee_numb = request.form.get('trainee_number')
@@ -31,7 +36,7 @@ def query():
                 results = cursor.fetchone()
                 print(results)
                 
-                if((results)):
+                if(results):
                     nama=results["trainee_nama"]
                     print(nama)
                     return render_template(
@@ -247,7 +252,7 @@ def forum_api():
     connection = get_db_connection()
     with connection.cursor() as cursor:
         # T217 GANTI JADI SESUAI DATABASE NYA WENE
-        query = "SELECT trainee_number,COUNT(trainee_number) FROM `forum` GROUP BY trainee_number ORDER BY COUNT(trainee_number) DESC;"
+        query = "SELECT trainee_number,COUNT(trainee_number) FROM `forum` WHERE answer_status > 0 GROUP BY trainee_number ORDER BY COUNT(trainee_number) DESC;"
         cursor.execute(query)
         result=cursor.fetchall()
         print(result)
@@ -277,14 +282,14 @@ def forum_list():
 
 @app.route('/checkTheBoxAPI', methods=['GET'])
 def checkTheBox():
-    forum_id = request.args.get('forum_id')
+    forum_id = int(request.args.get('forum_id'))
     print(request.headers.get('answerStatus'))
     answer_status=int(request.headers.get('answerStatus'))
-    print("box is checked at "+forum_id)
+    print("box is checked at ",forum_id)
     connection = get_db_connection()
     with connection.cursor() as cursor:
         query="UPDATE forum SET answer_status=%s WHERE forum_id=%s"
-        cursor.execute(query,(answer_status,forum_id))
+        cursor.execute(query, (answer_status, forum_id))
         connection.commit()
     return render_template("forumList.html")
     
@@ -303,9 +308,10 @@ def subco():
 def progress():
     return render_template("progress.html")
 
-@app.route("/progress_add", methods=['GET','POST'])
+@app.route("/progress_add", methods=['GET', 'POST'])
 def progress_add():
     if request.method == 'POST':
+<<<<<<< HEAD
         # numOfFeatures = int(request.form.get('numberOfFeatures'))
         
         weightOfFeatures=request.form.get('weightOfFeatures')
@@ -313,28 +319,37 @@ def progress_add():
         fitur=nameOfFeatures+"#"+weightOfFeatures
         print(fitur) #JADI IDENYA BUAT NARO BOBOTNYA DINAMANYA
         # KYK MAINPAGE#22
+=======
+        nameOfFeatures = request.form.get('nameOfFeatures').strip()
+        featurePoints = request.form.get('featurePoints').strip()
+>>>>>>> 8826150474dfaf0db34fd2f5bcf1bf4c81258fe3
         connection = get_db_connection()
         if connection is None:
             return "Failed to connect to database"
         try:
             with connection.cursor() as cursor:
+<<<<<<< HEAD
                 query=f"ALTER TABLE progress ADD `{fitur}` FLOAT" #this returns syntax error
                 cursor.execute(query)
                 connection.commit()
                 query=f"UPDATE progress SET `{fitur}` = 0 "
+=======
+                query = f"ALTER TABLE progress ADD COLUMN {nameOfFeatures} DECIMAL(10, 2) DEFAULT 0.00"
+>>>>>>> 8826150474dfaf0db34fd2f5bcf1bf4c81258fe3
                 cursor.execute(query)
+                query = "INSERT INTO feature_points (feature_name, feature_points) VALUES (%s, %s)"
+                cursor.execute(query, (nameOfFeatures, featurePoints))
                 connection.commit()
                 return redirect("/progress")
-        
         finally:
             connection.close()
-        return redirect("/progress")
-    
     return render_template("progress.html")
+
+
 
 @app.route("/progress_delete", methods=["DELETE"])
 def progress_delete():
-    columnToDelete=request.headers.get("deleteColumn")
+    columnToDelete = request.headers.get("deleteColumn")
     connection = get_db_connection()
     
     if connection is None:
@@ -343,13 +358,24 @@ def progress_delete():
         with connection.cursor() as cursor:
             print(columnToDelete)
             query = f"ALTER TABLE progress DROP COLUMN {columnToDelete}"
-            result=cursor.execute(query)
-            print(result)
-            print("KEHAPUS KOLOMNYA")
+            cursor.execute(query)
+            print("Column deleted from progress table")
+            
+            query = "DELETE FROM feature_points WHERE feature_name = %s"
+            cursor.execute(query, (columnToDelete,))
+            print("Row deleted from feature_points table")
+            
             connection.commit()
+<<<<<<< HEAD
         return redirect("/progress")
     except:
         return "database progress doesn't exist"
+=======
+        return render_template("progress.html")
+    except Exception as e:
+        print(f"Error: {e}")
+        return "An error occurred while deleting the column and row"
+>>>>>>> 8826150474dfaf0db34fd2f5bcf1bf4c81258fe3
     finally:
         connection.close()
 
@@ -371,31 +397,133 @@ def progress_api():
             connection.close()
     return jsonify({"connection":"error"})
 
+<<<<<<< HEAD
 
 
 @app.route("/checkTheProgressAPI",methods=['GET', 'POST'] )
+=======
+@app.route("/checkProgressAPI", methods=['GET', 'POST'])
+>>>>>>> 8826150474dfaf0db34fd2f5bcf1bf4c81258fe3
 def check_progress_api():
-    dropdown_id = request.headers.get('dropdownId') #T217Feature
-    answer_status=request.headers.get('answerStatus')
-    # print("box is checked at "+ dropdown_id[4:]+" "+dropdown_id[:4] )
-    connection = get_db_connection()
-    with connection.cursor() as cursor:
+    if request.method == 'GET':
+        answer_status = float(request.headers.get("answerStatus"))  
+        dropdown_id = request.headers.get("dropdownId")  
+        trainee_number, feature_name = dropdown_id[:4], dropdown_id[4:]
         
-        query=f"UPDATE progress SET {dropdown_id[4:]} = {answer_status} WHERE trainee_number = '{dropdown_id[:4]}' " 
-        print(query)
-        cursor.execute(query)
-        connection.commit()
-    return render_template("forumList.html")
+        connection = get_db_connection()
+        if connection is None:
+            return "Failed to connect to database"
+        try:
+            with connection.cursor() as cursor:
+                query = f"UPDATE progress SET {feature_name} = %s WHERE trainee_number = %s"
+                cursor.execute(query, (answer_status, trainee_number))
+                connection.commit()
+        finally:
+            connection.close()
+        return "Success"
 
+<<<<<<< HEAD
 #==========================================INI BUAT AMBIL DATA COLOUMNYA==========================
 @app.route("/api/progress_runquery",methods=['GET', 'POST'] )
+=======
+@app.route("/api/progress_runquery", methods=['GET', 'POST'])
+>>>>>>> 8826150474dfaf0db34fd2f5bcf1bf4c81258fe3
 def progress_api_run():
+    if request.method == 'GET':
+        connection = get_db_connection()
+        if connection is None:
+            return "Failed to connect to database"
+        try:
+            with connection.cursor() as cursor:
+                cursor.execute("SELECT feature_name, feature_points FROM feature_points")
+                feature_data = cursor.fetchall()
+
+                row_sum_parts = []
+                for feature in feature_data:
+                    feature_name = feature["feature_name"]
+                    feature_points = feature["feature_points"]
+                    row_sum_parts.append(f"{feature_name} * {feature_points}")
+                
+                row_sum_expression = " + ".join(row_sum_parts)
+
+                print("idk what is this : ", row_sum_parts)
+                print("variable", row_sum_expression)
+
+                query = f"""SELECT *, ({row_sum_expression}) AS RowSum FROM progress ORDER BY RowSum DESC"""
+                cursor.execute(query)
+                result = cursor.fetchall()
+                return jsonify({"data": result})
+        finally:
+            connection.close()
+    return jsonify({"connection": "error"})
+
+
+
+
+
+#=================================== CASE ========================================
+#ini case tinggal dicopas dari progress ya -T207 
+#ini bekas copas progress sebelumnya, yang belom ditambahin poin per fitur
+
+@app.route("/case")
+def case():
+    return render_template("case.html")
+
+@app.route("/case_add", methods=['GET','POST'])
+def case_add():
+    if request.method == 'POST':
+        nameOfFeatures = request.form.get('nameOfFeatures').strip()
+        featurePoints = request.form.get('featurePoints').strip()
+        connection = get_db_connection()
+        if connection is None:
+            return "Failed to connect to database"
+        try:
+            with connection.cursor() as cursor:
+                query = f"ALTER TABLE `case` ADD COLUMN {nameOfFeatures} DECIMAL(10, 2) DEFAULT 0.00"
+                cursor.execute(query)
+                query = "INSERT INTO fp_case (feature_name, feature_points) VALUES (%s, %s)"
+                cursor.execute(query, (nameOfFeatures, featurePoints))
+                connection.commit()
+                return redirect("/case")
+        finally:
+            connection.close()
+    return render_template("case.html")
+
+@app.route("/case_delete", methods=["DELETE"])
+def case_delete():
+    columnToDelete = request.headers.get("deleteColumn")
+    connection = get_db_connection()
+    
+    if connection is None:
+        return "Failed to connect to database"
+    try:
+        with connection.cursor() as cursor:
+            print(columnToDelete)
+            query = f"ALTER TABLE `case` DROP COLUMN {columnToDelete}"
+            cursor.execute(query)
+            print("Column deleted from case table")
+            
+            query = "DELETE FROM fp_case WHERE feature_name = %s"
+            cursor.execute(query, (columnToDelete,))
+            print("Row deleted from fp_case table")
+            
+            connection.commit()
+        return render_template("case.html")
+    except Exception as e:
+        print(f"Error: {e}")
+        return "An error occurred while deleting the column and row"
+    finally:
+        connection.close()
+
+@app.route("/case_api",methods=['GET', 'POST'] )
+def case_api():
     if request.method == 'GET' or 1==1:
         connection = get_db_connection()
         if connection is None:
             return "Failed to connect to database"
         try:
             with connection.cursor() as cursor:
+<<<<<<< HEAD
                 
                 cursor.execute("SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'progress'")
                 column_name = cursor.fetchall()
@@ -405,6 +533,9 @@ def progress_api_run():
                 print(columns)
                 print(weight)
                 query= f"SELECT *, () AS RowSum FROM progress ORDER BY RowSum DESC" #INI SYNTAX ERRORNYA
+=======
+                query="SELECT * FROM `case`"
+>>>>>>> 8826150474dfaf0db34fd2f5bcf1bf4c81258fe3
                 cursor.execute(query)
                 result=cursor.fetchall()
                 print(result)
@@ -413,6 +544,56 @@ def progress_api_run():
             connection.commit()
             connection.close()
     return jsonify({"connection":"error"})
+
+@app.route("/checkCaseAPI", methods=['GET', 'POST'])
+def check_case_api():
+    if request.method == 'GET':
+        answer_status = float(request.headers.get("answerStatus"))  
+        dropdown_id = request.headers.get("dropdownId")  
+        trainee_number, feature_name = dropdown_id[:4], dropdown_id[4:]
+        
+        connection = get_db_connection()
+        if connection is None:
+            return "Failed to connect to database"
+        try:
+            with connection.cursor() as cursor:
+                query = f"UPDATE `case` SET {feature_name} = %s WHERE trainee_number = %s"
+                cursor.execute(query, (answer_status, trainee_number))
+                connection.commit()
+        finally:
+            connection.close()
+        return "Success"
+
+@app.route("/api/case_runquery", methods=['GET', 'POST'])
+def case_api_run():
+    if request.method == 'GET':
+        connection = get_db_connection()
+        if connection is None:
+            return "Failed to connect to database"
+        try:
+            with connection.cursor() as cursor:
+                cursor.execute("SELECT feature_name, feature_points FROM `fp_case`")
+                feature_data = cursor.fetchall()
+
+                row_sum_parts = []
+                for feature in feature_data:
+                    feature_name = feature["feature_name"]
+                    feature_points = feature["feature_points"]
+                    row_sum_parts.append(f"{feature_name} * {feature_points}")
+                
+                row_sum_expression = " + ".join(row_sum_parts)
+
+                print("idk what is this : ", row_sum_parts)
+                print("variable", row_sum_expression)
+
+                query = f"""SELECT *, ({row_sum_expression}) AS RowSum FROM `case` ORDER BY RowSum DESC"""
+                cursor.execute(query)
+                result = cursor.fetchall()
+                return jsonify({"data": result})
+        finally:
+            connection.close()
+    return jsonify({"connection": "error"})
+
 
 #================================ LEADERBOARD ====================================
 
@@ -425,6 +606,11 @@ def leaderboard():
 def leaderboard_progress():
     print("ke leader board")
     return render_template("leaderboardProgress.html")
+
+@app.route("/lb_case")
+def leaderboard_case():
+    print("ke lb case")
+    return render_template("leaderboardCase.html")
 
 #================================ GALERY ====================================
 @app.route("/gallery")
@@ -529,8 +715,16 @@ def register():
 @app.route("/send_input_register", methods=["POST"])
 def send_input_register():
     username = request.form.get("username")
+    tnum = request.form.get("name")
     password = request.form.get("password")
+<<<<<<< HEAD
     cpassword = request.form.get("passwordconfirm")
+=======
+    confirm = request.form.get("password-con")
+    if(password != confirm):
+        return register()
+    
+>>>>>>> 8826150474dfaf0db34fd2f5bcf1bf4c81258fe3
     connection = get_db_connection()
     if connection is None:
         return "Failed to connect to the database!"
@@ -538,10 +732,16 @@ def send_input_register():
         return "Password beda sama Confirm Password"
     try: 
         with connection.cursor() as cursor:
+<<<<<<< HEAD
             # query = "SELECT * FROM trainee WHERE trainee_number = %s AND trainee_pass = %s"
             print("AAAAAAA")
             query = "INSERT INTO trainee (trainee_number, trainee_pass) VALUES (%s, %s)"
             cursor.execute(query, (username, password))
+=======
+            query = "SELECT * FROM trainee WHERE trainee_number = %s AND trainee_pass = %s AND trainee_nama = %s"
+            query = "INSERT INTO trainee (trainee_number, trainee_pass, trainee_nama) VALUES (%s, %s, %s)"
+            cursor.execute(query, (username, password, tnum))
+>>>>>>> 8826150474dfaf0db34fd2f5bcf1bf4c81258fe3
             connection.commit()
     
     finally:

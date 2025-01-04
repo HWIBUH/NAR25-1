@@ -57,6 +57,7 @@ async function generate_data() {
                 <option value="1" ${item["answer_status"] == 1 ? "selected" : ""}>Unchecked</option>
                 <option value="2" ${item["answer_status"] == 2 ? "selected" : ""}>Wrong</option>
                 <option value="3" ${item["answer_status"] == 3 ? "selected" : ""}>Correct</option>`;
+        
         const newDropdown=document.createElement("select")
         newDropdown.id=item["forum_id"]
         newDropdown.style.borderRadius="5px";
