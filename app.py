@@ -678,15 +678,19 @@ def send_input_register():
     connection = get_db_connection()
     if connection is None:
         return "Failed to connect to the database!"
+    if password != cpassword:
+        return "Password beda sama Confirm Password"
     try: 
         with connection.cursor() as cursor:
             query = "SELECT * FROM trainee WHERE trainee_number = %s AND trainee_pass = %s AND trainee_nama = %s"
             query = "INSERT INTO trainee (trainee_number, trainee_pass, trainee_nama) VALUES (%s, %s, %s)"
             cursor.execute(query, (username, password, tnum))
             connection.commit()
+    
     finally:
         connection.close()
-    return redirect("/")
+    
+    return redirect("/login")
 
 if __name__ == '__main__':
     app.run(debug=True)
