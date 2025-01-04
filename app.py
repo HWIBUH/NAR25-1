@@ -311,14 +311,31 @@ def progress():
 @app.route("/progress_add", methods=['GET', 'POST'])
 def progress_add():
     if request.method == 'POST':
+<<<<<<< HEAD
+        # numOfFeatures = int(request.form.get('numberOfFeatures'))
+        
+        weightOfFeatures=request.form.get('weightOfFeatures')
+        nameOfFeatures =request.form.get('nameOfFeatures').strip()
+        fitur=nameOfFeatures+"#"+weightOfFeatures
+        print(fitur) #JADI IDENYA BUAT NARO BOBOTNYA DINAMANYA
+        # KYK MAINPAGE#22
+=======
         nameOfFeatures = request.form.get('nameOfFeatures').strip()
         featurePoints = request.form.get('featurePoints').strip()
+>>>>>>> 8826150474dfaf0db34fd2f5bcf1bf4c81258fe3
         connection = get_db_connection()
         if connection is None:
             return "Failed to connect to database"
         try:
             with connection.cursor() as cursor:
+<<<<<<< HEAD
+                query=f"ALTER TABLE progress ADD `{fitur}` FLOAT" #this returns syntax error
+                cursor.execute(query)
+                connection.commit()
+                query=f"UPDATE progress SET `{fitur}` = 0 "
+=======
                 query = f"ALTER TABLE progress ADD COLUMN {nameOfFeatures} DECIMAL(10, 2) DEFAULT 0.00"
+>>>>>>> 8826150474dfaf0db34fd2f5bcf1bf4c81258fe3
                 cursor.execute(query)
                 query = "INSERT INTO feature_points (feature_name, feature_points) VALUES (%s, %s)"
                 cursor.execute(query, (nameOfFeatures, featurePoints))
@@ -349,10 +366,16 @@ def progress_delete():
             print("Row deleted from feature_points table")
             
             connection.commit()
+<<<<<<< HEAD
+        return redirect("/progress")
+    except:
+        return "database progress doesn't exist"
+=======
         return render_template("progress.html")
     except Exception as e:
         print(f"Error: {e}")
         return "An error occurred while deleting the column and row"
+>>>>>>> 8826150474dfaf0db34fd2f5bcf1bf4c81258fe3
     finally:
         connection.close()
 
@@ -374,7 +397,13 @@ def progress_api():
             connection.close()
     return jsonify({"connection":"error"})
 
+<<<<<<< HEAD
+
+
+@app.route("/checkTheProgressAPI",methods=['GET', 'POST'] )
+=======
 @app.route("/checkProgressAPI", methods=['GET', 'POST'])
+>>>>>>> 8826150474dfaf0db34fd2f5bcf1bf4c81258fe3
 def check_progress_api():
     if request.method == 'GET':
         answer_status = float(request.headers.get("answerStatus"))  
@@ -393,7 +422,12 @@ def check_progress_api():
             connection.close()
         return "Success"
 
+<<<<<<< HEAD
+#==========================================INI BUAT AMBIL DATA COLOUMNYA==========================
+@app.route("/api/progress_runquery",methods=['GET', 'POST'] )
+=======
 @app.route("/api/progress_runquery", methods=['GET', 'POST'])
+>>>>>>> 8826150474dfaf0db34fd2f5bcf1bf4c81258fe3
 def progress_api_run():
     if request.method == 'GET':
         connection = get_db_connection()
@@ -489,7 +523,19 @@ def case_api():
             return "Failed to connect to database"
         try:
             with connection.cursor() as cursor:
+<<<<<<< HEAD
+                
+                cursor.execute("SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'progress'")
+                column_name = cursor.fetchall()
+                columns = [name["COLUMN_NAME"][:-2] for name in column_name[1:]] # INI BUAT AMBIL SEMUA NAMA COLUMNNYA
+                weight = [name["COLUMN_NAME"][-2:] for name in column_name[1:]] #INI BUAT AMBIL WEIGHTNYA 
+                #NTAR LOOPING WEIGHT NYA SAMA KOLOMNYA
+                print(columns)
+                print(weight)
+                query= f"SELECT *, () AS RowSum FROM progress ORDER BY RowSum DESC" #INI SYNTAX ERRORNYA
+=======
                 query="SELECT * FROM `case`"
+>>>>>>> 8826150474dfaf0db34fd2f5bcf1bf4c81258fe3
                 cursor.execute(query)
                 result=cursor.fetchall()
                 print(result)
@@ -671,22 +717,37 @@ def send_input_register():
     username = request.form.get("username")
     tnum = request.form.get("name")
     password = request.form.get("password")
+<<<<<<< HEAD
+    cpassword = request.form.get("passwordconfirm")
+=======
     confirm = request.form.get("password-con")
     if(password != confirm):
         return register()
     
+>>>>>>> 8826150474dfaf0db34fd2f5bcf1bf4c81258fe3
     connection = get_db_connection()
     if connection is None:
         return "Failed to connect to the database!"
+    if password != cpassword:
+        return "Password beda sama Confirm Password"
     try: 
         with connection.cursor() as cursor:
+<<<<<<< HEAD
+            # query = "SELECT * FROM trainee WHERE trainee_number = %s AND trainee_pass = %s"
+            print("AAAAAAA")
+            query = "INSERT INTO trainee (trainee_number, trainee_pass) VALUES (%s, %s)"
+            cursor.execute(query, (username, password))
+=======
             query = "SELECT * FROM trainee WHERE trainee_number = %s AND trainee_pass = %s AND trainee_nama = %s"
             query = "INSERT INTO trainee (trainee_number, trainee_pass, trainee_nama) VALUES (%s, %s, %s)"
             cursor.execute(query, (username, password, tnum))
+>>>>>>> 8826150474dfaf0db34fd2f5bcf1bf4c81258fe3
             connection.commit()
+    
     finally:
         connection.close()
-    return redirect("/")
+    
+    return redirect("/login")
 
 if __name__ == '__main__':
     app.run(debug=True)
