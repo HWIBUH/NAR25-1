@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{url_for('static',filename='CSS/progress.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='CSS/case.css')}}">
     <title>NAR 25-1</title>
 </head>
 <body>
@@ -39,9 +39,9 @@
         </nav>
 
         <div class="progress-container">
-            <form method="POST" action="/progress_add" id="my-form">
+            <form method="POST" action="/case_add" id="my-form">
                 <div class="forum-container">
-                    <p id="inputforum-text">Progress Table</p>
+                    <p id="inputforum-text">Case Table</p>
                     <label for="answerer">Feature name must be unique</label>
                     <label>Number of features, submit each one</label>
                     <label> NO SPACES IN THE NAME </label>
@@ -60,7 +60,7 @@
                 <p> T number: {{tnumber}}</p>
             {% endif %}
 
-            <button id="show-table">Show Progress Table</button>
+            <button id="show-table">Show Case Table</button>
 
             <div id="parent">
                 <table id="jsonTable">
@@ -69,6 +69,7 @@
                     </thead>
                 </table>
             </div>
+        </div>
     </section>
 
     <div class="bangun inactive" id="bangunPop"> 
@@ -104,7 +105,7 @@
             </form>
         </div>
     </div>
-    <script src="{{url_for('static',filename='JS/progress.js')}}"></script>
+    <script src="{{url_for('static',filename='JS/case.js')}}"></script>
     <script src="{{url_for('static',filename='JS/alarm.js')}}"></script>
 </body>
 </html>

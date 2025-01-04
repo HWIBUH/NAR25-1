@@ -22,12 +22,12 @@ INSERT INTO progress(trainee_number) VALUES
 ('T330'),
 ('T355');
 
-CREATE TABLE `case` (
+CREATE TABLE case (
     trainee_number CHAR(4),
     FOREIGN KEY (trainee_number) REFERENCES trainee(trainee_number)
 );
 
-INSERT INTO `case` (trainee_number) VALUES
+INSERT INTO case (trainee_number) VALUES
 ('T186'),
 ('T191'),
 ('T192'),
@@ -47,6 +47,11 @@ INSERT INTO `case` (trainee_number) VALUES
 ('T355');
 
 CREATE TABLE feature_points (
+    feature_name VARCHAR(255) PRIMARY KEY,
+    feature_points FLOAT NOT NULL
+);
+
+CREATE TABLE fp_case (
     feature_name VARCHAR(255) PRIMARY KEY,
     feature_points FLOAT NOT NULL
 );
