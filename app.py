@@ -515,13 +515,17 @@ def gallery():
     connection = get_db_connection()
     if connection is None:
         return "Failed to connect to the database!"
+    
+    # filter_subject = request.form.get('filterSubject')
+    # print(filter_subject)
+
     try:
         with connection.cursor() as cursor:
             cursor.execute("SELECT q.trainee_number, trainee_nama, trainee_binusian, trainee_major, trainee_photo FROM quiz q JOIN trainee tr ON tr.trainee_number = q.trainee_number")
             rows_trainee = cursor.fetchall()
             trainee_data = [dict(row) for row in rows_trainee]
 
-            cursor.execute("SELECT TrainerInitial, TrainerName, TrainerGeneration FROM trainers")
+            cursor.execute("SELECT TrainerInitial, TrainerName, TrainerGeneration FROM trainers JOIN trainersSubject tsb ON tsb.trainerId = trainers.TrainerID")
             rows_trainer = cursor.fetchall()
             trainer_data = [dict(row) for row in rows_trainer]
     finally:

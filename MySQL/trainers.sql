@@ -19,7 +19,7 @@ CREATE TABLE trainers (
     ('PP241', 'PP', 'Philip Purnama', '24-1'),
     ('XY241', 'XY', 'Xaviero Yamin Loganta', '24-1'),
     ('IS232', 'IS', 'Cindy Clarissa Tanoto', '23-2'),
-    ('ML231', 'ML', 'Michael Bryan Chandra', '23-1'),
+    ('ML231', 'ML', 'Michrtael Bryan Chandra', '23-1'),
     ('AY232', 'AY', 'Adrian Yu', '23-2'),
     ('BL232', 'BL', 'Abel Kristanto', '23-2'),
     ('LM232', 'LM', 'William Christian', '23-2'),
