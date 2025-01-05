@@ -213,7 +213,7 @@ def get_lowest():
     connection = get_db_connection()
     with connection.cursor() as cursor:
         # T217 GANTI JADI SESUAI DATABASE NYA WENE
-        query = " SELECT trainee_number,COUNT(trainee_number) FROM `forum` GROUP BY trainee_number ORDER BY COUNT(trainee_number) ASC LIMIT 1;"
+        query = " SELECT trainee_number,COUNT(trainee_number) FROM `forum` WHERE trainee_number IN ('T186', 'T192', 'T207', 'T212', 'T213', 'T217', 'T228', 'T237', 'T241', 'T252', 'T297', 'T312', 'T330', 'T355') GROUP BY trainee_number ORDER BY COUNT(trainee_number) ASC LIMIT 1;"
         cursor.execute(query)
         result=cursor.fetchall()
         print(result[0]["trainee_number"])
@@ -241,6 +241,7 @@ def forum_add():
         finally:
             connection.close()
         print(f"User input: {forum_url}")
+
         return render_template("forumAdd.html", forum_url = forum_url, tnumber = input_tnumber)
     
     return render_template("forumAdd.html")
