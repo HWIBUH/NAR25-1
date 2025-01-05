@@ -1,19 +1,16 @@
 CREATE TABLE progress(
 	trainee_number VARCHAR(251) ,
-    FOREIGN KEY (trainee_number) REFERENCES trainee(trainee_number)
+    FOREIGN KEY (trainee_number) REFERENCES trainee(trainee_number) ON DELETE CASCADE
 )
 
 INSERT INTO progress(trainee_number) VALUES
 ('T186'),
-('T191'),
 ('T192'),
-('T195'),
 ('T207'),
 ('T212'),
 ('T213'),
 ('T217'),
 ('T228'),
-('T230'),
 ('T237'),
 ('T241'),
 ('T252'),

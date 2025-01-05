@@ -213,12 +213,27 @@ def get_lowest():
     connection = get_db_connection()
     with connection.cursor() as cursor:
         # T217 GANTI JADI SESUAI DATABASE NYA WENE
-        query = " SELECT trainee_number,COUNT(trainee_number) FROM `forum` GROUP BY trainee_number ORDER BY COUNT(trainee_number) ASC LIMIT 1;"
+        query = " SELECT trainee_number,COUNT(trainee_number) FROM `forum` WHERE trainee_number IN (SELECT trainee_number FROM trainee) GROUP BY trainee_number ORDER BY COUNT(trainee_number) ASC LIMIT 1;"
         cursor.execute(query)
         result=cursor.fetchall()
         print(result[0]["trainee_number"])
         return result[0]["trainee_number"]
-    
+
+
+# INI SCRIPT CUMA BUAT ASSIGN ULANG DOANG, DR YANG DI ASSIGN KE YANG DI CUT DI ALOKASI KE YANG MSH ADA (TP TERENDAH)
+def forum_assign_ulang():
+    connection = get_db_connection()
+    with connection.cursor() as cursor:
+        query = "SELECT forum_link FROM `forum` WHERE trainee_number NOT IN (SELECT trainee_number FROM trainee) AND trainee_number NOT LIKE '';"
+        # query = "SELECT forum_link FROM `forum` WHERE trainee_number NOT IN (SELECT trainee_number FROM trainee) AND trainee_number NOT LIKE 'Q';" , kalo udh diganti ke Q yg quit
+        cursor.execute(query)
+        result=cursor.fetchall()
+        for link in result:
+            Tlow=get_lowest()
+            query = "UPDATE `forum` SET trainee_number =%s WHERE forum_link=%s"
+            cursor.execute(query, (Tlow,link["forum_link"]))
+            connection.commit()
+
 #ini routing ke forum add yang nanti ada di drop down
 @app.route('/forum_add', methods = ['GET', 'POST'])
 def forum_add():
@@ -416,6 +431,7 @@ def progress_api_run():
                 print("variable", row_sum_expression)
 
                 query = f"""SELECT *, ({row_sum_expression}) AS RowSum FROM progress ORDER BY RowSum DESC"""
+                print(query)
                 cursor.execute(query)
                 result = cursor.fetchall()
                 return jsonify({"data": result})
@@ -693,4 +709,5 @@ def send_input_register():
     return redirect("/login")
 
 if __name__ == '__main__':
+    # forum_assign_ulang()
     app.run(debug=True)

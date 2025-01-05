@@ -10,6 +10,10 @@ CREATE TABLE FORUM(
 --WRONG = 2
 --CORRECT = 3
 
+-- rekomendasi, assign yg udh quit jd Q, biar gampang di query
+-- UPDATE forum_id SET trainee_number = "Q" WHERE trainee_number = '';
+-- DELETE FROM forum WHERE trainee_number="Q"
+
     INSERT INTO Forum (forum_id, forum_link, trainee_number) VALUES
     (1, 'https://nar.binus.ac.id/presentation/question/0ec8c367-e07a-ef11-a1c3-9440c921bcaf/6d02e1ac-9a81-ef11-a1c3-9440c921bcaf/9aa49d27-f168-472c-a591-9764c3ac415f', ''),
     (2, 'https://nar.binus.ac.id/presentation/question/0ec8c367-e07a-ef11-a1c3-9440c921bcaf/6d02e1ac-9a81-ef11-a1c3-9440c921bcaf/0826cd5f-9118-4223-9ee3-a66f60692ef5', ''),
