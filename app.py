@@ -452,6 +452,7 @@ def progress_api_run():
 def case():
     return render_template("case.html")
 
+
 @app.route("/case_add", methods=['GET','POST'])
 def case_add():
     if request.method == 'POST':
@@ -578,7 +579,7 @@ def leaderboard_progress():
     print("ke leader board")
     return render_template("leaderboardProgress.html")
 
-@app.route("/lb_case")
+@app.route("/leaderboard_case")
 def leaderboard_case():
     print("ke lb case")
     return render_template("leaderboardCase.html")
@@ -599,7 +600,7 @@ def gallery():
             rows_trainee = cursor.fetchall()
             trainee_data = [dict(row) for row in rows_trainee]
 
-            cursor.execute("SELECT TrainerInitial, TrainerName, TrainerGeneration, SubjectName FROM Trainers JOIN TrainerSubjects tsb ON tsb.TrainerID = trainers.TrainerID JOIN Subjects sb ON sb.SubjectID = tsb.SubjectID")
+            cursor.execute("SELECT TrainerInitial, TrainerName, TrainerGeneration, SubjectName FROM trainers JOIN trainersubjects tsb ON tsb.TrainerID = trainers.TrainerID JOIN subjects sb ON sb.SubjectID = tsb.SubjectID")
             rows_trainer = cursor.fetchall()
             print(rows_trainer)
             trainer_data = [dict(row) for row in rows_trainer]

@@ -33,7 +33,7 @@ function upTime() {
     }
    i++
     console.log(i);
-    if(trimin(date)|| i%60==1){
+    if(trimin(date)){
         (async()=>{
             const response = await fetch('/randomize');
 
@@ -147,7 +147,7 @@ if(trainerForm != null)
                 alert(qTrainer1);
                 qTrainer1.classList.add('inactive');
                 qTrainer1.classList.remove('active');
-                tingnung.loop=false
+                // tingnung.loop=false
                 await fetch('/mainPage');
             } else {
                 const siapa=document.getElementById("siapa")

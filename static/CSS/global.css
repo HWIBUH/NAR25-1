@@ -91,7 +91,18 @@
     top: 100%;
     transition-duration: 500ms;
 }
-
+.dropdown-item-2{
+    position: absolute;
+    background-color: var(--bean-50);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    height: 0%;
+    overflow: hidden;
+    left: -10%;
+    top: 130%;
+    transition-duration: 500ms;
+}
 #time{
     display: flex;
     flex-direction: column;
