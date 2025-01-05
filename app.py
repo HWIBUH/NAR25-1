@@ -218,7 +218,22 @@ def get_lowest():
         result=cursor.fetchall()
         print(result[0]["trainee_number"])
         return result[0]["trainee_number"]
-    
+
+
+# INI SCRIPT CUMA BUAT ASSIGN ULANG DOANG, DR YANG DI ASSIGN KE YANG DI CUT DI ALOKASI KE YANG MSH ADA (TP TERENDAH)
+def forum_assign_ulang():
+    connection = get_db_connection()
+    with connection.cursor() as cursor:
+        query = "SELECT forum_link FROM `forum` WHERE trainee_number NOT IN (SELECT trainee_number FROM trainee) AND trainee_number NOT LIKE '';"
+        # query = "SELECT forum_link FROM `forum` WHERE trainee_number NOT IN (SELECT trainee_number FROM trainee) AND trainee_number NOT LIKE 'Q';" , kalo udh diganti ke Q yg quit
+        cursor.execute(query)
+        result=cursor.fetchall()
+        for link in result:
+            Tlow=get_lowest()
+            query = "UPDATE `forum` SET trainee_number =%s WHERE forum_link=%s"
+            cursor.execute(query, (Tlow,link["forum_link"]))
+            connection.commit()
+
 #ini routing ke forum add yang nanti ada di drop down
 @app.route('/forum_add', methods = ['GET', 'POST'])
 def forum_add():
@@ -417,6 +432,7 @@ def progress_api_run():
                 print("variable", row_sum_expression)
 
                 query = f"""SELECT *, ({row_sum_expression}) AS RowSum FROM progress ORDER BY RowSum DESC"""
+                print(query)
                 cursor.execute(query)
                 result = cursor.fetchall()
                 return jsonify({"data": result})
@@ -435,6 +451,7 @@ def progress_api_run():
 @app.route("/case")
 def case():
     return render_template("case.html")
+
 
 @app.route("/case_add", methods=['GET','POST'])
 def case_add():
@@ -562,7 +579,7 @@ def leaderboard_progress():
     print("ke leader board")
     return render_template("leaderboardProgress.html")
 
-@app.route("/lb_case")
+@app.route("/leaderboard_case")
 def leaderboard_case():
     print("ke lb case")
     return render_template("leaderboardCase.html")
@@ -583,7 +600,7 @@ def gallery():
             rows_trainee = cursor.fetchall()
             trainee_data = [dict(row) for row in rows_trainee]
 
-            cursor.execute("SELECT TrainerInitial, TrainerName, TrainerGeneration, SubjectName FROM Trainers JOIN TrainerSubjects tsb ON tsb.TrainerID = trainers.TrainerID JOIN Subjects sb ON sb.SubjectID = tsb.SubjectID")
+            cursor.execute("SELECT TrainerInitial, TrainerName, TrainerGeneration, SubjectName FROM trainers JOIN trainersubjects tsb ON tsb.TrainerID = trainers.TrainerID JOIN subjects sb ON sb.SubjectID = tsb.SubjectID")
             rows_trainer = cursor.fetchall()
             print(rows_trainer)
             trainer_data = [dict(row) for row in rows_trainer]
@@ -699,4 +716,5 @@ def send_input_register():
     return redirect("/login")
 
 if __name__ == '__main__':
+    # forum_assign_ulang()
     app.run(debug=True)

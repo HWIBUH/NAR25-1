@@ -53,6 +53,7 @@ async function halos() {
                     <option value="0.35" ${parseFloat(item[head]) === 0.35 ? "selected" : ""}>Sentuh</option>
                     <option value="0.65" ${parseFloat(item[head]) === 0.65 ? "selected" : ""}>Debugging</option>
                     <option value="1" ${parseFloat(item[head]) === 1 ? "selected" : ""}>Selesai</option>`;
+                console.log(dropdown)
                 
                 const newDropdown = document.createElement("select");
                 newDropdown.id = item["trainee_number"] + head;
@@ -60,7 +61,7 @@ async function halos() {
                 newDropdown.style.marginLeft = "1vw";
                 newDropdown.style.width = "5vw";
                 newDropdown.innerHTML = dropdown;
-                newDropdown.value = item[head];
+                newDropdown.value = parseFloat(item[head]);
                 
                 newDropdown.addEventListener("change", async () => {
                     const selectedValue = newDropdown.value;

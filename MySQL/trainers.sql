@@ -4,10 +4,11 @@ CREATE TABLE Trainers (
     TrainerName VARCHAR(251),
     TrainerGeneration CHAR(4)
 );
-CREATE TABLE Subjects (
-    SubjectID VARCHAR(10) PRIMARY KEY,
-    SubjectName VARCHAR(251)
-);
+
+    CREATE TABLE Subjects (
+        SubjectID VARCHAR(10) PRIMARY KEY,
+        SubjectName VARCHAR(251)
+    );
 
 CREATE TABLE TrainerSubjects (
     TrainerID VARCHAR(251),
