@@ -4,10 +4,11 @@ CREATE TABLE Trainers (
     TrainerName VARCHAR(251),
     TrainerGeneration CHAR(4)
 );
-CREATE TABLE Subjects (
-    SubjectID VARCHAR(10) PRIMARY KEY,
-    SubjectName VARCHAR(251)
-);
+
+    CREATE TABLE Subjects (
+        SubjectID VARCHAR(10) PRIMARY KEY,
+        SubjectName VARCHAR(251)
+    );
 
 CREATE TABLE TrainerSubjects (
     TrainerID VARCHAR(251),
@@ -16,6 +17,15 @@ CREATE TABLE TrainerSubjects (
     FOREIGN KEY (TrainerID) REFERENCES Trainers(TrainerID),
     FOREIGN KEY (SubjectID) REFERENCES Subjects(SubjectID)
 );
+
+INSERT INTO Subjects (SubjectID, SubjectName) VALUES
+('SU001', 'A&DS'),
+('SU002', 'DB'),
+('SU003', 'Java'),
+('SU004', 'ComVis'),
+('SU005', 'WD'),
+('SU006', 'Network')
+;
 
 INSERT INTO Trainers (TrainerID, TrainerInitial, TrainerName, TrainerGeneration) VALUES
 ('MS241', 'MS', 'Marvella Viana Santoso', '24-1'),
@@ -156,6 +166,7 @@ INSERT INTO TrainerSubjects (TrainerID, SubjectID) VALUES
 ('BW221', 'SU002'),
 ('JC222', 'SU002'),
 ('ML231', 'SU002');
+
 INSERT INTO TrainerSubjects (TrainerID, SubjectID) VALUES
 ('YK241', 'SU003'),
 ('AI232', 'SU003'),
@@ -212,6 +223,7 @@ INSERT INTO TrainerSubjects (TrainerID, SubjectID) VALUES
 ('WL231', 'SU005'),
 ('HI222', 'SU005'),
 ('KA241', 'SU005');
+
 INSERT INTO TrainerSubjects (TrainerID, SubjectID) VALUES
 ('DJ241', 'SU006'),
 ('ZN222', 'SU006'),

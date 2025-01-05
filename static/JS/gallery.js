@@ -50,10 +50,12 @@ $(document).ready(function() {
         let trainer_initial = $('<p>').text(e.TrainerInitial);
         let trainer_name = $('<p>').text(e.TrainerName);
         let trainer_generation = $('<p>').text(e.TrainerGeneration);
+        let trainer_subject = $('<p>').text(e.SubjectName);
 
         details.append(trainer_initial);
         details.append(trainer_name);
         details.append(trainer_generation);
+        details.append(trainer_subject);
 
         let container = $('<div>').attr('class', 'grid-item');
 

@@ -213,7 +213,7 @@ def get_lowest():
     connection = get_db_connection()
     with connection.cursor() as cursor:
         # T217 GANTI JADI SESUAI DATABASE NYA WENE
-        query = " SELECT trainee_number,COUNT(trainee_number) FROM `forum` WHERE trainee_number IN (SELECT trainee_number FROM trainee) GROUP BY trainee_number ORDER BY COUNT(trainee_number) ASC LIMIT 1;"
+        query = " SELECT trainee_number,COUNT(trainee_number) FROM `forum` WHERE trainee_number IN ('T186', 'T192', 'T207', 'T212', 'T213', 'T217', 'T228', 'T237', 'T241', 'T252', 'T297', 'T312', 'T330', 'T355') GROUP BY trainee_number ORDER BY COUNT(trainee_number) ASC LIMIT 1;"
         cursor.execute(query)
         result=cursor.fetchall()
         print(result[0]["trainee_number"])
@@ -256,6 +256,7 @@ def forum_add():
         finally:
             connection.close()
         print(f"User input: {forum_url}")
+
         return render_template("forumAdd.html", forum_url = forum_url, tnumber = input_tnumber)
     
     return render_template("forumAdd.html")
@@ -588,14 +589,19 @@ def gallery():
     connection = get_db_connection()
     if connection is None:
         return "Failed to connect to the database!"
+    
+    # filter_subject = request.form.get('filterSubject')
+    # print(filter_subject)
+
     try:
         with connection.cursor() as cursor:
             cursor.execute("SELECT q.trainee_number, trainee_nama, trainee_binusian, trainee_major, trainee_photo FROM quiz q JOIN trainee tr ON tr.trainee_number = q.trainee_number")
             rows_trainee = cursor.fetchall()
             trainee_data = [dict(row) for row in rows_trainee]
 
-            cursor.execute("SELECT TrainerInitial, TrainerName, TrainerGeneration FROM trainers")
+            cursor.execute("SELECT TrainerInitial, TrainerName, TrainerGeneration, SubjectName FROM Trainers JOIN TrainerSubjects tsb ON tsb.TrainerID = trainers.TrainerID JOIN Subjects sb ON sb.SubjectID = tsb.SubjectID")
             rows_trainer = cursor.fetchall()
+            print(rows_trainer)
             trainer_data = [dict(row) for row in rows_trainer]
     finally:
         connection.close()
