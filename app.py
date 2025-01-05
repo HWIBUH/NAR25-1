@@ -253,7 +253,7 @@ def forum_api():
     connection = get_db_connection()
     with connection.cursor() as cursor:
         # T217 GANTI JADI SESUAI DATABASE NYA WENE
-        query = "SELECT trainee_number,COUNT(trainee_number) FROM `forum` WHERE answer_status > 0 GROUP BY trainee_number ORDER BY COUNT(trainee_number) DESC;"
+        query = "SELECT trainee_number,COUNT(trainee_number) FROM `forum` WHERE answer_status >= 0 GROUP BY trainee_number ORDER BY COUNT(trainee_number) DESC;"
         cursor.execute(query)
         result=cursor.fetchall()
         print(result)
@@ -573,14 +573,19 @@ def gallery():
     connection = get_db_connection()
     if connection is None:
         return "Failed to connect to the database!"
+    
+    # filter_subject = request.form.get('filterSubject')
+    # print(filter_subject)
+
     try:
         with connection.cursor() as cursor:
             cursor.execute("SELECT q.trainee_number, trainee_nama, trainee_binusian, trainee_major, trainee_photo FROM quiz q JOIN trainee tr ON tr.trainee_number = q.trainee_number")
             rows_trainee = cursor.fetchall()
             trainee_data = [dict(row) for row in rows_trainee]
 
-            cursor.execute("SELECT TrainerInitial, TrainerName, TrainerGeneration FROM trainers")
+            cursor.execute("SELECT TrainerInitial, TrainerName, TrainerGeneration, SubjectName FROM trainers JOIN TrainerSubjects tsb ON tsb.TrainerID = trainers.TrainerID JOIN Subjects sb ON sb.SubjectID = tsb.SubjectID")
             rows_trainer = cursor.fetchall()
+            print(rows_trainer)
             trainer_data = [dict(row) for row in rows_trainer]
     finally:
         connection.close()
@@ -679,15 +684,19 @@ def send_input_register():
     connection = get_db_connection()
     if connection is None:
         return "Failed to connect to the database!"
+    if password != confirm:
+        return "Password beda sama Confirm Password"
     try: 
         with connection.cursor() as cursor:
             query = "SELECT * FROM trainee WHERE trainee_number = %s AND trainee_pass = %s AND trainee_nama = %s"
             query = "INSERT INTO trainee (trainee_number, trainee_pass, trainee_nama) VALUES (%s, %s, %s)"
             cursor.execute(query, (username, password, tnum))
             connection.commit()
+    
     finally:
         connection.close()
-    return redirect("/")
+    
+    return redirect("/login")
 
 if __name__ == '__main__':
     app.run(debug=True)

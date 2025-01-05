@@ -44,8 +44,33 @@
             <p id="time-clock"></p>
         </div>
     </nav>
+
     <section class="login-page">
+        
+       
         <div class="Regis-container"> <!--ada di loginpage.css-->
+<<<<<<< HEAD
+            <form method="POST" action="/send_input_register" class="Regis-container">  
+            <div>
+                <p id="regis-text">Register</p>
+            </div>
+            
+            <div class="usn">
+                <p>Username</p>
+                <input type="text" name="username" id="trainee_name" required>
+            </div>
+            <div class="pass">
+                <p>Password</p>
+                <input type="password" name="password" id="trainee_pass" required>
+            </div>
+            <div class="confirmpass">
+                <p>Confirm Password</p>
+                <input type="password" name="passwordconfirm" id="confirmpass" required>
+            </div>
+            <button id="submit-button" type="submit">Submit</button>
+            <p class="login-link">Apakah Anda sudah punya akun? <a href="{{url_for('index') }}">Login</a></p>
+        </form>
+=======
             <form method="post" action="/send_input_register">
                 <div>
                     <p id="regis-text">Register</p>
@@ -71,7 +96,9 @@
             </form>
 
             
+>>>>>>> 8826150474dfaf0db34fd2f5bcf1bf4c81258fe3
         </div>
+    
         <div class="scene">
             <div class="reindeer-wrapper">
                 <div class="reindeer">

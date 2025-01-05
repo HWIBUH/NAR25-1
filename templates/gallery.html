@@ -14,6 +14,7 @@
         var traineeData = {{ trainee_data|tojson }};
         var trainerData = {{ trainer_data|tojson }};
     </script>
+    <script src="{{url_for('static',filename='JS/auth/auth.js')}}"></script>
 </head>
 <body>
     <nav class="nav-bar">
@@ -54,6 +55,26 @@
             Trainer Gallery
         </div>
     </div>
+
+    <!-- <form id="filterSubject" method="POST">
+        <label for="dropdown">Select an option:</label>
+        <select id="dropdown" name="dropdown">
+            <option value="all">All</option>
+            <option value="ads">A&DS</option>
+            <option value="database">Database</option>
+            <option value="java">Java</option>
+            <option value="comvis">ComVis</option>
+            <option value="wd">WD</option>
+            <option value="network">Network</option>
+        </select>
+    </form>
+    
+    <script>
+        document.getElementById('dropdown').addEventListener('change', function() {
+            document.getElementById('filterSubject').submit();
+        });
+    </script> -->
+
     <div class="gallery trainee">
         
     </div>
