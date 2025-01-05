@@ -381,7 +381,7 @@ def check_progress_api():
         answer_status = float(request.headers.get("answerStatus"))  
         dropdown_id = request.headers.get("dropdownId")  
         trainee_number, feature_name = dropdown_id[:4], dropdown_id[4:]
-        
+        print(an)
         connection = get_db_connection()
         if connection is None:
             return "Failed to connect to database"

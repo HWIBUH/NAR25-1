@@ -147,7 +147,7 @@ if(trainerForm != null)
                 alert(qTrainer1);
                 qTrainer1.classList.add('inactive');
                 qTrainer1.classList.remove('active');
-                tingnung.loop=false
+                //tingnung.loop=false
                 await fetch('/mainPage');
             } else {
                 const siapa=document.getElementById("siapa")
