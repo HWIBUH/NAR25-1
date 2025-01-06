@@ -268,7 +268,7 @@ def forum_api():
     connection = get_db_connection()
     with connection.cursor() as cursor:
         # T217 GANTI JADI SESUAI DATABASE NYA WENE
-        query = "SELECT trainee_number,COUNT(trainee_number) FROM `forum` WHERE answer_status >= 0 GROUP BY trainee_number ORDER BY COUNT(trainee_number) DESC;"
+        query = "SELECT trainee_number,COUNT(trainee_number) FROM `forum` WHERE answer_status > 0 GROUP BY trainee_number ORDER BY COUNT(trainee_number) DESC;"
         cursor.execute(query)
         result=cursor.fetchall()
         print(result)
@@ -396,7 +396,6 @@ def check_progress_api():
         answer_status = float(request.headers.get("answerStatus"))  
         dropdown_id = request.headers.get("dropdownId")  
         trainee_number, feature_name = dropdown_id[:4], dropdown_id[4:]
-        print(an)
         connection = get_db_connection()
         if connection is None:
             return "Failed to connect to database"
