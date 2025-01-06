@@ -268,7 +268,7 @@ def forum_api():
     connection = get_db_connection()
     with connection.cursor() as cursor:
         # T217 GANTI JADI SESUAI DATABASE NYA WENE
-        query = "SELECT trainee_number,COUNT(trainee_number) FROM `forum` WHERE answer_status >= 0 GROUP BY trainee_number ORDER BY COUNT(trainee_number) DESC;"
+        query = "SELECT trainee_number,COUNT(trainee_number) FROM `forum` WHERE answer_status > 0 GROUP BY trainee_number ORDER BY COUNT(trainee_number) DESC;"
         cursor.execute(query)
         result=cursor.fetchall()
         print(result)

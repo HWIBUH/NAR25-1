@@ -6,7 +6,7 @@ def get_db_connection():
             host='localhost',
             user='root',
             password='',
-            database='nar251',
+            database='baru',
             cursorclass=pymysql.cursors.DictCursor  
         )  
         return connection  
